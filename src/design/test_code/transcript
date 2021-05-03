@@ -1,7 +1,7 @@
 # vsim -c top 
-# Start time: 22:56:22 on May 02,2021
+# Start time: 23:15:27 on May 02,2021
 # ** Note: (vsim-3813) Design is being optimized due to module recompilation...
-# ** Warning: test.sv(3): (vopt-2605) empty port name in port list.
+# ** Warning: addpkgtb.sv(3): (vopt-2605) empty port name in port list.
 # //  Questa Sim-64
 # //  Version 2019.2_1 linux_x86_64 May 13 2019
 # //
@@ -18,13 +18,13 @@
 # //
 # Loading sv_std.std
 # Loading work.addpkg(fast)
-# Loading work.test_sv_unit(fast)
+# Loading work.addpkgtb_sv_unit(fast)
 # Loading work.top(fast)
 # Val = 0.250000
-# Bit Val = 111110100000000000000000000000
+# Bit Val = 00111110100000000000000000000000
 # sign bit = 0, exponent = 01111101, significand = 00000000000000000000000.
-# Val = 100.000000
-# Bit Val = 1000010110010000000000000000000
-# sign bit = 0, exponent = 10000101, significand = 10010000000000000000000.
-# End time: 23:01:16 on May 02,2021, Elapsed time: 0:04:54
+# Val = -0.250000
+# Bit Val = 10111110100000000000000000000000
+# sign bit = 1, exponent = 01111101, significand = 00000000000000000000000.
+# End time: 23:15:40 on May 02,2021, Elapsed time: 0:00:13
 # Errors: 0, Warnings: 1

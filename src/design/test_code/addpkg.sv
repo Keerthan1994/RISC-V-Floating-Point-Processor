@@ -25,7 +25,7 @@ function void FpUnpackTest (shortreal val);
     num = fpUnpack(val);
     // Print out the bits that make up this value:
     $display("Val = %0f", val);
-    $display("Bit Val = %0b", num.bits);
+    $display("Bit Val = %032b", num.bits);
     $display("sign bit = %01b, exponent = %08b, significand = %023b.", num.un.sign, num.un.exponent, num.un.significand);
 endfunction
 
