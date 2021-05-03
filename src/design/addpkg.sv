@@ -1,6 +1,6 @@
 package addpkg;
 
-typedef struct {
+typedef packed struct {
     bit sign;
     bit [7:0] exponent;
     bit [22:0] significand;
