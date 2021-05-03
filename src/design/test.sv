@@ -1,10 +1,14 @@
 import addpkg::*;
 
 module top();
-    initial begin
-        FpUnpackTest(0.25);
-        FpUnpackTest(100);
 
+    shortreal val;
+
+    initial begin
+        val = 0.25;
+        FpUnpackTest(val);
+        val = 100;
+        FpUnpackTest(val);
     end
 
 endmodule
