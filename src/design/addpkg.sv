@@ -1,15 +1,15 @@
 package addpkg;
 
 typedef struct packed {
-    bit sign;
-    bit [7:0] exponent;
-    bit [22:0] significand;
-} ieee754_sp_t;             // Breaks the 32-bit short real into bits
+    logic sign;
+    logic [7:0] exponent;
+    logic [22:0] significand;
+} ieee754_sp_t;                 // Breaks the 32-bit short real into bits
 
 // Generic floating point type to use for unpacking
 typedef union {
-    bit [31:0] bits;        // Shortreal (32 bit) Float value
-    ieee754_sp_t un;        // Single Precision Floating Point Unpacked
+    logic [31:0] bits;          // Shortreal (32 bit) Float value
+    ieee754_sp_t unpkg;      // Single Precision Floating Point Unpacked
 } fp_t;
 
 
@@ -26,7 +26,7 @@ function void FpUnpackTest (shortreal val);
     // Print out the bits that make up this value:
     $display("Val = %0f", val);
     $display("Bits = %032b", num.bits);
-    $display("sign bit = %01b, exponent = %08b, significand = %023b.", num.un.sign, num.un.exponent, num.un.significand);
+    $display("sign bit = %01b, exponent = %08b, significand = %023b.", num.unpkg.sign, num.unpkg.exponent, num.unpkg.significand);
 endfunction
 
 endpackage
