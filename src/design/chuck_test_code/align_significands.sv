@@ -34,6 +34,9 @@ module align_significands (
     input fp_t op1, op2;
     output fp_t op2_aligned;            // Only outputting aligned op2, since op1 can just be passed through.
 
+    // Note: This feels like a slightly high level way of doing this? Because it involves subtraction
+    // Another way of implmementing it at a lower level is to use a while loop and shift the significand and
+    // add one to the exponent until the exponents of each match. Don't know which is more appropriate to use.
     unsigned int SHIFT = op1.unpkg.exponent - op2.unpkg.exponent;
 
     if (SHIFT != 0) begin
