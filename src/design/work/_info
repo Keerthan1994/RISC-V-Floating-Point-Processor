@@ -1,0 +1,95 @@
+m255
+K4
+z2
+!s11f vlog 2019.2_1 2019.05, May 13 2019
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 d/home/cfaber/common/Documents/ECE571/RISC-V-Floating-Point-Processor/src/design
+T_opt
+!s110 1620598984
+V2=U9Pd4mz1H1onRl4TJ;^3
+04 21 4 work Nbit_FullSubtractorTb fast 0
+=1-5254006cf05e-609860c8-c9f-84f9
+o-quiet -auto_acc_if_foreign -work work
+Z1 tCvgOpt 0
+n@_opt
+OL;O;2019.2_1;69
+vFullSubtractor
+Z2 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
+Z3 !s110 1620598981
+!i10b 1
+!s100 z3zWIolh;keYoo1^1b_C`1
+!s11b mldf61bPRFI5`0e9QA3YV1
+IXRVF]geGM4Rbjlhjc0TJ]3
+Z4 VDg1SIo80bB@j0V0VzS_@n1
+S1
+R0
+w1620598812
+8fullsubt.sv
+Ffullsubt.sv
+L0 1
+Z5 OL;L;2019.2_1;69
+r1
+!s85 0
+31
+Z6 !s108 1620598981.000000
+Z7 !s107 fullsubt.sv|Nbit_fullsubt_tb.sv|Nbit_fullsubt.sv|
+Z8 !s90 -lint=full|Nbit_fullsubt.sv|Nbit_fullsubt_tb.sv|fullsubt.sv|
+!i113 0
+Z9 o-lint=full -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R1
+n@full@subtractor
+vNbit_FullSubtractor
+R2
+R3
+!i10b 1
+!s100 UBYJ3=UiMAWd8Zo6`eS510
+!s11b cn9:D`fAo_g1JQ^8M:a^>2
+I;VHC9d1B4dXMQOIVfeAcU2
+R4
+S1
+R0
+w1620598545
+8Nbit_fullsubt.sv
+FNbit_fullsubt.sv
+L0 1
+R5
+r1
+!s85 0
+31
+R6
+R7
+R8
+!i113 0
+R9
+R1
+n@nbit_@full@subtractor
+vNbit_FullSubtractorTb
+R2
+R3
+!i10b 1
+!s100 26J^<gkdS;h`4nPHSR9SF0
+!s11b 4VAdMCmhIVaN[L6i<Wkbn0
+IF4?P3R>JYo`7N`O7JjjLV3
+R4
+S1
+R0
+w1620598977
+8Nbit_fullsubt_tb.sv
+FNbit_fullsubt_tb.sv
+L0 1
+R5
+r1
+!s85 0
+31
+R6
+R7
+R8
+!i113 0
+R9
+R1
+n@nbit_@full@subtractor@tb

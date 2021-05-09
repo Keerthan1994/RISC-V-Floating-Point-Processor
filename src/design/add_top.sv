@@ -15,6 +15,7 @@ module add(input fp_t bin_val1, bin_val2, output fp_t bin_out);
     assign swap_sig1 = full_sub_bo ? sig1 : sig2;
     assign swap_sig2 = full_sub_bo ? sig2 : sig1;
 
+    // Shift_by_bits comes from subtractor, which can be positive or negative. If negative it needs to be complemented and just get the absolute value.
     align_significands a(swap_sig2, shift_by_bits, aligned_sig2);
 
     Nbit_FullAdder Add(adder_sum, adder_CO, swap_sig1, swap_sig2, 1'b0);

@@ -1,0 +1,23 @@
+# vsim -c Nbit_FullSubtractorTb 
+# Start time: 15:23:03 on May 09,2021
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: Nbit_fullsubt_tb.sv(7): (vopt-2241) Connection width does not match width of port 'BI'. The port definition is at: Nbit_fullsubt.sv(1).
+# //  Questa Sim-64
+# //  Version 2019.2_1 linux_x86_64 May 13 2019
+# //
+# //  Copyright 1991-2019 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  QuestaSim and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# Loading sv_std.std
+# Loading work.Nbit_FullSubtractorTb(fast)
+# A= 10, B= 15, BI=  0, D=251, BO=1
+# End time: 15:24:08 on May 09,2021, Elapsed time: 0:01:05
+# Errors: 0, Warnings: 1
