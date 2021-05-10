@@ -15,6 +15,8 @@
  * Outputs the normalized signficand, and the shift value (negative for
  * left shift, positive for right shift) which will be added to the exponent.
  * 
+ * May need to adjust logic/ports for the rounding module.
+ * 
  * -----
  * HISTORY:
  * Date      	By	Comments
