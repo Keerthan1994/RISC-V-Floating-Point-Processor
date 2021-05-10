@@ -4,7 +4,7 @@
  * Created Date: Thursday, May 6th 2021, 7:11:34 pm
  * Author: Chuck Faber
  * -----
- * Last Modified: Thu May 06 2021
+ * Last Modified: Sun May 09 2021
  * Modified By: Chuck Faber
  * -----
  * Copyright (c) 2021 Portland State University
@@ -24,6 +24,7 @@ module compare_exponents(
 );
     input [7:0] exp1, exp2;
     output [7:0] diff, exp_r;
+    output borrow;
 
     // This module needs to subtract the two exponents (exp1 - exp2), and then 
     // depending on if the value is positive or negative output exp1 or exp2

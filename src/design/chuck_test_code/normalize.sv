@@ -4,13 +4,13 @@
  * Created Date: Thursday, May 6th 2021, 11:36:37 pm
  * Author: Chuck Faber
  * -----
- * Last Modified: Thu May 06 2021
+ * Last Modified: Sun May 09 2021
  * Modified By: Chuck Faber
  * -----
  * Copyright (c) 2021 Portland State University
  * 
- * Takes in the summed significands, checks if normalization is necessary
- * and performs the normalization shift necessary.
+ * Takes in the summed significands, and carry out from the ALU checks 
+ * if normalization is necessary and performs the normalization shift necessary.
  * 
  * Outputs the normalized signficand, and the shift value (negative for
  * left shift, positive for right shift) which will be added to the exponent.

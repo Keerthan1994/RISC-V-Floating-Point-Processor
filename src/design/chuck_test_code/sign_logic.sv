@@ -4,7 +4,7 @@
  * Created Date: Thursday, May 6th 2021, 11:44:03 pm
  * Author: Chuck Faber
  * -----
- * Last Modified: Fri May 07 2021
+ * Last Modified: Sun May 09 2021
  * Modified By: Chuck Faber
  * -----
  * Copyright (c) 2021 Portland State University
@@ -28,15 +28,13 @@
  * ----------	---	----------------------------------------------------------
  */
 
-module control (
-    sign1, sign2, opcode, borrow, carry, norm_shift, exp_correct, sign_r
+module sign_logic (
+    sign1, sign2, opcode, swap, complement, sign_r
 );
     input sign1, sign2;             // Sign bit from each operand
     input opcode;                   // Opcode defining addition or subtraction
-    input borrow;                   // Borrow Bit from Full Subtractor from compare_exponents
-    input carry;                    // Carry-Out from Full Adder after alignment (I'm guessing if carry out, we need to normalize to the right -- not sure why it's passed here and not in normalize)
-    input [7:0] norm_shift;         // Shift value from normalization
-    output [7:0] exp_correct;       // Value to correct final exponent
+    input swap;                     // Swap signal, if true, Op2 is greater than Op1.
+    output complement;              // Complement signal means we pre-complement and post complement
     output sign_r;                  // resultant sign bit
 
 
