@@ -1,9 +1,8 @@
-module denorm_zero (exp1, exp2, sig1, sig2, n_concat, exp1_d, exp2_d, sig1_o, sig2_o);
+module denorm_zero (exp1, exp2, sig1, sig2, n_concat, exp1_d, exp2_d);
 
 input [7:0] exp1, exp2;
 input [22:0] sig1, sig2;
 output [7:0] exp1_d, exp2_d;
-output [22:0] sig1_o, sig2_o;
 output [1:0] n_concat;
 
 // If exoponent is zero, and sig is nonzero, set exponent to 1
