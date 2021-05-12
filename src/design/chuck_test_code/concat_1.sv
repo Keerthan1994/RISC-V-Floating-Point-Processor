@@ -29,7 +29,7 @@ input swap;
 output [23:0] logic op1_concat, op2_concat;
 
 // If operands were swapped, also swap concat bits.
-n_concat = swap ? {n_concat[0], n_concat[1]} : n_concat;
+n_concat[1:0] = swap ? {n_concat[0], n_concat[1]} : n_concat[1:0];
 
 // If no-concat signal true (for zero or denorm numbers) append 0, else append 1. 
 op1_concat = n_concat[1] ? {1'b0, operand1} : {1'b1, operand1};

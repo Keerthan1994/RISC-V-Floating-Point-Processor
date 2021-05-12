@@ -14,7 +14,11 @@ if (exp1 == 8'b0) begin
     end else begin              // Op1 is zero
         exp1_d = exp1;          // Keep exponent as zero
     end
+end else begin                  // Number is neither zero nor subnormal
+    n_concat[1] = 1'b0;
+    exp1_d = exp1;
 end
+
 if (exp2 == 8'b0) begin
     n_concat[0] = 1'b1;         // Don't add leading 1 to op2
     if (sig2 != 23'b0) begin    // Op2 is subnormal number
@@ -22,6 +26,9 @@ if (exp2 == 8'b0) begin
     end else begin              // Op2 is zero
         exp2_d = exp2;          // Keep exponent as zero
     end
+end else begin                  // Number is neither zero nor subnormal
+    n_concat[0] = 1'b0;
+    exp2_d = exp2;
 end
 
 endmodule
