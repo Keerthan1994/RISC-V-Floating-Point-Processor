@@ -8,19 +8,19 @@ output [1:0] n_concat;
 
 // If exoponent is zero, and sig is nonzero, set exponent to 1
 if (exp1 == 8'b0) begin
-    n_concat[1] = 1'b1;
+    n_concat[1] = 1'b1;         // Don't add leading 1 to op1
     if (sig1 != 23'b0) begin    // Op1 is subnormal number
-        exp1_d = 8'b1;
+        exp1_d = 8'b1;          // Make exponent equal to 1 (-126)
     end else begin              // Op1 is zero
-        exp1_d = exp1;
+        exp1_d = exp1;          // Keep exponent as zero
     end
 end
 if (exp2 == 8'b0) begin
-    n_concat[0] = 1'b1;
+    n_concat[0] = 1'b1;         // Don't add leading 1 to op2
     if (sig2 != 23'b0) begin    // Op2 is subnormal number
-        exp2_d = 8'b1;
+        exp2_d = 8'b1;          // Make exponent equal to 1 (-126)
     end else begin              // Op2 is zero
-        exp2_d = exp2;
+        exp2_d = exp2;          // Keep exponent as zero
     end
 end
 
