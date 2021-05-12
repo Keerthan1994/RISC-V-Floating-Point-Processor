@@ -4,7 +4,7 @@
  * Created Date: Sunday, May 9th 2021, 9:55:12 pm
  * Author: Chuck Faber
  * -----
- * Last Modified: Tue May 11 2021
+ * Last Modified: Wed May 12 2021
  * Modified By: Chuck Faber
  * -----
  * Copyright (c) 2021 Portland State University
@@ -32,7 +32,7 @@ output [23:0] logic op1_concat, op2_concat;
 n_concat[1:0] = swap ? {n_concat[0], n_concat[1]} : n_concat[1:0];
 
 // If no-concat signal true (for zero or denorm numbers) append 0, else append 1. 
-op1_concat = n_concat[1] ? {1'b0, operand1} : {1'b1, operand1};
-op2_concat = n_concat[0] ? {1'b0, operand2} : {1'b1, operand2};
+op1_concat = {~n_concat[1], operand1};
+op2_concat = {~n_concat[0], operand2};
 
 endmodule

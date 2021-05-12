@@ -4,7 +4,7 @@
  * Created Date: Thursday, May 6th 2021, 11:36:37 pm
  * Author: Chuck Faber
  * -----
- * Last Modified: Mon May 10 2021
+ * Last Modified: Wed May 12 2021
  * Modified By: Chuck Faber
  * -----
  * Copyright (c) 2021 Portland State University
@@ -24,17 +24,29 @@
  */
 
 module normalize (
-    sig, carryout, sig_norm, shift
+    sig, carryout, exp, sig_norm, shift
 );
 
 input [23:0] sig;
 input carryout;
+input [7:0] exp;
 output logic [23:0] sig_norm;
 output logic [7:0] shift;
 
 if (carryout) begin                     // If there is a carryout we need to shift just 1 to the right, and increment the exponent.
     sig_norm = sig >> 1;
     shift = 1;
+end else if (sig == 0) begin            // The entire significand is 0, so the value is zero
+    sig_norm = sig;
+    // Need to do a check if the exponent is 1 or 0. If it is 1, set it to zero. Otherwise it is already zero, so leave it at that.
+    if (exp == 8'b1) begin
+        shift = -1;
+    end else begin
+        shift = 0;
+    end
+end else if (sig != 0 && exp == 8'b1 && sig[23] != 1'b1) begin    // If the sig is not zero, no carry out, and no MSB and the exponent is 1, output a denorm number.
+    sig_norm = sig;
+    shift = -1;                         // Change the exponent to 0
 end else begin                          // Else keep shifting to the left and decrementing exponent until there is a 1 in the MSB.
     shift = 0;
     while (sig[23] != 1'b1) begin
