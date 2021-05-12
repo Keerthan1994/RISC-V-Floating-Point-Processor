@@ -4,7 +4,7 @@
  * Created Date: Sunday, May 9th 2021, 9:55:12 pm
  * Author: Chuck Faber
  * -----
- * Last Modified: Sun May 09 2021
+ * Last Modified: Tue May 11 2021
  * Modified By: Chuck Faber
  * -----
  * Copyright (c) 2021 Portland State University
@@ -20,13 +20,19 @@
  */
 
 module concat_1 (
-    operand1, operand2, op1_concat, op2_concat
+    operand1, operand2, n_concat, swap, op1_concat, op2_concat
 );
 
 input [22:0] logic operand1, operand2;
+input [1:0] logic n_concat;
+input swap;
 output [23:0] logic op1_concat, op2_concat;
 
-op1_concat = {1'b1, operand1};
-op2_concat = {1'b1, operand2};
+// If operands were swapped, also swap concat bits.
+n_concat = swap ? {n_concat[0], n_concat[1]} : n_concat;
+
+// If no-concat signal true (for zero or denorm numbers) append 0, else append 1. 
+op1_concat = n_concat[1] ? {1'b0, operand1} : {1'b1, operand1};
+op2_concat = n_concat[0] ? {1'b0, operand2} : {1'b1, operand2};
 
 endmodule
