@@ -36,7 +36,7 @@ output logic [7:0] shift;
 if (carryout) begin                     // If there is a carryout we need to shift just 1 to the right, and increment the exponent.
     sig_norm = sig >> 1;
     shift = 1;
-end else if (sig == 0) begin            // The entire significand is 0, so the value is zero
+end else if (sig == 0) begin            // The entire significand is 0, so the value is zero (that's only the case if using denorm numbers or zero math)
     sig_norm = sig;
     // Need to do a check if the exponent is 1 or 0. If it is 1, set it to zero. Otherwise it is already zero, so leave it at that.
     if (exp == 8'b1) begin
@@ -49,7 +49,7 @@ end else if (sig != 0 && exp == 8'b1 && sig[23] != 1'b1) begin    // If the sig 
     shift = -1;                         // Change the exponent to 0
 end else begin                          // Else keep shifting to the left and decrementing exponent until there is a 1 in the MSB.
     shift = 0;
-    while (sig[23] != 1'b1) begin
+    while (sig[23] != 1'b1) begin       // Will need sequential or try to figure out "find first one" and shift by that amount to keep it combinational
         sig = sig << 1;
         shift -= 1;
     end

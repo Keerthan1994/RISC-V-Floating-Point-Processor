@@ -5,6 +5,7 @@ input [22:0] sig1, sig2;
 output [7:0] exp1_d, exp2_d;
 output [1:0] n_concat;
 
+
 // If exoponent is zero, and sig is nonzero, set exponent to 1
 if (exp1 == 8'b0) begin
     n_concat[1] = 1'b1;         // Don't add leading 1 to op1
