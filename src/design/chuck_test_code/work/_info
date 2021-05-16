@@ -12,39 +12,59 @@ Z0 d/home/cfaber/common/Documents/ECE571/RISC-V-Floating-Point-Processor/src/des
 T_opt
 !s110 1620022527
 VdVoiW51Bjmk=5iA6Ci@0Z2
-04 3 4 work top fast 0
+Z1 04 3 4 work top fast 0
 =1-5254006cf05e-608f94ff-6b5af-c6dc
-o-quiet -auto_acc_if_foreign -work work
-Z1 tCvgOpt 0
+Z2 o-quiet -auto_acc_if_foreign -work work
+Z3 tCvgOpt 0
 n@_opt
-OL;O;2019.2_1;69
-Xaddpkg
-Z2 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
-!s110 1620022523
-!i10b 1
-!s100 zYa<@PJhe:a6DJODH2NGo1
-!s11b h06[VS?8>?SYbe3iRLG6]0
-I7:B2nXWLenNNYL20eNVWD2
-V7:B2nXWLenNNYL20eNVWD2
-S1
+Z4 OL;O;2019.2_1;69
 R0
-w1620022518
+T_opt1
+!s110 1621201797
+VA0T7l^_?<nJC5f1<_K@cG3
+R1
+=1-5254006cf05e-60a19385-91613-dff6
+R2
+R3
+n@_opt1
+R4
+T_opt2
+!s110 1621201770
+VmQMb0J5C]7a5deCjX0R@]0
+04 21 4 work Nbit_FullSubtractorTb fast 0
+=1-5254006cf05e-60a1936a-10726-de58
+R2
+R3
+n@_opt2
+R4
+R0
+Xaddpkg
+Z5 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
+Z6 !s110 1621201791
+!i10b 1
+!s100 0oWSC7N<Mgb4j[HNVV>IL0
+!s11b I:FkKUjh`B=O`8W`kTVdX1
+IzC[l9956XRX_N0V6<bEoB0
+VzC[l9956XRX_N0V6<bEoB0
+S1
+Z7 d/home/cfaber/common/Documents/ECE571/RISC-V-Floating-Point-Processor/src/design/chuck_test_code
+w1621192546
 8addpkg.sv
 Faddpkg.sv
 L0 1
-Z3 OL;L;2019.2_1;69
+Z8 OL;L;2019.2_1;69
 r1
 !s85 0
 31
-Z4 !s108 1620022523.000000
-Z5 !s107 addpkgtb.sv|addpkg.sv|
-Z6 !s90 addpkg.sv|addpkgtb.sv|-lint=full|
+Z9 !s108 1621201791.000000
+Z10 !s107 addpkg.sv|nbit_fullsubt.sv|fullsubt.sv|verification/swap_tb.sv|swap.sv|compare_exponents.sv|
+Z11 !s90 compare_exponents.sv|swap.sv|verification/swap_tb.sv|fullsubt.sv|nbit_fullsubt.sv|addpkg.sv|-lint=full|
 !i113 0
-Z7 o-lint=full -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
-R1
+Z12 o-lint=full -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R3
 Xaddpkgtb_sv_unit
-R2
-Z8 DXx4 work 6 addpkg 0 22 7:B2nXWLenNNYL20eNVWD2
+R5
+Z13 DXx4 work 6 addpkg 0 22 7:B2nXWLenNNYL20eNVWD2
 VN@0oCk^YHn_^zWdS:CIoT2
 r1
 !s85 0
@@ -54,40 +74,187 @@ IN@0oCk^YHn_^zWdS:CIoT2
 !i103 1
 S1
 R0
-Z9 w1620022398
-Z10 8addpkgtb.sv
-Z11 Faddpkgtb.sv
+w1620022398
+8addpkgtb.sv
+Faddpkgtb.sv
 L0 1
-R3
+R8
 31
-R4
+!s108 1620022523.000000
+!s107 addpkgtb.sv|addpkg.sv|
+!s90 addpkg.sv|addpkgtb.sv|-lint=full|
+!i113 0
+R12
+R3
+vcompare_exponents
 R5
 R6
-!i113 0
+!i10b 1
+!s100 UFII56Bm6?<?n<0^881kY1
+!s11b Q7S[Zif5iKAYU8I1b:Iz]2
+Ia6R<=@;WOZH=Z@]_MReBM0
+Z14 VDg1SIo80bB@j0V0VzS_@n1
+S1
 R7
-R1
-vtop
-R2
+w1621192243
+8compare_exponents.sv
+Fcompare_exponents.sv
+Z15 L0 22
 R8
-DXx4 work 16 addpkgtb_sv_unit 0 22 N@0oCk^YHn_^zWdS:CIoT2
-VDg1SIo80bB@j0V0VzS_@n1
 r1
 !s85 0
-!i10b 1
-!s100 ecW2FXikm7X6Ea;Oe=49B3
-IEeKV`:O[II0O^BgnSn8jO3
-!s105 addpkgtb_sv_unit
-S1
-R0
+31
 R9
 R10
 R11
-L0 3
+!i113 0
+R12
 R3
-31
-R4
+vFullSubtractor
 R5
 R6
-!i113 0
+!i10b 1
+!s100 B8[KB?IjaAce`T;R`klNk3
+!s11b QNiN=W0hJe7@fS[W_Sh2c2
+I]1d?zoz??`<Z9<99X0Z3k1
+R14
+S1
 R7
-R1
+w1621200720
+8fullsubt.sv
+Ffullsubt.sv
+L0 1
+R8
+r1
+!s85 0
+31
+R9
+R10
+R11
+!i113 0
+R12
+R3
+n@full@subtractor
+vNbit_FullSubtractor
+R5
+R6
+!i10b 1
+!s100 D26I3NI4zQUgTN;AF>baL1
+!s11b ekC9cUH4jK4BkU>Z==II:0
+IWREZE8mfZB0?j1dbaoPUI3
+R14
+S1
+R7
+w1621201760
+8nbit_fullsubt.sv
+Fnbit_fullsubt.sv
+L0 1
+R8
+r1
+!s85 0
+31
+R9
+R10
+R11
+!i113 0
+R12
+R3
+n@nbit_@full@subtractor
+vNbit_FullSubtractorTb
+R5
+!s110 1621201767
+!i10b 1
+!s100 @K8zHX5FY^g=ZO`zFVd`h2
+!s11b `l[F:RIa[9i[WH:KCSJAc1
+I;[hXEO0SJCe`TFmMm@3I23
+R14
+S1
+R7
+w1621201193
+8verification/nbit_fullsub_tb.sv
+Fverification/nbit_fullsub_tb.sv
+L0 1
+R8
+r1
+!s85 0
+31
+!s108 1621201766.000000
+!s107 verification/nbit_fullsub_tb.sv|fullsubt.sv|nbit_fullsubt.sv|
+!s90 nbit_fullsubt.sv|fullsubt.sv|verification/nbit_fullsub_tb.sv|-lint=full|
+!i113 0
+R12
+R3
+n@nbit_@full@subtractor@tb
+vswap
+R5
+R6
+!i10b 1
+!s100 zH:Gb[0Q:[@DMCaY6FWC;3
+!s11b aj`mSE@SeACn:09EEWjPQ0
+I8`S2GAWoRo<aSdd43c8Ge0
+R14
+S1
+R7
+w1621192346
+8swap.sv
+Fswap.sv
+R15
+R8
+r1
+!s85 0
+31
+R9
+R10
+R11
+!i113 0
+R12
+R3
+Xswap_tb_sv_unit
+R5
+R13
+VNU=oKo]0@[fGWPU=Fk:X03
+r1
+!s85 0
+!i10b 1
+!s100 zENHBSYgH3LiN^gfah;Gh0
+INU=oKo]0@[fGWPU=Fk:X03
+!i103 1
+S1
+R7
+w1621192431
+Z16 8verification/swap_tb.sv
+Z17 Fverification/swap_tb.sv
+L0 1
+R8
+31
+!s108 1621192562.000000
+R10
+R11
+!i113 0
+R12
+R3
+vtop
+R5
+DXx4 work 6 addpkg 0 22 zC[l9956XRX_N0V6<bEoB0
+R6
+!i10b 1
+!s100 igFz[l:hm`ml28ijkbS[22
+!s11b gTb]]bnzmXR7zh?MW9km41
+IHZ9:B39YY1T9:1i?jO14g3
+R14
+S1
+R7
+w1621200573
+R16
+R17
+L0 1
+R8
+r1
+!s85 0
+31
+R9
+R10
+R11
+!i113 0
+R12
+R3

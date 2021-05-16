@@ -1,0 +1,28 @@
+# vsim -c top 
+# Start time: 14:49:57 on May 16,2021
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: verification/swap_tb.sv(1): (vopt-2605) empty port name in port list.
+# //  Questa Sim-64
+# //  Version 2019.2_1 linux_x86_64 May 13 2019
+# //
+# //  Copyright 1991-2019 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  QuestaSim and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# Loading sv_std.std
+# Loading work.addpkg(fast)
+# Loading work.top(fast)
+# op1:   1.000000 op2:   0.050000; exp1: 127 exp2: 122, borrow: 0, swap?: 0, diff:        5, shift:        5
+# op1:   0.250000 op2:   1.230000; exp1: 125 exp2: 127, borrow: 1, swap?: 1, diff:      254, shift:        2
+# op1:   0.050000 op2:   5.100000; exp1: 122 exp2: 129, borrow: 1, swap?: 1, diff:      249, shift:        7
+# op1:   0.000000 op2:   0.001000; exp1:   0 exp2: 117, borrow: 1, swap?: 1, diff:      139, shift:      117
+# op1:  20.100000 op2:   0.023000; exp1: 131 exp2: 121, borrow: 0, swap?: 0, diff:       10, shift:       10
+# End time: 14:56:39 on May 16,2021, Elapsed time: 0:06:42
+# Errors: 0, Warnings: 1

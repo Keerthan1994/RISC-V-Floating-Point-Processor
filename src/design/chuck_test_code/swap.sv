@@ -26,9 +26,9 @@ module swap (
 input [22:0] sig1, sig2;
 input [7:0] diff;
 input borrow;
-output [7:0] shift;
-output swap;
-output [22:0] sig1_swap, sig2_swap;
+output logic[7:0] shift;
+output logic swap;
+output logic [22:0] sig1_swap, sig2_swap;
 
 always_comb begin
     if (borrow) begin                                   // Difference is negative, swap operands
@@ -45,7 +45,7 @@ always_comb begin
         sig1_swap = sig1;
         sig2_swap = sig2;
         shift = diff;
-        swap = 1'b0'
+        swap = 1'b0;
     end
 end
 

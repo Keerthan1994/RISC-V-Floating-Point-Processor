@@ -14,6 +14,6 @@ module Nbit_FullSubtractor(D, BO, A, B, BI);
         FullSubtractor s(D[r], BO_p[r+1], A[r], B[r], BO_p[r]);
     end
     endgenerate
-    assign BO = BO_p[N-1];
+    assign BO = BO_p[N];
 
 endmodule
