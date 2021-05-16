@@ -4,7 +4,7 @@
  * Created Date: Sunday, May 9th 2021, 9:59:33 pm
  * Author: Chuck Faber
  * -----
- * Last Modified: Sun May 09 2021
+ * Last Modified: Fri May 14 2021
  * Modified By: Chuck Faber
  * -----
  * Copyright (c) 2021 Portland State University
@@ -27,6 +27,8 @@ input complement;
 input [23:0] operand;
 output [23:0] op_comp;
 
-op_comp = complement ? ~operand + 1 : operand;
+always_comb begin
+    op_comp = complement ? ~operand + 1 : operand;
+end
 
 endmodule

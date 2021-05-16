@@ -4,7 +4,7 @@
  * Created Date: Thursday, May 6th 2021, 7:11:34 pm
  * Author: Chuck Faber
  * -----
- * Last Modified: Sun May 09 2021
+ * Last Modified: Sun May 16 2021
  * Modified By: Chuck Faber
  * -----
  * Copyright (c) 2021 Portland State University
@@ -30,5 +30,15 @@ module compare_exponents(
     // depending on if the value is positive or negative output exp1 or exp2
     // and the absolute difference between the two exponents.
     // Diagram uses a full subtractor, dunno if this is what I wanna do.
+    
+    Nbit_FullSubtractor #(8) fs0 (
+        .D(diff), 
+        .BO(borrow), 
+        .A(exp1), 
+        .B(exp2), 
+        .BI(1'b0)
+    );
+
+    assign exp_r = borrow ? exp2 : exp1;
 
 endmodule

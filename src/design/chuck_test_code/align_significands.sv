@@ -4,7 +4,7 @@
  * Created Date: Thursday, May 6th 2021, 6:31:47 pm
  * Author: Chuck Faber
  * -----
- * Last Modified: Wed May 12 2021
+ * Last Modified: Fri May 14 2021
  * Modified By: Chuck Faber
  * -----
  * Copyright (c) 2021 Portland State University
@@ -30,10 +30,12 @@ module align_significands (
     sig2, shift, sig2_aligned
 );
 
-    input [22:0] sig2;
-    input [7:0] shift;                      // Output of the subraction of the exponents
-    output [22:0] sig2_aligned;             // Only outputting aligned op2, since op1 can just be passed through.
+input [22:0] sig2;
+input [7:0] shift;                      // Output of the subraction of the exponents
+output [22:0] sig2_aligned;             // Only outputting aligned op2, since op1 can just be passed through.
 
+always_comb begin
     sig2_aligned = sig2 >> shift;     // First shift brings hidden bit into significand (combinational)
+end
 
 endmodule
