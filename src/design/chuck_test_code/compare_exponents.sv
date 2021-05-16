@@ -20,7 +20,7 @@
  */
 
 module compare_exponents(
-    exp1, exp2, diff, exp_r
+    exp1, exp2, diff, exp_r, borrow
 );
     input [7:0] exp1, exp2;
     output [7:0] diff, exp_r;
