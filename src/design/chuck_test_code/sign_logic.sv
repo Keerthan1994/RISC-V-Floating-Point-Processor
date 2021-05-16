@@ -35,11 +35,11 @@ module sign_logic (
 input sign1, sign2;             // Sign bit from each operand
 input opcode;                   // Opcode defining addition (0) or subtraction (1)
 input swap;                     // Swap signal, if true, Op2 is greater than Op1.
-output complement;              // Complement signal means we pre-complement and post complement
-output sign_r;                  // resultant sign bit
+output logic complement;              // Complement signal means we pre-complement and post complement
+output logic sign_r;                  // resultant sign bit
 
 always_comb begin
-    sign_r = (!swap && sign1) || (swap && opcode && sign1) || (swap && !opcode && sign2);
+    sign_r = (!swap && sign1) || (swap && opcode && !sign2) || (swap && !opcode && sign2);
     complement = (opcode && !sign1 && !sign2) || (!opcode && !sign1 && sign2) || (opcode && sign1 && sign2) || (!opcode && sign1 && !sign2);
 end
 

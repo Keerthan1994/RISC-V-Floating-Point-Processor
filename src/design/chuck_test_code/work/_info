@@ -20,10 +20,10 @@ n@_opt
 Z4 OL;O;2019.2_1;69
 R0
 T_opt1
-!s110 1621204532
-VJ761S30g9?:<S3]jP8SW@1
+!s110 1621206473
+VzU:bKb8UUQ5T3MeYmlhGh3
 R1
-=1-5254006cf05e-60a19e34-8fcbe-8181
+=1-5254006cf05e-60a1a5c9-31c62-e2f1
 R2
 R3
 n@_opt1
@@ -40,7 +40,7 @@ R4
 R0
 Xaddpkg
 Z5 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
-Z6 !s110 1621201791
+Z6 !s110 1621206470
 !i10b 1
 !s100 0oWSC7N<Mgb4j[HNVV>IL0
 !s11b I:FkKUjh`B=O`8W`kTVdX1
@@ -56,9 +56,9 @@ Z8 OL;L;2019.2_1;69
 r1
 !s85 0
 31
-Z9 !s108 1621201791.000000
-Z10 !s107 addpkg.sv|nbit_fullsubt.sv|fullsubt.sv|verification/swap_tb.sv|swap.sv|compare_exponents.sv|
-Z11 !s90 compare_exponents.sv|swap.sv|verification/swap_tb.sv|fullsubt.sv|nbit_fullsubt.sv|addpkg.sv|-lint=full|
+Z9 !s108 1621206470.000000
+Z10 !s107 verification/sign_logic_tb.sv|sign_logic.sv|swap.sv|compare_exponents.sv|denorm_zero.sv|addpkg.sv|
+Z11 !s90 addpkg.sv|denorm_zero.sv|compare_exponents.sv|swap.sv|sign_logic.sv|verification/sign_logic_tb.sv|-lint=full|
 !i113 0
 Z12 o-lint=full -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
 R3
@@ -136,7 +136,7 @@ R12
 R3
 vdenorm_zero
 R5
-Z16 !s110 1621204530
+R6
 !i10b 1
 !s100 RDa`cT4EJD`DjFXcSM>@P0
 !s11b PH^mCDEH[aa=J9;6e@WIP3
@@ -152,15 +152,15 @@ R8
 r1
 !s85 0
 31
-Z17 !s108 1621204530.000000
-Z18 !s107 verification/denorm_zero_tb.sv|denorm_zero.sv|
-Z19 !s90 denorm_zero.sv|verification/denorm_zero_tb.sv|-lint=full|
+R9
+R10
+R11
 !i113 0
 R12
 R3
 vFullSubtractor
 R5
-R6
+Z16 !s110 1621201791
 !i10b 1
 !s100 B8[KB?IjaAce`T;R`klNk3
 !s11b QNiN=W0hJe7@fS[W_Sh2c2
@@ -176,16 +176,16 @@ R8
 r1
 !s85 0
 31
-R9
-R10
-R11
+Z17 !s108 1621201791.000000
+Z18 !s107 addpkg.sv|nbit_fullsubt.sv|fullsubt.sv|verification/swap_tb.sv|swap.sv|compare_exponents.sv|
+Z19 !s90 compare_exponents.sv|swap.sv|verification/swap_tb.sv|fullsubt.sv|nbit_fullsubt.sv|addpkg.sv|-lint=full|
 !i113 0
 R12
 R3
 n@full@subtractor
 vNbit_FullSubtractor
 R5
-R6
+R16
 !i10b 1
 !s100 D26I3NI4zQUgTN;AF>baL1
 !s11b ekC9cUH4jK4BkU>Z==II:0
@@ -201,9 +201,9 @@ R8
 r1
 !s85 0
 31
-R9
-R10
-R11
+R17
+R18
+R19
 !i113 0
 R12
 R3
@@ -233,6 +233,54 @@ r1
 R12
 R3
 n@nbit_@full@subtractor@tb
+vsign_logic
+R5
+R6
+!i10b 1
+!s100 4QR`4H6=[h:M=QUj:CMf;3
+!s11b J`H0Z5fDobYJ=OOHKT`eo3
+IT1X3]2:SRhLI@_3UNa0WY2
+R14
+S1
+R7
+w1621206464
+8sign_logic.sv
+Fsign_logic.sv
+L0 31
+R8
+r1
+!s85 0
+31
+R9
+R10
+R11
+!i113 0
+R12
+R3
+Xsign_logic_tb_sv_unit
+R5
+Z20 DXx4 work 6 addpkg 0 22 zC[l9956XRX_N0V6<bEoB0
+VHCldFJ8ckJobOB_0FLVId1
+r1
+!s85 0
+!i10b 1
+!s100 A5`Y@LmTYB7>8QmOAS;Ql3
+IHCldFJ8ckJobOB_0FLVId1
+!i103 1
+S1
+R7
+Z21 w1621206195
+Z22 8verification/sign_logic_tb.sv
+Z23 Fverification/sign_logic_tb.sv
+L0 1
+R8
+31
+R9
+R10
+R11
+!i113 0
+R12
+R3
 vswap
 R5
 R6
@@ -276,32 +324,33 @@ L0 1
 R8
 31
 !s108 1621192562.000000
-R10
-R11
+R18
+R19
 !i113 0
 R12
 R3
 vtop
 R5
-R16
-!i10b 1
-!s100 `LN6Ko0dJ893QB3gG16ik1
-!s11b P^k62adiD=]7NmWdN=G@E3
-I1?mz0m8MAP`N[l:2^8fJl0
+R20
+DXx4 work 21 sign_logic_tb_sv_unit 0 22 HCldFJ8ckJobOB_0FLVId1
 R14
-S1
-R7
-w1621204524
-8verification/denorm_zero_tb.sv
-Fverification/denorm_zero_tb.sv
-L0 1
-R8
 r1
 !s85 0
+!i10b 1
+!s100 S]Sn_0HDU620PgUj0`3e]2
+I>Ik[4iifl=ejFHG0b4zC`3
+!s105 sign_logic_tb_sv_unit
+S1
+R7
+R21
+R22
+R23
+L0 3
+R8
 31
-R17
-R18
-R19
+R9
+R10
+R11
 !i113 0
 R12
 R3

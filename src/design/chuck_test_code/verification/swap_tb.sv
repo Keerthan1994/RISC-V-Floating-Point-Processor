@@ -8,28 +8,13 @@ import addpkg::*;
 shortreal op1[] = '{1.0, 0.25, 0.05, 0, 20.1};
 shortreal op2[] = '{0.05, 1.23, 5.1, 0.001, 0.023};
 fp_t fp1, fp2;
-logic [22:0] sig1, sig2, sig1_o, sig2_o;
+logic [22:0] sig1, sig2, sig1_swap, sig2_swap;
 logic [7:0] exp1, exp2, exp_r, diff, shift;
 logic borrow, swap;
 
-compare_exponents ce0 (
-    .exp1(exp1), 
-    .exp2(exp2), 
-    .diff(diff), 
-    .exp_r(exp_r),
-    .borrow(borrow)
-);
+compare_exponents ce0 (.*);
 
-swap swp0 (
-    .sig1(sig1), 
-    .sig2(sig2), 
-    .diff(diff), 
-    .borrow(borrow), 
-    .shift(shift), 
-    .swap(swap), 
-    .sig1_swap(sig1_o), 
-    .sig2_swap(sig2_o)
-);
+swap swp0 (.*);
 
 initial begin
     foreach (op1[i]) begin
