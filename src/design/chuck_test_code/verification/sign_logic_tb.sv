@@ -1,8 +1,10 @@
+// cfaber - 5/16 module verified
+
 import addpkg::*;
 
 module top();
 
-shortreal op1[] = '{1.0, 0.25, 0.05, 0, 20.1};
+shortreal op1[] = '{-1.0, -0.25, -0.05, -0, -20.1};
 shortreal op2[] = '{0.05, 1.23, 5.1, 0.001, 0.023};
 fp_t fp1, fp2;
 

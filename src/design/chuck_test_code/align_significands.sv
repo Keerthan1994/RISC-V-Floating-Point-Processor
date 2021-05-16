@@ -30,9 +30,9 @@ module align_significands (
     sig2, shift, sig2_aligned
 );
 
-input [22:0] sig2;
+input [23:0] sig2;
 input [7:0] shift;                      // Output of the subraction of the exponents
-output [22:0] sig2_aligned;             // Only outputting aligned op2, since op1 can just be passed through.
+output [23:0] sig2_aligned;             // Only outputting aligned op2, since op1 can just be passed through.
 
 always_comb begin
     sig2_aligned = sig2 >> shift;     // First shift brings hidden bit into significand (combinational)

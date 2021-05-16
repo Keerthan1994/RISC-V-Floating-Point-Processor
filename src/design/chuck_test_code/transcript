@@ -1,5 +1,5 @@
 # vsim -c top 
-# Start time: 16:07:53 on May 16,2021
+# Start time: 16:33:22 on May 16,2021
 # ** Note: (vsim-3813) Design is being optimized due to module recompilation...
 # ** Warning: verification/sign_logic_tb.sv(3): (vopt-2605) empty port name in port list.
 # //  Questa Sim-64
@@ -20,10 +20,10 @@
 # Loading work.addpkg(fast)
 # Loading work.sign_logic_tb_sv_unit(fast)
 # Loading work.top(fast)
-# op1:   1.000000 op2:   0.050000; operation: add; swap: 0; Resulting Sign: +
-# op1:   0.250000 op2:   1.230000; operation: sub; swap: 1; Resulting Sign: -
-# op1:   0.050000 op2:   5.100000; operation: add; swap: 1; Resulting Sign: +
+# op1:  -1.000000 op2:   0.050000; operation: add; swap: 0; Resulting Sign: -
+# op1:  -0.250000 op2:   1.230000; operation: sub; swap: 1; Resulting Sign: -
+# op1:  -0.050000 op2:   5.100000; operation: add; swap: 1; Resulting Sign: +
 # op1:   0.000000 op2:   0.001000; operation: sub; swap: 1; Resulting Sign: -
-# op1:  20.100000 op2:   0.023000; operation: add; swap: 0; Resulting Sign: +
-# End time: 16:09:16 on May 16,2021, Elapsed time: 0:01:23
+# op1: -20.100000 op2:   0.023000; operation: add; swap: 0; Resulting Sign: -
+# End time: 16:34:29 on May 16,2021, Elapsed time: 0:01:07
 # Errors: 0, Warnings: 1
