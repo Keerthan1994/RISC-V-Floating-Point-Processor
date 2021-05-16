@@ -1,0 +1,70 @@
+m255
+K4
+z2
+!s11f vlog 2020.3 2020.07, Jul 12 2020
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dN:/subject/7th_quarter/prj_workspace
+T_opt
+!s110 1621183538
+VPdgWAk8jJG^^B^T7Pn?U;3
+04 10 4 work div_int_tb fast 0
+=1-525400c843c0-60a14c32-137-29f0
+o-quiet -auto_acc_if_foreign -work work +acc
+Z0 tCvgOpt 0
+n@_opt
+OL;O;2020.3;71
+vdiv_int
+Z1 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
+Z2 !s110 1621183516
+!i10b 1
+!s100 SX[9kzl=QC24]BcH:`b<V3
+Z3 !s11b Dg1SIo80bB@j0V0VzS_@n1
+IZE`>DS60hC>X5^gVGc5T<3
+S1
+Z4 dN:/subject/7th_quarter/prj_workspace/RISC-V-Floating-Point-Processor/src/design/fp_div_prj_repo
+w1621151482
+8design/div_circuit.sv
+Fdesign/div_circuit.sv
+!i122 1
+L0 5 81
+Z5 VDg1SIo80bB@j0V0VzS_@n1
+Z6 OL;L;2020.3;71
+r1
+!s85 0
+31
+Z7 !s108 1621183516.000000
+Z8 !s107 tb/div_circuit_tb.sv|design/div_circuit.sv|
+Z9 !s90 -reportprogress|300|-source|-lint=full|design/div_circuit.sv|tb/div_circuit_tb.sv|
+!i113 0
+Z10 o-source -lint=full -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R0
+vdiv_int_tb
+R1
+R2
+!i10b 1
+!s100 U^XR:fL0@]imE5UR>D?Wg0
+R3
+IFNzm5edTh:4l:TMbHde@e2
+S1
+R4
+w1621147300
+8tb/div_circuit_tb.sv
+Ftb/div_circuit_tb.sv
+!i122 1
+L0 1 68
+R5
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 0
+R10
+R0
