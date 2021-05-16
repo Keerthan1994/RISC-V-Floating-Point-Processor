@@ -23,18 +23,19 @@ module concat_1 (
     sig1, sig2, n_concat, swap, sig1_concat, sig2_concat
 );
 
-input [22:0] logic sig1, sig2;
-input [1:0] logic n_concat;
+input logic [22:0] sig1, sig2;
+input logic [1:0] n_concat;
 input swap;
-output [23:0] logic sig1_concat, sig2_concat;
+output logic [23:0] sig1_concat, sig2_concat;
+logic [1:0] n_concat_s;
 
 always_comb begin
     // If operands were swapped, also swap concat bits.
-    n_concat[1:0] = swap ? {n_concat[0], n_concat[1]} : n_concat[1:0];
+    n_concat_s[1:0] = swap ? {n_concat[0], n_concat[1]} : n_concat[1:0];
 
     // If no-concat signal true (for zero or denorm numbers) append 0, else append 1. 
-    sig1_concat = {~n_concat[1], sig1};
-    sig2_concat = {~n_concat[0], sig2};
+    sig1_concat = {~n_concat_s[1], sig1};
+    sig2_concat = {~n_concat_s[0], sig2};
 end
 
 endmodule
