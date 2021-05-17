@@ -50,7 +50,7 @@ always_comb begin
         shift = -1;                         // Change the exponent to 0
     end else begin                          // Else keep shifting to the left and decrementing exponent until there is a 1 in the MSB.
         shift = 0;
-        while (sig[23] != 1'b1) begin       // Will need sequential or try to figure out "find first one" and shift by that amount to keep it combinational
+        while (sig[23] != 1'b1) begin       // FIXME: Will need sequential or try to figure out "find first one" and shift by that amount to keep it combinational
             sig = sig << 1;
             shift -= 1;
         end

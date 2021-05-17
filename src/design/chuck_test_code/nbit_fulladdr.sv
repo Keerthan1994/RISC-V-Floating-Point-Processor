@@ -14,6 +14,6 @@ module Nbit_FullAdder(S, CO, A, B, CI);
         FullAdder s(S[r], CO_p[r+1], A[r], B[r], CO_p[r]);
     end
     endgenerate
-    assign CO = CO_p[N-1];
+    assign CO = CO_p[N];
 
 endmodule

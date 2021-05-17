@@ -74,7 +74,7 @@ initial begin
         sig2 = fp2.unpkg.significand;
         opcode = (i%2 == 0) ? 1'b0 : 1'b1;
         #10
-        $display("op1: %10f op2: %10f; operation: %s; swap: %1b; Resulting Sign: %s", op1[i], op2[i], opcode ? "sub" : "add", swap, sign_r ? "-" : "+");
+        $display("op1: %10f op2: %10f; operation: %s; swap: %1b; Resulting Sign: %s; complement: %1b", op1[i], op2[i], opcode ? "sub" : "add", swap, sign_r ? "-" : "+", complement);
     end
 end
 
