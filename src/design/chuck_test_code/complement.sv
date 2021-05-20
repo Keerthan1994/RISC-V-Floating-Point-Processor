@@ -24,8 +24,8 @@ module complement (
 );
 
 input complement;
-input [23:0] operand;
-output logic [23:0] op_comp;
+input [26:0] operand;
+output logic [26:0] op_comp;
 
 always_comb begin
     op_comp = complement ? ~operand + 1 : operand;

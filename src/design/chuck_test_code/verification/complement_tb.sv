@@ -3,8 +3,8 @@
 module top();
 
 logic complement;
-logic [23:0] operand;
-logic [23:0] op_comp;
+logic [26:0] operand;
+logic [26:0] op_comp;
 
 complement comp0 (.*);
 
@@ -13,7 +13,7 @@ initial begin
         complement = {$random()} % 2;
         operand = $random();
         #10
-        $display("complement: %1b; operand: %24b; result: %24b", complement, operand, op_comp);
+        $display("complement: %1b; operand: %27b; result: %27b", complement, operand, op_comp);
     end
 end
 

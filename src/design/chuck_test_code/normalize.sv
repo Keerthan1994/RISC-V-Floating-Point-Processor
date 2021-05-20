@@ -27,10 +27,10 @@ module normalize (
     sig, carryout, exp, sig_norm, shift
 );
 
-input [23:0] sig;
+input [26:0] sig;
 input carryout;
 input [7:0] exp;
-output logic [23:0] sig_norm;
+output logic [26:0] sig_norm;
 output logic [7:0] shift;
 
 always_comb begin

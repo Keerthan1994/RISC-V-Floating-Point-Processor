@@ -10,7 +10,7 @@
  * Copyright (c) 2021 Portland State University
  * 
  * Concatenates the hidden 1 bit at the beginning of the significand.
- * 
+ * Also concatenates 3 zeroes at the end for rounding, sticky, and guard bits.
  * 
  * 
  * -----
@@ -26,16 +26,17 @@ module concat_1 (
 input logic [22:0] sig1, sig2;
 input logic [1:0] n_concat;
 input swap;
-output logic [23:0] sig1_concat, sig2_concat;
+output logic [26:0] sig1_concat, sig2_concat;
 logic [1:0] n_concat_s;
 
 always_comb begin
     // If operands were swapped, also swap concat bits.
     n_concat_s[1:0] = swap ? {n_concat[0], n_concat[1]} : n_concat[1:0];
 
-    // If no-concat signal true (for zero or denorm numbers) append 0, else append 1. 
-    sig1_concat = {~n_concat_s[1], sig1};
-    sig2_concat = {~n_concat_s[0], sig2};
+    // If no-concat signal true (for zero or denorm numbers) append 0, else append 1.
+    // Also append 3 0s for rounding
+    sig1_concat = {~n_concat_s[1], sig1, 3'b000};
+    sig2_concat = {~n_concat_s[0], sig2, 3'b000};
 end
 
 endmodule
