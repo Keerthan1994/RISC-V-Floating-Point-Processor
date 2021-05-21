@@ -23,6 +23,9 @@
  * 2021-05-06	CF	Added initial code. NOT YET TESTED.
  */
 
+`define GUARD 2
+`define ROUND 1
+`define STICKY 0
 
 import addpkg::*;
 
@@ -34,8 +37,22 @@ input [26:0] sig2;
 input [7:0] shift;                      // Output of the subraction of the exponents
 output [26:0] sig2_aligned;             // Only outputting aligned op2, since op1 can just be passed through.
 
+logic [23:0] sig_tmp;
+bit guard, round, sticky;
+
 always_comb begin
-    sig2_aligned = sig2 >> shift;     // First shift brings hidden bit into significand (combinational)
+    // sig_tmp = sig2[26:3];
+    if (shift > 0) begin
+        sig2[GUARD] = sig_tmp[0];
+    end
+    if (shift > 1) begin
+        sig2[ROUND] = sig_tmp[1];
+    end
+    if (shift > 2) begin
+        // check if any bit between sig_tmp[shift:2] is 1
+        sig2[STICKY] = |sig_tmp[shift:2];
+    end
+    sig2_aligned = {sig2[26:3] >> shift, sig2[2:0]};     // First shift brings hidden bit into significand (combinational)
 end
 
 endmodule
