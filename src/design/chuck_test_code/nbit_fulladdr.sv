@@ -1,5 +1,5 @@
 module Nbit_FullAdder(S, CO, A, B, CI);
-    parameter N=23;
+    parameter N=27;
     input wire[N-1:0] A, B;
     input wire CI;
     output logic [N-1:0] S;

@@ -45,12 +45,12 @@ always_comb begin
         end else begin
             shift = 0;
         end
-    end else if (sig != 0 && exp == 8'b1 && sig[23] != 1'b1) begin    // If the sig is not zero, no carry out, and no MSB and the exponent is 1, output a denorm number.
+    end else if (sig != 0 && exp == 8'b1 && sig[26] != 1'b1) begin    // If the sig is not zero, no carry out, and no MSB and the exponent is 1, output a denorm number.
         sig_norm = sig;
         shift = -1;                         // Change the exponent to 0
     end else begin                          // Else keep shifting to the left and decrementing exponent until there is a 1 in the MSB.
         shift = 0;
-        while (sig[23] != 1'b1) begin       // FIXME: Will need sequential or try to figure out "find first one" and shift by that amount to keep it combinational
+        while (sig[26] != 1'b1) begin       // FIXME: Will need sequential or try to figure out "find first one" and shift by that amount to keep it combinational
             sig = sig << 1;
             shift -= 1;
         end
