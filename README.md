@@ -1,6 +1,65 @@
 # Floating-Point-Co-Processor
 Design of a floating point processor.
 
+![image](https://user-images.githubusercontent.com/61081801/119273450-d9134b00-bbbf-11eb-83bd-e3b631af86db.png)
+
+
+
+
+
+
+
+ 
+  
+ 
+ 
+  
+  
+ 
+
+
+
+
+
+
+ 
+  
+ 
+ 
+  
+  
+ 
+
+
+
+
+
+
+ 
+  
+ 
+ 
+  
+  
+ 
+
+
+
+
+
+
+ 
+  
+ 
+ 
+  
+  
+ 
+
+
+
+
+
 
 
 
