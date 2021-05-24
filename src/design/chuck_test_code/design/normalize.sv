@@ -33,6 +33,10 @@ input [7:0] exp;
 output logic [26:0] sig_norm;
 output logic [7:0] shift;
 
+logic [7:0] first_one;
+
+find_first_1 #(6) ff1 (sig, first_one);
+
 always_comb begin
     if (carryout) begin                     // If there is a carryout we need to shift just 1 to the right, and increment the exponent.
         sig_norm = sig >> 1;
@@ -49,12 +53,8 @@ always_comb begin
         sig_norm = sig;
         shift = -1;                         // Change the exponent to 0
     end else begin                          // Else keep shifting to the left and decrementing exponent until there is a 1 in the MSB.
-        shift = 0;
-        while (sig[26] != 1'b1) begin       // FIXME: Will need sequential or try to figure out "find first one" and shift by that amount to keep it combinational
-            sig = sig << 1;
-            shift -= 1;
-        end
-        sig_norm = sig;
+        shift = 26 - first_one;
+        sig_norm = sig << shift;
     end
 end
 
