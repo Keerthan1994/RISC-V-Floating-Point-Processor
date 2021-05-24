@@ -20,10 +20,10 @@ n@_opt
 Z3 OL;O;2019.2_1;69
 R0
 T_opt1
-!s110 1621825550
-V>Z2lg8`4RY^;fIlXfiZcI2
+!s110 1621826504
+VnO?XIg]m5nkJfF;V57DN52
 04 3 4 work top fast 0
-=1-5254006cf05e-60ab180e-4e88c-89b9
+=1-5254006cf05e-60ab1bc8-26589-b754
 R1
 R2
 n@_opt1
@@ -233,7 +233,7 @@ R11
 R2
 vfind_first_1
 R4
-Z23 !s110 1621820881
+Z23 !s110 1621826501
 !i10b 1
 !s100 ]6@G?2i?zH`8gZQ<2Nd8S2
 !s11b D<YN4;ZEz]@J8e8U_7zHo1
@@ -249,7 +249,7 @@ R7
 r1
 !s85 0
 31
-Z24 !s108 1621820881.000000
+Z24 !s108 1621826501.000000
 Z25 !s107 verification/normalize_tb.sv|design/find_first_1.sv|design/normalize.sv|
 Z26 !s90 design/normalize.sv|design/find_first_1.sv|verification/normalize_tb.sv|-lint=full|
 !i113 0
@@ -433,13 +433,13 @@ vnormalize
 R4
 R23
 !i10b 1
-!s100 R2YajW<`73UfJfGAhZ5CX0
-!s11b ZQ<2NbfRc87?kXnb239cF0
-I>E05lYM`QRPo@OcB^Kz_N2
+!s100 <?6Cge_lJO;1A8Ro>J2kT3
+!s11b l2WTX6N=oFF4ZGDe3h4N80
+IVe1KiO>fiYnO7^Oa66:T`3
 R14
 S1
 R6
-w1621820877
+w1621826135
 8design/normalize.sv
 Fdesign/normalize.sv
 R21
@@ -455,7 +455,7 @@ R11
 R2
 vpostcomplement
 R4
-Z35 !s110 1621825548
+!s110 1621825548
 !i10b 1
 !s100 AXclNG@M4E]c[3]9W7ZHM3
 !s11b o6oLzYSQQ78;YdjRKAe7=1
@@ -471,11 +471,11 @@ R7
 r1
 !s85 0
 31
-Z36 !s108 1621825548.000000
-Z37 !s107 verification/postcomplement_tb.sv|design/postcomplement.sv|
-Z38 !s90 design/postcomplement.sv|verification/postcomplement_tb.sv|
+!s108 1621825548.000000
+!s107 verification/postcomplement_tb.sv|design/postcomplement.sv|
+!s90 design/postcomplement.sv|verification/postcomplement_tb.sv|
 !i113 0
-Z39 o-L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+o-L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
 R2
 vsign_logic
 R4
@@ -575,25 +575,25 @@ R11
 R2
 vtop
 R4
-R35
+R23
 !i10b 1
-!s100 RUJ0oMGfzVd>Xc`5PHIQH2
-!s11b ?hdJz6IGM7KLhSlinOZHd3
-Il=Uaj3D9QnNVAY8`?=UnS0
+!s100 LaGjk8?H06U[?I33EB@]@0
+!s11b k?SN98:B`Kb5Se53fi5Z;1
+I`5jIm<?cBdh;]A7abVzUR0
 R14
 S1
 R6
-w1621825544
-8verification/postcomplement_tb.sv
-Fverification/postcomplement_tb.sv
+w1621826497
+8verification/normalize_tb.sv
+Fverification/normalize_tb.sv
 L0 1
 R7
 r1
 !s85 0
 31
-R36
-R37
-R38
+R24
+R25
+R26
 !i113 0
-R39
+R11
 R2

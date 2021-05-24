@@ -33,7 +33,9 @@ input [7:0] exp;
 output logic [26:0] sig_norm;
 output logic [7:0] shift;
 
-logic [15:0] first_one;
+
+
+logic [4:0] first_one;
 logic [7:0]  norm_shift;
 
 find_first_1 #(27) ff1 (sig, first_one);
@@ -41,6 +43,7 @@ find_first_1 #(27) ff1 (sig, first_one);
 always_comb begin
     if (carryout) begin                     // If there is a carryout we need to shift just 1 to the right, and increment the exponent.
         sig_norm = sig >> 1;
+        sig_norm[26] = carryout;
         shift = 1;
     end else if (sig == 0) begin            // The entire significand is 0, so the value is zero (that's only the case if using denorm numbers or zero math)
         sig_norm = sig;

@@ -1,3 +1,5 @@
+// 5/23/2021 Verified by CF and BC
+
 module top();
 
 logic carryout;
@@ -8,12 +10,21 @@ normalize norm0 (.*);
 
 initial begin
 
-sig = $urandom();
-exp = $urandom();
-carryout = {$random()}%2;
-#10;
-$display("INPUTS: Sig: %27b. Exp: %3d. Carryout: %1b. OUTPUTS: Shift: %3d. Sig_Norm: %27b.", sig, 127-exp, carryout, $signed(shift), sig_norm);
+    for (int i = 0; i < 10; i++) begin
+        sig = $urandom();
+        exp = $urandom() & 8'hFF;
+        carryout = {$random()}%2;
+        #10;
+        $display("INPUTS: Sig: %27b. Exp: %3d. Carryout: %1b. OUTPUTS: Shift: %3d. Sig_Norm: %27b.", sig, exp, carryout, $signed(shift), sig_norm);
+    end
 
+    for (int i = 0; i < 10; i++) begin
+        sig = $urandom() & 20'hFFFFF;
+        exp = $urandom() & 8'hFF;
+        carryout = 0;
+        #10;
+        $display("INPUTS: Sig: %27b. Exp: %3d. Carryout: %1b. OUTPUTS: Shift: %3d. Sig_Norm: %27b.", sig, exp, carryout, $signed(shift), sig_norm);
+    end
 end
 
 endmodule
