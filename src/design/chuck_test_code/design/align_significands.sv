@@ -31,8 +31,8 @@ module align_significands (
 
 input [26:0] sig2;
 input [7:0] shift;                      // Output of the subraction of the exponents
-output [26:0] sig2_aligned;             // Only outputting aligned op2, since op1 can just be passed through.
-logic sticky;
+output logic [26:0] sig2_aligned;             // Only outputting aligned op2, since op1 can just be passed through.
+logic guard, round, sticky;
 
 
 always_comb begin
@@ -46,8 +46,9 @@ always_comb begin
     // end
 
     if (shift > 3) begin
-        sticky = |sig2[shift-3:0];
-    end
+        // sticky = |sig2[shift-3:0];
+        sticky = |(sig2 << (27-shift-1));
+    end 
 
     // sig_tmp = sig2[26:3];
     // if (shift > 0) begin
@@ -64,7 +65,7 @@ always_comb begin
     sig2_aligned = sig2 >> shift;     // First shift brings hidden bit into significand (combinational)
     if (shift > 3) begin
         sig2_aligned[0] = sticky;
-    end
+    end 
 end
 
 endmodule

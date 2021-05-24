@@ -20,10 +20,10 @@ n@_opt
 Z4 OL;O;2019.2_1;69
 R0
 T_opt1
-!s110 1621813014
-Vbj;ngJJ0[e7c2_JY_E_^C1
+!s110 1621818766
+Ve:]jCDTAk:UeNC8ZSIH`d0
 R1
-=1-5254006cf05e-60aae716-6b465-3b17
+=1-5254006cf05e-60aafd8e-a314f-44da
 R2
 R3
 n@_opt1
@@ -86,6 +86,55 @@ R8
 !i113 0
 R12
 R3
+valign_significands
+R5
+Z14 DXx4 work 6 addpkg 0 22 zC[l9956XRX_N0V6<bEoB0
+DXx4 work 26 align_significands_sv_unit 0 22 X2gEki7e3I48Fn6:>K0VS1
+Z15 VDg1SIo80bB@j0V0VzS_@n1
+r1
+!s85 0
+!i10b 1
+!s100 1dSI:KCO6`8a::AcKc;L=2
+I6;aKG[A;]cl3`a;l?I:ZZ3
+!s105 align_significands_sv_unit
+S1
+R7
+Z16 w1621818726
+Z17 8design/align_significands.sv
+Z18 Fdesign/align_significands.sv
+L0 28
+R8
+31
+Z19 !s108 1621818764.000000
+Z20 !s107 verification/align_significands_tb.sv|design/align_significands.sv|
+Z21 !s90 design/align_significands.sv|verification/align_significands_tb.sv|-lint=full|
+!i113 0
+R12
+R3
+Xalign_significands_sv_unit
+R5
+R14
+VX2gEki7e3I48Fn6:>K0VS1
+r1
+!s85 0
+!i10b 1
+!s100 R>WjF^7=;[eZ3XaEHWMjd2
+IX2gEki7e3I48Fn6:>K0VS1
+!i103 1
+S1
+R7
+R16
+R17
+R18
+L0 26
+R8
+31
+R19
+R20
+R21
+!i113 0
+R12
+R3
 vcompare_exponents
 R5
 R6
@@ -93,13 +142,13 @@ R6
 !s100 UFII56Bm6?<?n<0^881kY1
 !s11b Q7S[Zif5iKAYU8I1b:Iz]2
 Ia6R<=@;WOZH=Z@]_MReBM0
-Z14 VDg1SIo80bB@j0V0VzS_@n1
+R15
 S1
 R7
 w1621192243
 8compare_exponents.sv
 Fcompare_exponents.sv
-Z15 L0 22
+Z22 L0 22
 R8
 r1
 !s85 0
@@ -117,13 +166,13 @@ R5
 !s100 g7WDPjW6jbfz4fz:63^E<0
 !s11b DSWKiJDD2S<oCK^l]PLV@1
 IUkfneS`DGmz6khOkYIG_K3
-R14
+R15
 S1
 R7
 w1621222999
 8complement.sv
 Fcomplement.sv
-R15
+R22
 R8
 r1
 !s85 0
@@ -141,13 +190,13 @@ R5
 !s100 3PS3WLXYNdGH4?5?iEYSd3
 !s11b zHG@TSJI7BjhKIJaXK[4o0
 I9B14><_B1f?`G;a^7Wna81
-R14
+R15
 S1
 R7
 w1621202832
 8concat_1.sv
 Fconcat_1.sv
-R15
+R22
 R8
 r1
 !s85 0
@@ -165,7 +214,7 @@ R6
 !s100 RDa`cT4EJD`DjFXcSM>@P0
 !s11b PH^mCDEH[aa=J9;6e@WIP3
 IYD^EoG55VXic5Gh15Eb=G0
-R14
+R15
 S1
 R7
 w1621204003
@@ -184,12 +233,12 @@ R12
 R3
 vFullSubtractor
 R5
-Z16 !s110 1621201791
+Z23 !s110 1621201791
 !i10b 1
 !s100 B8[KB?IjaAce`T;R`klNk3
 !s11b QNiN=W0hJe7@fS[W_Sh2c2
 I]1d?zoz??`<Z9<99X0Z3k1
-R14
+R15
 S1
 R7
 w1621200720
@@ -200,45 +249,45 @@ R8
 r1
 !s85 0
 31
-Z17 !s108 1621201791.000000
-Z18 !s107 addpkg.sv|nbit_fullsubt.sv|fullsubt.sv|verification/swap_tb.sv|swap.sv|compare_exponents.sv|
-Z19 !s90 compare_exponents.sv|swap.sv|verification/swap_tb.sv|fullsubt.sv|nbit_fullsubt.sv|addpkg.sv|-lint=full|
+Z24 !s108 1621201791.000000
+Z25 !s107 addpkg.sv|nbit_fullsubt.sv|fullsubt.sv|verification/swap_tb.sv|swap.sv|compare_exponents.sv|
+Z26 !s90 compare_exponents.sv|swap.sv|verification/swap_tb.sv|fullsubt.sv|nbit_fullsubt.sv|addpkg.sv|-lint=full|
 !i113 0
 R12
 R3
 n@full@subtractor
 vhighbit
 R5
-Z20 !s110 1621813011
+!s110 1621813011
 !i10b 1
 !s100 RXj;j;6?J@F]nD0eV0PZ?3
 !s11b @G<Ra_^ZR<QT<hJ[@PGL<2
 I;SK^l5bSVG4UC9zf`6GQ43
-R14
+R15
 S1
 R7
-Z21 w1621813003
-Z22 8findfirstone.sv
-Z23 Ffindfirstone.sv
+w1621813003
+8findfirstone.sv
+Ffindfirstone.sv
 L0 1
 R8
 r1
 !s85 0
 31
-Z24 !s108 1621813011.000000
-Z25 !s107 findfirstone.sv|
-Z26 !s90 findfirstone.sv|-lint=full|
+!s108 1621813011.000000
+!s107 findfirstone.sv|
+!s90 findfirstone.sv|-lint=full|
 !i113 0
 R12
 R3
 vNbit_FullSubtractor
 R5
-R16
+R23
 !i10b 1
 !s100 D26I3NI4zQUgTN;AF>baL1
 !s11b ekC9cUH4jK4BkU>Z==II:0
 IWREZE8mfZB0?j1dbaoPUI3
-R14
+R15
 S1
 R7
 w1621201760
@@ -249,9 +298,9 @@ R8
 r1
 !s85 0
 31
-R17
-R18
-R19
+R24
+R25
+R26
 !i113 0
 R12
 R3
@@ -263,7 +312,7 @@ R5
 !s100 @K8zHX5FY^g=ZO`zFVd`h2
 !s11b `l[F:RIa[9i[WH:KCSJAc1
 I;[hXEO0SJCe`TFmMm@3I23
-R14
+R15
 S1
 R7
 w1621201193
@@ -288,7 +337,7 @@ R6
 !s100 4QR`4H6=[h:M=QUj:CMf;3
 !s11b J`H0Z5fDobYJ=OOHKT`eo3
 IT1X3]2:SRhLI@_3UNa0WY2
-R14
+R15
 S1
 R7
 w1621206464
@@ -307,7 +356,7 @@ R12
 R3
 Xsign_logic_tb_sv_unit
 R5
-DXx4 work 6 addpkg 0 22 zC[l9956XRX_N0V6<bEoB0
+R14
 VQc`nE0M51RkiGS6c>5Ilb3
 r1
 !s85 0
@@ -336,13 +385,13 @@ R6
 !s100 zH:Gb[0Q:[@DMCaY6FWC;3
 !s11b aj`mSE@SeACn:09EEWjPQ0
 I8`S2GAWoRo<aSdd43c8Ge0
-R14
+R15
 S1
 R7
 w1621192346
 8swap.sv
 Fswap.sv
-R15
+R22
 R8
 r1
 !s85 0
@@ -372,32 +421,32 @@ L0 1
 R8
 31
 !s108 1621192562.000000
-R18
-R19
+R25
+R26
 !i113 0
 R12
 R3
 vtop
 R5
-R20
+!s110 1621818764
 !i10b 1
-!s100 @PhB3`i5R_d<llXVRjQ8e2
-!s11b UX`GX=HJg>[[^E@C`B99l1
-IM3FU5VJjc7d=1EUI1Um200
-R14
+!s100 G0diEHZJMVDm5=^K`0P>00
+!s11b b=i2TFS?BA2OibLcW]0]N3
+IFF>BZ^2T_Rlc[PQVSTkRZ1
+R15
 S1
 R7
-R21
-R22
-R23
-L0 20
+w1621818759
+8verification/align_significands_tb.sv
+Fverification/align_significands_tb.sv
+L0 1
 R8
 r1
 !s85 0
 31
-R24
-R25
-R26
+R19
+R20
+R21
 !i113 0
 R12
 R3
