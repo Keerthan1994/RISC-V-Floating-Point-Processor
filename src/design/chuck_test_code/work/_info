@@ -20,10 +20,10 @@ n@_opt
 Z3 OL;O;2019.2_1;69
 R0
 T_opt1
-!s110 1621826504
-VnO?XIg]m5nkJfF;V57DN52
+!s110 1621828417
+V>[doz0DW@2oN^dYz5S8n81
 04 3 4 work top fast 0
-=1-5254006cf05e-60ab1bc8-26589-b754
+=1-5254006cf05e-60ab2340-cce70-1f55
 R1
 R2
 n@_opt1
@@ -477,6 +477,30 @@ r1
 !i113 0
 o-L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
 R2
+vrounding
+R4
+Z35 !s110 1621828414
+!i10b 1
+!s100 HcYEcMh]F5ZHCME5L?2PK3
+!s11b L1HfV6Tkf^gTOPObnbg@]0
+IEI>IJk5l7eIgFkJ^VcEcn3
+R14
+S1
+R6
+w1621828408
+8design/rounding.sv
+Fdesign/rounding.sv
+L0 1
+R7
+r1
+!s85 0
+31
+Z36 !s108 1621828414.000000
+Z37 !s107 verification/rounding_tb.sv|design/rounding.sv|
+Z38 !s90 design/rounding.sv|verification/rounding_tb.sv|-lint=full|
+!i113 0
+R11
+R2
 vsign_logic
 R4
 R5
@@ -575,25 +599,25 @@ R11
 R2
 vtop
 R4
-R23
+R35
 !i10b 1
-!s100 LaGjk8?H06U[?I33EB@]@0
-!s11b k?SN98:B`Kb5Se53fi5Z;1
-I`5jIm<?cBdh;]A7abVzUR0
+!s100 UKglMF<>hl?S4[Kfm?on73
+!s11b dQ_c5FICXI;WS7g^WPcB=1
+IFYRKDKMnCn6aB<JR;GH?<2
 R14
 S1
 R6
-w1621826497
-8verification/normalize_tb.sv
-Fverification/normalize_tb.sv
-L0 1
+w1621828282
+8verification/rounding_tb.sv
+Fverification/rounding_tb.sv
+L0 2
 R7
 r1
 !s85 0
 31
-R24
-R25
-R26
+R36
+R37
+R38
 !i113 0
 R11
 R2
