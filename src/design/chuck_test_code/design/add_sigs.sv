@@ -1,3 +1,5 @@
+// Verified 5/23 by inspection - CF and BC
+
 module add_significands (
     sig1_cc, sig2_a, co, sum
 );

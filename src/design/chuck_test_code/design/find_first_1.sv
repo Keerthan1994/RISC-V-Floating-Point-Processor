@@ -1,8 +1,7 @@
-module find_first_1 #(
-    parameter OUT_WIDTH = 4 // How many bits needed to represent the index plus 1
-) (in, out);
+module find_first_1 (in, out);
 
-localparam IN_WIDTH = 1<<(OUT_WIDTH-1); // Represents the total number of bits
+parameter IN_WIDTH = 27;
+localparam OUT_WIDTH = $clog2(IN_WIDTH)+1;
 
 input [IN_WIDTH-1:0]in;
 output [OUT_WIDTH-1:0]out;
