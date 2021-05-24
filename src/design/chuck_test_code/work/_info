@@ -18,16 +18,16 @@ Z1 o-quiet -auto_acc_if_foreign -work work
 Z2 tCvgOpt 0
 n@_opt
 Z3 OL;O;2019.2_1;69
+R0
 T_opt1
-!s110 1621820885
-VNk=3=F:XGl8ic9Ek>kGFJ2
+!s110 1621825550
+V>Z2lg8`4RY^;fIlXfiZcI2
 04 3 4 work top fast 0
-=1-5254006cf05e-60ab05d4-f0d94-a581
+=1-5254006cf05e-60ab180e-4e88c-89b9
 R1
 R2
 n@_opt1
 R3
-R0
 T_opt2
 !s110 1621201770
 VmQMb0J5C]7a5deCjX0R@]0
@@ -453,6 +453,30 @@ R26
 !i113 0
 R11
 R2
+vpostcomplement
+R4
+Z35 !s110 1621825548
+!i10b 1
+!s100 AXclNG@M4E]c[3]9W7ZHM3
+!s11b o6oLzYSQQ78;YdjRKAe7=1
+I:5fo03>nEaVlkVN2UKYU42
+R14
+S1
+R6
+w1621824593
+8design/postcomplement.sv
+Fdesign/postcomplement.sv
+L0 1
+R7
+r1
+!s85 0
+31
+Z36 !s108 1621825548.000000
+Z37 !s107 verification/postcomplement_tb.sv|design/postcomplement.sv|
+Z38 !s90 design/postcomplement.sv|verification/postcomplement_tb.sv|
+!i113 0
+Z39 o-L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R2
 vsign_logic
 R4
 R5
@@ -551,25 +575,25 @@ R11
 R2
 vtop
 R4
-R23
+R35
 !i10b 1
-!s100 K;@ek>Q1cUmL`B7BEDhg`3
-!s11b mcTeeZmI`IN?egQT6PBYD1
-Igl=2U4KiCdieXjlfE5UHe3
+!s100 RUJ0oMGfzVd>Xc`5PHIQH2
+!s11b ?hdJz6IGM7KLhSlinOZHd3
+Il=Uaj3D9QnNVAY8`?=UnS0
 R14
 S1
 R6
-w1621819704
-8verification/normalize_tb.sv
-Fverification/normalize_tb.sv
+w1621825544
+8verification/postcomplement_tb.sv
+Fverification/postcomplement_tb.sv
 L0 1
 R7
 r1
 !s85 0
 31
-R24
-R25
-R26
+R36
+R37
+R38
 !i113 0
-R11
+R39
 R2

@@ -2,9 +2,11 @@ module postcomplement (
     complement, co_i, operand, op_comp, co_o
 );
 
+parameter N = 27;
+
 input complement, co_i;
-input [26:0] operand;
-output logic [26:0] op_comp;
+input [N-1:0] operand;
+output logic [N-1:0] op_comp;
 output logic co_o;
 
 always_comb begin
