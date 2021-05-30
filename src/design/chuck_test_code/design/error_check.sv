@@ -34,8 +34,8 @@ input [7:0] exp_i;
 input [26:0] sig_untrunc_i;
 input carry;
 input nan;
-output [31:0] fp_out;
-output [2:0] error;
+output logic [31:0] fp_out;
+output logic [2:0] error;
 
 logic [7:0] exp_o;
 logic [22:0] sig;

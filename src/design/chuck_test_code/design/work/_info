@@ -9,51 +9,75 @@ z2
 !i10f 100
 cModel Technology
 Z0 d/home/cfaber/common/Documents/ECE571/RISC-V-Floating-Point-Processor/src/design/chuck_test_code/design
-vfind_first_1
+verror_check
 Z1 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
-Z2 !s110 1621814415
+!s110 1622406770
+!i10b 1
+!s100 zhHPTfY5HK6W6OY6Fd^f60
+!s11b X5<<g6VnF4Eb6lQ06h6;h2
+IfU<@_cFF=>J1h4:=M^eJ_3
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+S1
+R0
+w1622406767
+8error_check.sv
+Ferror_check.sv
+L0 30
+Z3 OL;L;2019.2_1;69
+r1
+!s85 0
+31
+!s108 1622406770.000000
+!s107 error_check.sv|
+!s90 error_check.sv|-lint=full|
+!i113 0
+Z4 o-lint=full -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+Z5 tCvgOpt 0
+vfind_first_1
+R1
+Z6 !s110 1621814415
 !i10b 1
 !s100 15;nGLAO1F_;61:ALZ9Dn2
 !s11b ^jX;EFG@fFoX;ljnejGh_3
 ImZV[ZikZRG`<Bz4`nP_H;3
-Z3 VDg1SIo80bB@j0V0VzS_@n1
+R2
 S1
 R0
 w1621814155
 8find_first_1.sv
 Ffind_first_1.sv
 L0 1
-Z4 OL;L;2019.2_1;69
+R3
 r1
 !s85 0
 31
-Z5 !s108 1621814415.000000
-!s107 normalize.sv|find_first_1.sv|
-Z6 !s90 find_first_1.sv|normalize.sv|-lint=full|
+Z7 !s108 1621814415.000000
+Z8 !s107 normalize.sv|find_first_1.sv|
+Z9 !s90 find_first_1.sv|normalize.sv|-lint=full|
 !i113 0
-Z7 o-lint=full -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
-Z8 tCvgOpt 0
+R4
+R5
 vnormalize
 R1
-R2
+R6
 !i10b 1
 !s100 6Q3@YUIBc0cE2iSZ5C=b[2
 !s11b l4B?obL3[55QS<2fLTBVn1
 IF9nKndMGzi^67Beo0H0>03
-R3
+R2
 S1
 R0
 w1621814412
 8normalize.sv
 Fnormalize.sv
 L0 26
-R4
+R3
 r1
 !s85 0
 31
-R5
-Z9 !s107 normalize.sv|find_first_1.sv|
-R6
-!i113 0
 R7
 R8
+R9
+!i113 0
+R4
+R5
