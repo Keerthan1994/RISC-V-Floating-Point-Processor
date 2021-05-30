@@ -20,8 +20,6 @@
  * ----------	---	----------------------------------------------------------
  */
 
-import fp::*;
-
 module add_sub_top(sign1, exp1, sig1, sign2, exp2, sig2, opcode, fp_out, error);
 
     // Ports
@@ -48,9 +46,10 @@ module add_sub_top(sign1, exp1, sig1, sign2, exp2, sig2, opcode, fp_out, error);
     logic [26:0] sig1_cc, sig2_a;
     logic [26:0] sig_sum;
     logic [26:0] sig_pc;
+    logic [26:0] sig_n;
     logic [26:0] sig_r;
 
-    logic carry1, carry2, carry3;
+    logic carry1, carry2, carry3, carry4, carry5;
     logic[7:0] shift1, shift2, shift3;
 
     logic sign_r;

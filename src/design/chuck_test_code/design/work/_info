@@ -9,21 +9,45 @@ z2
 !i10f 100
 cModel Technology
 Z0 d/home/cfaber/common/Documents/ECE571/RISC-V-Floating-Point-Processor/src/design/chuck_test_code/design
-verror_check
+vadd_sub_top
 Z1 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
+!s110 1622406888
+!i10b 1
+!s100 CO_Ye]_UT88]XfDB^UGLK2
+!s11b 6Y3Y:f?ZV8>LG5L@5@b3:1
+IInZGkQWF2[]AIZ2TUHTJO1
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+S1
+R0
+w1622406883
+8add_sub_top.sv
+Fadd_sub_top.sv
+L0 23
+Z3 OL;L;2019.2_1;69
+r1
+!s85 0
+31
+!s108 1622406888.000000
+!s107 add_sub_top.sv|
+!s90 add_sub_top.sv|-lint=full|
+!i113 0
+Z4 o-lint=full -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+Z5 tCvgOpt 0
+verror_check
+R1
 !s110 1622406770
 !i10b 1
 !s100 zhHPTfY5HK6W6OY6Fd^f60
 !s11b X5<<g6VnF4Eb6lQ06h6;h2
 IfU<@_cFF=>J1h4:=M^eJ_3
-Z2 VDg1SIo80bB@j0V0VzS_@n1
+R2
 S1
 R0
 w1622406767
 8error_check.sv
 Ferror_check.sv
 L0 30
-Z3 OL;L;2019.2_1;69
+R3
 r1
 !s85 0
 31
@@ -31,8 +55,8 @@ r1
 !s107 error_check.sv|
 !s90 error_check.sv|-lint=full|
 !i113 0
-Z4 o-lint=full -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
-Z5 tCvgOpt 0
+R4
+R5
 vfind_first_1
 R1
 Z6 !s110 1621814415
