@@ -19,6 +19,12 @@ function fp_t fpUnpack (shortreal val);
     return fp;
 endfunction
 
+function shortreal fpPack (fp_t val);
+    shortreal fp;
+    fp = $bitstoshortreal(val.bits);
+    return fp;
+endfunction
+
 /* Example of use. */
 function void FpUnpackTest (shortreal val);
     fp_t num;
