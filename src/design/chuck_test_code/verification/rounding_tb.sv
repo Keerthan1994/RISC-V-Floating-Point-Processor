@@ -1,4 +1,6 @@
 
+// 5/23/2021 Verified by CF and BC
+
 module top();
 
 logic [26:0] sig_n, sig_r;

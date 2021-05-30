@@ -1,3 +1,7 @@
+// FIXME: Should also probably check if EXP represents Infinity or NaN.
+// http://pages.cs.wisc.edu/~markhill/cs354/Fall2008/notes/flpt.apprec.html
+// If so, send a signal to final stage, and inform it to ouput NaN.
+
 module denorm_zero (exp1, exp2, sig1, sig2, n_concat, exp1_d, exp2_d);
 
 input [7:0] exp1, exp2;
