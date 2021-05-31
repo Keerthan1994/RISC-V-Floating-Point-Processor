@@ -1,5 +1,5 @@
 # vsim -c top 
-# Start time: 19:25:45 on May 30,2021
+# Start time: 19:36:08 on May 30,2021
 # ** Note: (vsim-3813) Design is being optimized due to module recompilation...
 # ** Warning: design/normalize.sv(41): (vopt-2241) Connection width does not match width of port 'out'. The port definition is at: design/find_first_1.sv(1).
 # ** Warning: design/normalize.sv(41): (vopt-2241) Connection width does not match width of port 'out'. The port definition is at: design/find_first_1.sv(1).
@@ -24,43 +24,6 @@
 # Loading work.add_sub_top_sv_unit(fast)
 # Loading work.add_sub_top_tb_sv_unit(fast)
 # Loading work.top(fast)
-# swap: 0 complement: x exp_r1: xxxxxxxx shift1:        x shift2:        x exp_r2: xxxxxxxx shift3:        x carry1: x carry2: x carry3: x carry4: x 
-# sig1_c: 1xxxxxxxxxxxxxxxxxxxxxxx000 sig2_c: 1xxxxxxxxxxxxxxxxxxxxxxx000 sig1_cc: xxxxxxxxxxxxxxxxxxxxxxxxxxx sig2_a: xxxxxxxxxxxxxxxxxxxxxxxxxxx sig_sum: xxxxxxxxxxxxxxxxxxxxxxxxxxx 
-# sig_pc: xxxxxxxxxxxxxxxxxxxxxxxxxxx sig_r: xxxxxxxxxxxxxxxxxxxxxxxx000 
-# result: x xxxxxxxx xxxxxxxxxxxxxxxxxxxxxxxxxxx
-# 
-# op1: 0 10000000 00000000000000000000000. op2: 0 10000000 00000000000000000000000.
-# swap: 0 complement: 0 exp_r1: 10000000 shift1:        0 shift2:        x exp_r2: xxxxxxxx shift3:        x carry1: x carry2: x carry3: x carry4: x 
-# sig1_c: 100000000000000000000000000 sig2_c: 100000000000000000000000000 sig1_cc: 100000000000000000000000000 sig2_a: 100000000000000000000000000 sig_sum: xxxxxxxxxxxxxxxxxxxxxxxxxxx 
-# sig_pc: xxxxxxxxxxxxxxxxxxxxxxxxxxx sig_r: xxxxxxxxxxxxxxxxxxxxxxxx000 
-# result: 0 xxxxxxxx xxxxxxxxxxxxxxxxxxxxxxxxxxx
-# 
-# swap: 0 complement: 0 exp_r1: 10000000 shift1:        0 shift2:        1 exp_r2: xxxxxxxx shift3:        x carry1: 1 carry2: 1 carry3: x carry4: x 
-# sig1_c: 100000000000000000000000000 sig2_c: 100000000000000000000000000 sig1_cc: 100000000000000000000000000 sig2_a: 100000000000000000000000000 sig_sum: xxxxxxxxxxxxxxxxxxxxxxxxxx0 
-# sig_pc: xxxxxxxxxxxxxxxxxxxxxxxxxx0 sig_r: xxxxxxxxxxxxxxxxxxxxxxxx000 
-# result: 0 xxxxxxxx xxxxxxxxxxxxxxxxxxxxxxxxxxx
-# 
-# swap: 0 complement: 0 exp_r1: 10000000 shift1:        0 shift2:        1 exp_r2: xxxxxx01 shift3:        0 carry1: 1 carry2: 1 carry3: 0 carry4: x 
-# sig1_c: 100000000000000000000000000 sig2_c: 100000000000000000000000000 sig1_cc: 100000000000000000000000000 sig2_a: 100000000000000000000000000 sig_sum: 000000000000000000000000000 
-# sig_pc: 000000000000000000000000000 sig_r: 100000000000000000000000000 
-# result: 0 xxxxxxxx 100000000000000000000000000
-# 
-# swap: 0 complement: 0 exp_r1: 10000000 shift1:        0 shift2:        1 exp_r2: 10000001 shift3:        0 carry1: 1 carry2: 1 carry3: 0 carry4: 0 
-# sig1_c: 100000000000000000000000000 sig2_c: 100000000000000000000000000 sig1_cc: 100000000000000000000000000 sig2_a: 100000000000000000000000000 sig_sum: 000000000000000000000000000 
-# sig_pc: 000000000000000000000000000 sig_r: 100000000000000000000000000 
-# result: 0 xxxxxxxx 100000000000000000000000000
-# 
-# swap: 0 complement: 0 exp_r1: 10000000 shift1:        0 shift2:        1 exp_r2: 10000001 shift3:        0 carry1: 1 carry2: 1 carry3: 0 carry4: 0 
-# sig1_c: 100000000000000000000000000 sig2_c: 100000000000000000000000000 sig1_cc: 100000000000000000000000000 sig2_a: 100000000000000000000000000 sig_sum: 000000000000000000000000000 
-# sig_pc: 000000000000000000000000000 sig_r: 100000000000000000000000000 
-# result: 0 xxxxx0x1 100000000000000000000000000
-# 
-# swap: 0 complement: 0 exp_r1: 10000000 shift1:        0 shift2:        1 exp_r2: 10000001 shift3:        0 carry1: 1 carry2: 1 carry3: 0 carry4: 0 
-# sig1_c: 100000000000000000000000000 sig2_c: 100000000000000000000000000 sig1_cc: 100000000000000000000000000 sig2_a: 100000000000000000000000000 sig_sum: 000000000000000000000000000 
-# sig_pc: 000000000000000000000000000 sig_r: 100000000000000000000000000 
-# result: 0 10000001 100000000000000000000000000
-# 
-# Result: 4.000000.
-# out: 0 10000001 00000000000000000000000
-# End time: 19:25:55 on May 30,2021, Elapsed time: 0:00:10
+# Result: -nan.
+# End time: 19:36:40 on May 30,2021, Elapsed time: 0:00:32
 # Errors: 0, Warnings: 3

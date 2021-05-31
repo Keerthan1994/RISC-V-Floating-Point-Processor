@@ -22,7 +22,6 @@ typedef union {
     ieee754_sp_t unpkg;      // Single Precision Floating Point Unpacked
 } fp_t;
 
-
 function fp_t fpUnpack (shortreal val);
     fp_t fp;
     fp.bits = $shortrealtobits(val);
@@ -43,6 +42,42 @@ function void FpUnpackTest (shortreal val);
     $display("Val = %0f", val);
     $display("Bits = %032b", num.bits);
     $display("sign bit = %01b, exponent = %08b, significand = %023b.", num.unpkg.sign, num.unpkg.exponent, num.unpkg.significand);
+endfunction
+
+function bit checkIsNaN (fp_t fp);
+    if (fp.unpkg.exponent == 8'hFF && fp.unpkg.significand != 0) return 1;
+    else return 0;
+endfunction
+
+function bit checkIsInf (fp_t fp);
+    if (fp.unpkg.exponent == 8'hFF && fp.unpkg.significand == 0) return 1;
+    else return 0;
+endfunction
+
+function bit checkIsSignedNaN (fp_t fp, bit sign);
+    if (fp.unpkg.sign == sign && fp.unpkg.exponent == 8'hFF && fp.unpkg.significand != 0) return 1;
+    else return 0;
+endfunction
+
+function bit checkIsSignedInf (fp_t fp, bit sign);
+    if (fp.unpkg.sign == sign && fp.unpkg.exponent == 8'hFF && fp.unpkg.significand == 0) return 1;
+    else return 0;
+endfunction
+
+function fp_t createNaN (bit sign);
+    fp_t fp;
+    fp.unpkg.sign = sign;
+    fp.unpkg.exponent = '1;
+    fp.unpkg.signficand = '1;
+    return fp;
+endfunction
+
+function fp_t createInf (bit sign);
+    fp_t fp;
+    fp.unpkg.sign = sign;
+    fp.unpkg.exponent = '1;
+    fp.unpkg.signficand = '0;
+    return fp;
 endfunction
 
 endpackage
