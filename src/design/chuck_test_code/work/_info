@@ -10,17 +10,17 @@ z2
 cModel Technology
 Z0 d/home/cfaber/common/Documents/ECE571/RISC-V-Floating-Point-Processor/src/design/chuck_test_code
 T_opt
-!s110 1622419080
-VbgF]^BN2VdVbc>i<VEb_h3
+!s110 1622419336
+VlaWXi>J=1UOL1PVV5cY[e0
 04 3 4 work top fast 0
-=1-5254006cf05e-60b42688-46cd9-72ca
+=1-5254006cf05e-60b42788-5a1e0-7a95
 o-quiet -auto_acc_if_foreign -work work
 Z1 tCvgOpt 0
 n@_opt
 OL;O;2019.2_1;69
 vadd_significands
 Z2 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
-Z3 !s110 1622419077
+Z3 !s110 1622419330
 !i10b 1
 !s100 0EQUThZb1An`M_UU<RMYJ1
 !s11b e<NkK27TQRhe9_=d7PaR^2
@@ -36,7 +36,7 @@ Z5 OL;L;2019.2_1;69
 r1
 !s85 0
 31
-Z6 !s108 1622419077.000000
+Z6 !s108 1622419330.000000
 Z7 !s107 verification/add_sub_top_tb.sv|design/swap.sv|design/sign_logic.sv|design/rounding.sv|design/postcomplement.sv|design/normalize.sv|design/nbit_fullsubt.sv|design/nbit_fulladdr.sv|design/fullsubt.sv|design/fulladdr.sv|design/find_first_1.sv|design/error_check.sv|design/denorm_zero.sv|design/concat_1.sv|design/complement.sv|design/compare_exponents.sv|design/align_significands.sv|design/addpkg.sv|design/add_sub_top.sv|design/add_sigs.sv|
 Z8 !s90 design/add_sigs.sv|design/add_sub_top.sv|design/addpkg.sv|design/align_significands.sv|design/compare_exponents.sv|design/complement.sv|design/concat_1.sv|design/denorm_zero.sv|design/error_check.sv|design/find_first_1.sv|design/fulladdr.sv|design/fullsubt.sv|design/nbit_fulladdr.sv|design/nbit_fullsubt.sv|design/normalize.sv|design/postcomplement.sv|design/rounding.sv|design/sign_logic.sv|design/swap.sv|verification/add_sub_top_tb.sv|-lint=full|
 !i113 0
@@ -46,13 +46,13 @@ vadd_sub_top
 R2
 R3
 !i10b 1
-!s100 hGDW@1e]F21?2]AP7OLh>2
-!s11b OLaWohJaM>d0GZJ`?GYfl2
-ICPN0S7^UPg:Uo<DS:MGX_0
+!s100 FPVYa_cBd5Zm=ndQgg;>31
+!s11b H<<fRANozFXIGUof@EiK[1
+Iod8f39Zco=gmU8@lV1cT23
 R4
 S1
 R0
-w1622419042
+w1622419325
 8design/add_sub_top.sv
 Fdesign/add_sub_top.sv
 L0 23
@@ -69,16 +69,16 @@ R1
 Xadd_sub_top_tb_sv_unit
 R2
 Z10 DXx4 work 6 addpkg 0 22 gmC87lO3hV^ZXdOGOFO=d2
-V`Palob1BVd0d>ZngfIHY`3
+VZf:NzjT;;mI?I9@jUXCRW3
 r1
 !s85 0
 !i10b 1
-!s100 EH_3cYC@F_]b^HX<VR?=b2
-I`Palob1BVd0d>ZngfIHY`3
+!s100 TaPa`YU>NiE;`kMRS`Bj]3
+IZf:NzjT;;mI?I9@jUXCRW3
 !i103 1
 S1
 R0
-Z11 w1622419068
+Z11 w1622419292
 Z12 8verification/add_sub_top_tb.sv
 Z13 Fverification/add_sub_top_tb.sv
 L0 1
@@ -263,13 +263,13 @@ verror_check
 R2
 R3
 !i10b 1
-!s100 Ycdc_LEHVab6k^_]HG7DT1
-!s11b PdYVSGiI8ch4mHf_:RC<b2
-I;<d0N912S2BT27<Zk?hO`2
+!s100 E=2T6J;ak3lXO[65WSU1c0
+!s11b ?QAgWCmB<DgV8GSzPkOdS0
+I:Y_K;O>9:lP?KC_dSmk>^2
 R4
 S1
 R0
-w1622418409
+w1622419167
 8design/error_check.sv
 Fdesign/error_check.sv
 L0 30
@@ -626,13 +626,13 @@ R1
 vtop
 R2
 R10
-DXx4 work 22 add_sub_top_tb_sv_unit 0 22 `Palob1BVd0d>ZngfIHY`3
+DXx4 work 22 add_sub_top_tb_sv_unit 0 22 Zf:NzjT;;mI?I9@jUXCRW3
 R4
 r1
 !s85 0
 !i10b 1
-!s100 0a?bCVzzK]1?`l9<=S]>d2
-IOfS47Q9OH=]GFaV=L[WcJ3
+!s100 =97G]5ok@37^I=7TmSj`C2
+I@6S3S`Wh7n?g9X`RA^UNH0
 !s105 add_sub_top_tb_sv_unit
 S1
 R0
