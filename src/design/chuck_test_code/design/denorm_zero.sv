@@ -31,7 +31,7 @@ input [7:0] exp1, exp2;
 input [22:0] sig1, sig2;
 output logic [7:0] exp1_d, exp2_d;
 output logic [1:0] n_concat;
-output nan;
+output logic nan;
 
 
 always_comb begin

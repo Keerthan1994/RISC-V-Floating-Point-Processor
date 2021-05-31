@@ -1,4 +1,4 @@
-module Nbit_FullSubtractor(D, BO, A, B, BI);
+module nbit_fullsubtractor(D, BO, A, B, BI);
     parameter N=8;
     input wire[N-1:0] A, B;
     input wire BI;
@@ -11,7 +11,7 @@ module Nbit_FullSubtractor(D, BO, A, B, BI);
     generate
     for (r = 0; r < N; r++)
     begin
-        FullSubtractor s(D[r], BO_p[r+1], A[r], B[r], BO_p[r]);
+        fullsubtractor s(D[r], BO_p[r+1], A[r], B[r], BO_p[r]);
     end
     endgenerate
     assign BO = BO_p[N];

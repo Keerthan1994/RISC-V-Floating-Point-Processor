@@ -105,12 +105,12 @@ module add_sub_top(sign1, exp1, sig1, sign2, exp2, sig2, opcode, fp_out, error);
         .operand(sig1_c), 
         .op_comp(sig1_cc)
     );
-    align_significands (
+    align_significands as0 (
         .sig2(sig2_c), 
         .shift(shift1), 
         .sig2_aligned(sig2_a)
     );
-    fulladdr fa0 (
+    nbit_fulladder #(27) fa0 (
         .S(sig_sum), 
         .CO(carry1), 
         .A(sig1_cc), 
@@ -131,7 +131,7 @@ module add_sub_top(sign1, exp1, sig1, sign2, exp2, sig2, opcode, fp_out, error);
         .sig_norm(sig_n), 
         .shift(shift2)
     );
-    fulladdr fa1 (
+    nbit_fulladder #(8) fa1 (
         .S(exp_r2), 
         .CO(carry4), 
         .A(exp_r1), 
@@ -150,21 +150,21 @@ module add_sub_top(sign1, exp1, sig1, sign2, exp2, sig2, opcode, fp_out, error);
         .sig_norm(sig_f), 
         .shift(shift3)
     );
-    fulladdr fa2 (
+    nbit_fulladder #(8) fa2 (
         .S(exp_f), 
         .CO(carry5), 
         .A(exp_r2), 
         .B(shift3), 
-        .CI(carry4)                 // FIXME: Debatable whether to do this.
+        .CI(carry4)
     );                              // Adds exp_r2 and shift3
     error_check ec0 (
         .sign_i(sign_r), 
         .exp_i(exp_f), 
-        .sig_untrunc_i(sig_f), 
-        .carry(carry5), 
+        .sig_untrunc_i(sig_f),
+        .carry(carry), 
         .nan(nan), 
-        .fp_out(), 
-        .error()
+        .fp_out(fp_out), 
+        .error(error)
     );
 
 

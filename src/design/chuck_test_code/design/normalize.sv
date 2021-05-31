@@ -49,17 +49,17 @@ always_comb begin
         sig_norm = sig;
         // Need to do a check if the exponent is 1 or 0. If it is 1, set it to zero. Otherwise it is already zero, so leave it at that.
         if (exp == 8'b1) begin
-            shift = -1;
+            shift = ~1 + 1;
         end else begin
             shift = 0;
         end
     end else if (sig != 0 && exp == 8'b1 && sig[26] != 1'b1) begin    // If the sig is not zero, no carry out, and no MSB and the exponent is 1, output a denorm number.
         sig_norm = sig;
-        shift = -1;                         // Change the exponent to 0
+        shift = ~1 + 1;                     // Change the exponent to 0
     end else begin                          // Else keep shifting to the left and decrementing exponent until there is a 1 in the MSB.
         norm_shift = 26 - first_one;
         sig_norm = sig << norm_shift;
-        shift = -norm_shift;
+        shift = ~(norm_shift)+1;
     end
 end
 

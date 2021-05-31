@@ -42,6 +42,7 @@ logic [22:0] sig;
 
 always_comb begin
     sig = sig_untrunc_i[25:3];                          // Truncate the hidden bit and round bits
+
     if (nan) begin                                      // 1: Invalid Case
         error = 3'd1;
         exp_o = 8'hFF;
@@ -54,8 +55,8 @@ always_comb begin
         error = 3'd4;
         exp_o = exp_i;
     end else begin                                      // 0: No Error Case
-        error = 3'd0;
         exp_o = exp_i;
+        error = 3'd0;
     end
     fp_out = {sign_i, exp_o, sig};
 end

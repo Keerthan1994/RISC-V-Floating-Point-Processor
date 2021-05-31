@@ -1,4 +1,4 @@
-module Nbit_FullAdder(S, CO, A, B, CI);
+module nbit_fulladder(S, CO, A, B, CI);
     parameter N=27;
     input wire[N-1:0] A, B;
     input wire CI;
@@ -11,7 +11,7 @@ module Nbit_FullAdder(S, CO, A, B, CI);
     generate
     for (r = 0; r < N; r++)
     begin
-        FullAdder s(S[r], CO_p[r+1], A[r], B[r], CO_p[r]);
+        fulladder s(S[r], CO_p[r+1], A[r], B[r], CO_p[r]);
     end
     endgenerate
     assign CO = CO_p[N];

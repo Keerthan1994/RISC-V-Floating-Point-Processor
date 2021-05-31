@@ -1,4 +1,4 @@
-module FullSubtractor(D, BO, A, B, BI);
+module fullsubtractor(D, BO, A, B, BI);
     input wire A, B, BI;
     output logic D, BO;
 

@@ -30,12 +30,14 @@ module compare_exponents(
     // depending on if the value is positive or negative output exp1 or exp2
     // and the absolute difference between the two exponents.
     // Diagram uses a full subtractor, dunno if this is what I wanna do.
+
+    // Note: Technically a larger exp value is a lower fp value, and a smaller exp value is a larger fp value
     
-    Nbit_FullSubtractor #(8) fs0 (
+    nbit_fullsubtractor #(8) fs0 (
         .D(diff), 
         .BO(borrow), 
         .A(exp1), 
-        .B(exp2), 
+        .B(exp2),
         .BI(1'b0)
     );
 
