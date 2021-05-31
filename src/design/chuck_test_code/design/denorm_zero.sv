@@ -21,27 +21,62 @@
  * ----------	---	----------------------------------------------------------
  */
 
-// FIXME: Should also probably check if EXP represents Infinity or NaN.
+// FIXME: Should also probably check if EXP represents Infinity or NaN (NaN done).
 // http://pages.cs.wisc.edu/~markhill/cs354/Fall2008/notes/flpt.apprec.html
 // If so, send a signal to final stage, and inform it to ouput NaN.
+// FIXME: Should also check if the operands equal one another AND the complement signal
+// is true. If so, we need to output a zero signal in the final stage.
 
-module denorm_zero (exp1, exp2, sig1, sig2, n_concat, exp1_d, exp2_d, nan);
 
+module denorm_zero (complement, exp1, exp2, sig1, sig2, n_concat, exp1_d, exp2_d, err);
+
+import addpkg::*;
+
+input complement;
 input [7:0] exp1, exp2;
 input [22:0] sig1, sig2;
 output logic [7:0] exp1_d, exp2_d;
 output logic [1:0] n_concat;
-output logic nan;
+output i_err_t err;
+    // 0: Not Special
+    // 1: Zero
+    // 2: NaN
+    // 3: Inf
 
+//output logic nan;
+
+i_err_t op1_err, op2_err;
 
 always_comb begin
-    // Check for NaN operands
-    nan = 1'b0;
-    if (((exp1 == 8'hFF) && (sig1 != 23'b0)) || ((exp2 == 8'hFF) && (sig2 != 23'b0))) begin
-        nan = 1'b1;
-    end
+    // SPECIAL CASES
+    // Operand 1 Special Case
+    if (exp1 == 8'hFF && sig1 == 23'b0) op1_err = INF;
+    else if (exp1 == 8'hFF && sig1 != 23'b0) op1_err = NAN;
+    else op1_err = NOERR;
 
-    // If exoponent is zero, and sig is nonzero, set exponent to 1
+    // Operand 2 Special Case
+    if (exp2 == 8'hFF && sig2 == 23'b0) op2_err = INF;
+    else if (exp2 == 8'hFF && sig2 != 23'b0) op2_err = NAN;
+    else op2_err = NOERR;
+
+    // SPECIAL CASES LOGIC:
+    // One of the inputs is a NaN -- Output should be NaN
+    if (op1_err == NAN || op2_err == NAN) err = NAN;
+    // One of the inputs is INF, but the other is NOT INF -- Output should be INF
+    else if (op1_err == INF && op2_err == NOERR || op1_err == NOERR && op2_err == INF) err = INF;
+    // Both inputs are INF, but the complement signal is false -- Output should be INF
+    else if (op1_err == INF && op2_err == INF && !complement) err = INF;
+    // Both inputs are INF, but the complement signal is true -- Output should be NaN
+    else if (op1_err == INF && op2_err == INF && complement) err = NAN;
+    // Both inputs are equal, and the complement signal is true -- Output should be ZERO.
+    else if (exp1 == exp2 && sig1 == sig2 && complement) err = ZERO;
+    // Otherwise no special error case.
+    else err = NOERR;
+
+    // DENORM INPUTS PROCESSING
+    // If exponent is zero, and sig is nonzero, set exponent to 1
+
+    // Exponent 1 Denorm Processing
     if (exp1 == 8'b0) begin
         n_concat[1] = 1'b1;         // Don't add leading 1 to op1
         if (sig1 != 23'b0) begin    // Op1 is subnormal number
@@ -54,6 +89,7 @@ always_comb begin
         exp1_d = exp1;
     end
 
+    // Exponent 2 Denorm Processing
     if (exp2 == 8'b0) begin
         n_concat[0] = 1'b1;         // Don't add leading 1 to op2
         if (sig2 != 23'b0) begin    // Op2 is subnormal number

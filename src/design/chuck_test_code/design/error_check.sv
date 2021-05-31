@@ -27,36 +27,42 @@
  */
 
 
-module error_check (sign_i, exp_i, sig_untrunc_i, carry, nan, fp_out, error);
+module error_check (sign_i, exp_i, sig_untrunc_i, carry, err_i, fp_out, err_o);
+
+import addpkg::*;
 
 input sign_i;
 input [7:0] exp_i;
 input [26:0] sig_untrunc_i;
 input carry;
-input nan;
+input i_err_t err_i;
 output logic [31:0] fp_out;
-output logic [2:0] error;
+output o_err_t err_o;
 
 logic [7:0] exp_o;
 logic [22:0] sig;
 
 always_comb begin
-    sig = sig_untrunc_i[25:3];                          // Truncate the hidden bit and round bits
+    sig = sig_untrunc_i[25:3];                                  // Truncate the hidden bit and round bits
 
-    if (nan) begin                                      // 1: Invalid Case
-        error = 3'd1;
+    if (err_i == NAN || (exp_i == 8'hFF && sig != 0)) begin     // 1: Invalid Case -- should only happen from inputs but check just in case
+        err_o = INVALID;
         exp_o = 8'hFF;
         sig = {23{1'b1}};
-    end else if (carry || (exp_i == 8'hFF)) begin       // 3: Overflow Case
-        error = 3'd3;
+    end else if (carry || err_i == INF) begin                   // 3: Overflow Case (can happen as result or from inputs)
+        err_o = OVERFLOW;
         exp_o = 8'hFF;
         sig = {23{1'b0}};
-    end else if (exp_i == 8'h00 && sig != 0) begin      // 4: Underflow Case
-        error = 3'd4;
+    end else if (exp_i == 8'h00 && sig != 0) begin              // 4: Underflow Case (need to check result)
+        err_o = UNDERFLOW;
         exp_o = exp_i;
-    end else begin                                      // 0: No Error Case
+    end else if (err_i == ZERO) begin                           // Zero Case (not really an error but requires special handling)
+        err_o = NONE;
+        exp_o = 8'b0;
+        sig = {23{1'b0}};
+    end else begin                                              // 0: No Error Case
+        err_o = NONE;
         exp_o = exp_i;
-        error = 3'd0;
     end
     fp_out = {sign_i, exp_o, sig};
 end

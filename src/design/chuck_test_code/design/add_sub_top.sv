@@ -20,7 +20,9 @@
  * ----------	---	----------------------------------------------------------
  */
 
-module add_sub_top(sign1, exp1, sig1, sign2, exp2, sig2, opcode, fp_out, error);
+
+import addpkg::*; 
+module add_sub_top(opcode, sign1, exp1, sig1, sign2, exp2, sig2, fp_out, err_o);
 
     // Ports
     input opcode;                       // 0: Add; 1: Subtract
@@ -28,13 +30,13 @@ module add_sub_top(sign1, exp1, sig1, sign2, exp2, sig2, opcode, fp_out, error);
     input logic [22:0] sig1, sig2;
     input logic sign1, sign2;
     output logic [31:0] fp_out;
-    output logic [2:0] error;
+    output logic [2:0] err_o;
 
     // Connection Wires
+    i_err_t err_i;
     logic [7:0] exp1_d, exp2_d;
     logic [1:0] n_concat;
     logic [7:0] diff;
-    logic nan;
     logic borrow;
     logic swap;
     logic complement;
@@ -66,6 +68,7 @@ module add_sub_top(sign1, exp1, sig1, sign2, exp2, sig2, opcode, fp_out, error);
         .sign_r(sign_r)
     );
     denorm_zero dz0 (
+        .complement(complement),
         .exp1(exp1), 
         .exp2(exp2), 
         .sig1(sig1), 
@@ -73,7 +76,7 @@ module add_sub_top(sign1, exp1, sig1, sign2, exp2, sig2, opcode, fp_out, error);
         .n_concat(n_concat), 
         .exp1_d(exp1_d), 
         .exp2_d(exp2_d),
-        .nan(nan)
+        .err(err_i)
     );
     compare_exponents ce0 (
         .exp1(exp1_d), 
@@ -162,9 +165,9 @@ module add_sub_top(sign1, exp1, sig1, sign2, exp2, sig2, opcode, fp_out, error);
         .exp_i(exp_f), 
         .sig_untrunc_i(sig_f),
         .carry(carry5), 
-        .nan(nan), 
+        .err_i(err_i), 
         .fp_out(fp_out), 
-        .error(error)
+        .err_o(err_o)
     );
 
 

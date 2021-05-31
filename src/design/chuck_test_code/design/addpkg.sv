@@ -1,5 +1,15 @@
 package addpkg;
 
+// Special Cases For Input Operands
+typedef enum logic [1:0] {
+    NOERR, ZERO, NAN, INF
+} i_err_t;
+
+// Error Codes
+typedef enum logic [2:0] {
+    NONE, INVALID, DIVBYZERO, OVERFLOW, UNDERFLOW, INEXACT
+} o_err_t;
+
 typedef struct packed {
     logic sign;
     logic [7:0] exponent;

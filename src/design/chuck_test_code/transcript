@@ -1,5 +1,5 @@
 # vsim -c top 
-# Start time: 17:02:16 on May 30,2021
+# Start time: 19:25:45 on May 30,2021
 # ** Note: (vsim-3813) Design is being optimized due to module recompilation...
 # ** Warning: design/normalize.sv(41): (vopt-2241) Connection width does not match width of port 'out'. The port definition is at: design/find_first_1.sv(1).
 # ** Warning: design/normalize.sv(41): (vopt-2241) Connection width does not match width of port 'out'. The port definition is at: design/find_first_1.sv(1).
@@ -21,6 +21,7 @@
 # Loading sv_std.std
 # Loading work.addpkg(fast)
 # Loading work.align_significands_sv_unit(fast)
+# Loading work.add_sub_top_sv_unit(fast)
 # Loading work.add_sub_top_tb_sv_unit(fast)
 # Loading work.top(fast)
 # swap: 0 complement: x exp_r1: xxxxxxxx shift1:        x shift2:        x exp_r2: xxxxxxxx shift3:        x carry1: x carry2: x carry3: x carry4: x 
@@ -28,58 +29,38 @@
 # sig_pc: xxxxxxxxxxxxxxxxxxxxxxxxxxx sig_r: xxxxxxxxxxxxxxxxxxxxxxxx000 
 # result: x xxxxxxxx xxxxxxxxxxxxxxxxxxxxxxxxxxx
 # 
-# op1: 0 01111101 00110011001100110011010. op2: 1 10000000 01000000000000000000000.
-# swap: 1 complement: 1 exp_r1: 10000000 shift1:        3 shift2:        x exp_r2: xxxxxxxx shift3:        x carry1: x carry2: x carry3: x carry4: x 
-# sig1_c: 101000000000000000000000000 sig2_c: 100110011001100110011010000 sig1_cc: 011000000000000000000000000 sig2_a: 000100110011001100110011010 sig_sum: xxxxxxxxxxxxxxxxxxxxxxxxxxx 
+# op1: 0 10000000 00000000000000000000000. op2: 0 10000000 00000000000000000000000.
+# swap: 0 complement: 0 exp_r1: 10000000 shift1:        0 shift2:        x exp_r2: xxxxxxxx shift3:        x carry1: x carry2: x carry3: x carry4: x 
+# sig1_c: 100000000000000000000000000 sig2_c: 100000000000000000000000000 sig1_cc: 100000000000000000000000000 sig2_a: 100000000000000000000000000 sig_sum: xxxxxxxxxxxxxxxxxxxxxxxxxxx 
 # sig_pc: xxxxxxxxxxxxxxxxxxxxxxxxxxx sig_r: xxxxxxxxxxxxxxxxxxxxxxxx000 
-# result: 1 xxxxxxxx xxxxxxxxxxxxxxxxxxxxxxxxxxx
+# result: 0 xxxxxxxx xxxxxxxxxxxxxxxxxxxxxxxxxxx
 # 
-# swap: 1 complement: 1 exp_r1: 10000000 shift1:        3 shift2:        x exp_r2: xxxxxxxx shift3:        x carry1: 0 carry2: 0 carry3: x carry4: x 
-# sig1_c: 101000000000000000000000000 sig2_c: 100110011001100110011010000 sig1_cc: 011000000000000000000000000 sig2_a: 000100110011001100110011010 sig_sum: xxxxxxxxxxxxxxxxxxxxxxxxxx0 
-# sig_pc: xxxxxxxxxxxxxxxxxxxxxxxxxxx sig_r: xxxxxxxxxxxxxxxxxxxxxxxx000 
-# result: 1 xxxxxxxx xxxxxxxxxxxxxxxxxxxxxxxxxxx
+# swap: 0 complement: 0 exp_r1: 10000000 shift1:        0 shift2:        1 exp_r2: xxxxxxxx shift3:        x carry1: 1 carry2: 1 carry3: x carry4: x 
+# sig1_c: 100000000000000000000000000 sig2_c: 100000000000000000000000000 sig1_cc: 100000000000000000000000000 sig2_a: 100000000000000000000000000 sig_sum: xxxxxxxxxxxxxxxxxxxxxxxxxx0 
+# sig_pc: xxxxxxxxxxxxxxxxxxxxxxxxxx0 sig_r: xxxxxxxxxxxxxxxxxxxxxxxx000 
+# result: 0 xxxxxxxx xxxxxxxxxxxxxxxxxxxxxxxxxxx
 # 
-# swap: 1 complement: 1 exp_r1: 10000000 shift1:        3 shift2:        x exp_r2: xxxxxxxx shift3:        x carry1: 0 carry2: 0 carry3: x carry4: x 
-# sig1_c: 101000000000000000000000000 sig2_c: 100110011001100110011010000 sig1_cc: 011000000000000000000000000 sig2_a: 000100110011001100110011010 sig_sum: xxx10xx10xx10xx10xx10xx1x10 
-# sig_pc: xxxxxxxxxxxxxxxxxxxxxxxxxxx sig_r: xxxxxxxxxxxxxxxxxxxxxxxx000 
-# result: 1 xxxxxxxx xxxxxxxxxxxxxxxxxxxxxxxxxxx
+# swap: 0 complement: 0 exp_r1: 10000000 shift1:        0 shift2:        1 exp_r2: xxxxxx01 shift3:        0 carry1: 1 carry2: 1 carry3: 0 carry4: x 
+# sig1_c: 100000000000000000000000000 sig2_c: 100000000000000000000000000 sig1_cc: 100000000000000000000000000 sig2_a: 100000000000000000000000000 sig_sum: 000000000000000000000000000 
+# sig_pc: 000000000000000000000000000 sig_r: 100000000000000000000000000 
+# result: 0 xxxxxxxx 100000000000000000000000000
 # 
-# swap: 1 complement: 1 exp_r1: 10000000 shift1:        3 shift2:        x exp_r2: xxxxxxxx shift3:        x carry1: 0 carry2: 0 carry3: x carry4: x 
-# sig1_c: 101000000000000000000000000 sig2_c: 100110011001100110011010000 sig1_cc: 011000000000000000000000000 sig2_a: 000100110011001100110011010 sig_sum: xx110x110x110x110x110x11010 
-# sig_pc: xxxxxxxxxxxxxxxxxxxxxxxxxxx sig_r: xxxxxxxxxxxxxxxxxxxxxxxx000 
-# result: 1 xxxxxxxx xxxxxxxxxxxxxxxxxxxxxxxxxxx
+# swap: 0 complement: 0 exp_r1: 10000000 shift1:        0 shift2:        1 exp_r2: 10000001 shift3:        0 carry1: 1 carry2: 1 carry3: 0 carry4: 0 
+# sig1_c: 100000000000000000000000000 sig2_c: 100000000000000000000000000 sig1_cc: 100000000000000000000000000 sig2_a: 100000000000000000000000000 sig_sum: 000000000000000000000000000 
+# sig_pc: 000000000000000000000000000 sig_r: 100000000000000000000000000 
+# result: 0 xxxxxxxx 100000000000000000000000000
 # 
-# swap: 1 complement: 1 exp_r1: 10000000 shift1:        3 shift2:        x exp_r2: xxxxxxxx shift3:        x carry1: 0 carry2: 0 carry3: x carry4: x 
-# sig1_c: 101000000000000000000000000 sig2_c: 100110011001100110011010000 sig1_cc: 011000000000000000000000000 sig2_a: 000100110011001100110011010 sig_sum: x11100110011001100110011010 
-# sig_pc: xxxxxxxxxxxxxxxxxxxxxxxxxxx sig_r: xxxxxxxxxxxxxxxxxxxxxxxx000 
-# result: 1 xxxxxxxx xxxxxxxxxxxxxxxxxxxxxxxxxxx
+# swap: 0 complement: 0 exp_r1: 10000000 shift1:        0 shift2:        1 exp_r2: 10000001 shift3:        0 carry1: 1 carry2: 1 carry3: 0 carry4: 0 
+# sig1_c: 100000000000000000000000000 sig2_c: 100000000000000000000000000 sig1_cc: 100000000000000000000000000 sig2_a: 100000000000000000000000000 sig_sum: 000000000000000000000000000 
+# sig_pc: 000000000000000000000000000 sig_r: 100000000000000000000000000 
+# result: 0 xxxxx0x1 100000000000000000000000000
 # 
-# swap: 1 complement: 1 exp_r1: 10000000 shift1:        3 shift2:        0 exp_r2: xxxxxxxx shift3:        0 carry1: 0 carry2: 0 carry3: 0 carry4: x 
-# sig1_c: 101000000000000000000000000 sig2_c: 100110011001100110011010000 sig1_cc: 011000000000000000000000000 sig2_a: 000100110011001100110011010 sig_sum: 011100110011001100110011010 
-# sig_pc: 100011001100110011001100110 sig_r: 100011001100110011001101000 
-# result: 1 xxxxxxxx 100011001100110011001101000
+# swap: 0 complement: 0 exp_r1: 10000000 shift1:        0 shift2:        1 exp_r2: 10000001 shift3:        0 carry1: 1 carry2: 1 carry3: 0 carry4: 0 
+# sig1_c: 100000000000000000000000000 sig2_c: 100000000000000000000000000 sig1_cc: 100000000000000000000000000 sig2_a: 100000000000000000000000000 sig_sum: 000000000000000000000000000 
+# sig_pc: 000000000000000000000000000 sig_r: 100000000000000000000000000 
+# result: 0 10000001 100000000000000000000000000
 # 
-# swap: 1 complement: 1 exp_r1: 10000000 shift1:        3 shift2:        0 exp_r2: xx000000 shift3:        0 carry1: 0 carry2: 0 carry3: 0 carry4: x 
-# sig1_c: 101000000000000000000000000 sig2_c: 100110011001100110011010000 sig1_cc: 011000000000000000000000000 sig2_a: 000100110011001100110011010 sig_sum: 011100110011001100110011010 
-# sig_pc: 100011001100110011001100110 sig_r: 100011001100110011001101000 
-# result: 1 xxxxxxxx 100011001100110011001101000
-# 
-# swap: 1 complement: 1 exp_r1: 10000000 shift1:        3 shift2:        0 exp_r2: 10000000 shift3:        0 carry1: 0 carry2: 0 carry3: 0 carry4: 0 
-# sig1_c: 101000000000000000000000000 sig2_c: 100110011001100110011010000 sig1_cc: 011000000000000000000000000 sig2_a: 000100110011001100110011010 sig_sum: 011100110011001100110011010 
-# sig_pc: 100011001100110011001100110 sig_r: 100011001100110011001101000 
-# result: 1 xxxxxxxx 100011001100110011001101000
-# 
-# swap: 1 complement: 1 exp_r1: 10000000 shift1:        3 shift2:        0 exp_r2: 10000000 shift3:        0 carry1: 0 carry2: 0 carry3: 0 carry4: 0 
-# sig1_c: 101000000000000000000000000 sig2_c: 100110011001100110011010000 sig1_cc: 011000000000000000000000000 sig2_a: 000100110011001100110011010 sig_sum: 011100110011001100110011010 
-# sig_pc: 100011001100110011001100110 sig_r: 100011001100110011001101000 
-# result: 1 x0000000 100011001100110011001101000
-# 
-# swap: 1 complement: 1 exp_r1: 10000000 shift1:        3 shift2:        0 exp_r2: 10000000 shift3:        0 carry1: 0 carry2: 0 carry3: 0 carry4: 0 
-# sig1_c: 101000000000000000000000000 sig2_c: 100110011001100110011010000 sig1_cc: 011000000000000000000000000 sig2_a: 000100110011001100110011010 sig_sum: 011100110011001100110011010 
-# sig_pc: 100011001100110011001100110 sig_r: 100011001100110011001101000 
-# result: 1 10000000 100011001100110011001101000
-# 
-# Result: -2.200000.
-# out: 1 10000000 00011001100110011001101
-# End time: 17:02:34 on May 30,2021, Elapsed time: 0:00:18
+# Result: 4.000000.
+# out: 0 10000001 00000000000000000000000
+# End time: 19:25:55 on May 30,2021, Elapsed time: 0:00:10
 # Errors: 0, Warnings: 3
