@@ -1,5 +1,5 @@
 # vsim -c top 
-# Start time: 19:36:08 on May 30,2021
+# Start time: 19:55:50 on May 30,2021
 # ** Note: (vsim-3813) Design is being optimized due to module recompilation...
 # ** Warning: design/normalize.sv(41): (vopt-2241) Connection width does not match width of port 'out'. The port definition is at: design/find_first_1.sv(1).
 # ** Warning: design/normalize.sv(41): (vopt-2241) Connection width does not match width of port 'out'. The port definition is at: design/find_first_1.sv(1).
@@ -24,6 +24,11 @@
 # Loading work.add_sub_top_sv_unit(fast)
 # Loading work.add_sub_top_tb_sv_unit(fast)
 # Loading work.top(fast)
-# Result: -nan.
-# End time: 19:36:40 on May 30,2021, Elapsed time: 0:00:32
+# Result: nan.
+# Is NaN? 1.
+# Is Inf? 0.
+# Result: inf.
+# Is NaN? 0.
+# Is Inf? 1.
+# End time: 20:07:46 on May 30,2021, Elapsed time: 0:11:56
 # Errors: 0, Warnings: 3

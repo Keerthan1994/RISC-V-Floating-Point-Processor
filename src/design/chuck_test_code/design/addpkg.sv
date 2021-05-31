@@ -34,7 +34,7 @@ function shortreal fpPack (fp_t val);
     return fp;
 endfunction
 
-/* Example of use. */
+/* Example Functions */
 function void FpUnpackTest (shortreal val);
     fp_t num;
     num = fpUnpack(val);
@@ -42,6 +42,22 @@ function void FpUnpackTest (shortreal val);
     $display("Val = %0f", val);
     $display("Bits = %032b", num.bits);
     $display("sign bit = %01b, exponent = %08b, significand = %023b.", num.unpkg.sign, num.unpkg.exponent, num.unpkg.significand);
+endfunction
+
+function void InfNaNTests (void);
+    fp_t num;
+    shortreal sr;
+    num = createNaN(0);
+    sr = fpPack(num);
+    $display("Result: %0f.", sr);
+    $display("Is NaN? %b.", checkIsNaN(num));
+    $display("Is Inf? %b.", checkIsInf(num));
+    
+    num = createInf(0);
+    sr = fpPack(num);
+    $display("Result: %0f.", sr);
+    $display("Is NaN? %b.", checkIsNaN(num));
+    $display("Is Inf? %b.", checkIsInf(num));
 endfunction
 
 function bit checkIsNaN (fp_t fp);
@@ -68,7 +84,7 @@ function fp_t createNaN (bit sign);
     fp_t fp;
     fp.unpkg.sign = sign;
     fp.unpkg.exponent = '1;
-    fp.unpkg.signficand = '1;
+    fp.unpkg.significand = '1;
     return fp;
 endfunction
 
@@ -76,7 +92,7 @@ function fp_t createInf (bit sign);
     fp_t fp;
     fp.unpkg.sign = sign;
     fp.unpkg.exponent = '1;
-    fp.unpkg.signficand = '0;
+    fp.unpkg.significand = '0;
     return fp;
 endfunction
 

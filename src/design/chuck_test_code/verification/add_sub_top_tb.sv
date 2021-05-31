@@ -35,16 +35,6 @@ initial begin
     // $display("Result: %0f.", out_sr);
     // $display("out: %1b %8b %23b", out.unpkg.sign, out.unpkg.exponent, out.unpkg.significand);
 
-    op1.unpkg.sign = 1'b1;
-    op1.unpkg.exponent = '1;
-    op1.unpkg.significand = '1;
-    out_sr = fpPack(op1);
-    $display("Result: %0f.", out_sr);
-    
-    out_sr = nan;
-    $display("Result: %0f.", out_sr);
-
-
 end
 
 endmodule
