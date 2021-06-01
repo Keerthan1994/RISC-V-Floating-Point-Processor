@@ -90,7 +90,10 @@ endfunction
 function fp_t createRandReg (bit sign);
     fp_t fp;
     fp.unpkg.sign = sign;
-    // TODO: Create bounded random functions for exponent and sig
+    // Bounded random for exponent and sig
+    fp.unpkg.exponent = $urandom();
+    if (fp.unpkg.exponent == 8'b1111_1111) fp_unpkg.exponent -= 1'b1;
+    fp.unpkg.significand = $urandom();
     return fp;
 endfunction
 
@@ -98,8 +101,9 @@ function fp_t createRandDenorm (bit sign);
     fp_t fp;
     fp.unpkg.sign = sign;
     fp.unpkg.exponent = '0;
-    // TODO: Write bounded random function for significand
-//    fp.unpkg.significand = 
+    // Bounded random for significand
+    fp.unpkg.significand = $urandom();
+    if (fp.unpkg.significand == 0) fp_unpkg.significand += 1'b1;
     return fp;
 endfunction
 
@@ -137,7 +141,7 @@ function void FpUnpackTest (shortreal val);
     $display("sign bit = %01b, exponent = %08b, significand = %023b.", num.unpkg.sign, num.unpkg.exponent, num.unpkg.significand);
 endfunction
 
-function void InfNaNTests (void);
+function void InfNaNTests ();
     fp_t num;
     shortreal sr;
     num = createNaN(0);
@@ -152,5 +156,63 @@ function void InfNaNTests (void);
     $display("Is NaN? %b.", checkIsNaN(num));
     $display("Is Inf? %b.", checkIsInf(num));
 endfunction
+
+
+// TODO: Change the fp_t into a class, and have different classes
+// with constrained random fields, and constructor methods which
+// package it into an fp_t.
+
+
+// This is a bad implementation. Should figure this out later..
+
+// class FloatingPoint;
+//     fp_t fp;
+//     shortreal fp_sr;
+//     bit sign;
+//     bit [7:0] exponent;
+//     bit [22:0] significand;
+
+//     function new();
+//         fp.unpkg.sign = sign;
+//         fp.unpkg.exponent = exponent;
+//         fp.unpkg.significand = significand;
+//         fp_sr = fpPack(fp);
+//     endfunction
+
+//     function buildFP();
+//         fp.unpkg.sign = sign;
+//         fp.unpkg.exponent = exponent;
+//         fp.unpkg.significand = significand;
+//     endfunction
+
+//     // Function which takes a shortreal and converts it into a fp_t type to work with in the FPU
+//     function void fpUnpack ();
+//         fp.bits = $shortrealtobits(fp_sr);
+//     endfunction
+
+//     // Function which takes a fp_t number and converts it to shortreal for printing/display.
+//     function void fpPack ();
+//         fp_sr = $bitstoshortreal(fp.bits);
+//     endfunction
+
+// endclass
+
+// class RandReg extends FloatingPoint;
+//     bit sign;
+//     bit [7:0] exponent;
+//     rand bit [22:0] sigificand;
+//     constraint c {
+//         exponent < 8'b1111_1111;
+//         exponent > 8'b0000_0000;
+//     }
+// endclass
+
+// class RandDenorm extends FloatingPoint;
+//     static rand bit [7:0] exp = 0;
+//     rand bit [22:0] sig;
+//     constraint c {
+//         sig > 23'd0;
+//     }
+// endclass
 
 endpackage
