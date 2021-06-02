@@ -236,7 +236,7 @@ endtask
 
 // OBJECT: OP Pair Test Object
 // DATA: Op1, Op2, Expected Results, Actual Results, Actual Errors, Actual Types
-// METHODS: Apply 8 sign tests and store results and errors, Identify the type of each result
+// METHODS: Apply 8 sign tests and store expected results and errors, Identify the type of each result
 
 // OBJECT: Combo Case Object
 // DATA: Case 1, Case 2, Expected Types, Expected Errors, Op Test Objects
@@ -246,6 +246,14 @@ endtask
 typedef enum logic [2:0] {REG, NAN, INF, ZERO, DENORM, MAX, NORMMIN, DENORMMIN} fp_case;
 
 class FloatingPoint;
+// Using this class:
+// 1. Create FloatingPoint Objects for OP1, OP2, and OUT and EXP.
+// 2. Use generateNew(fp_case) to generate a new randomized value for OP1, and OP2 of specified type.
+// 2a. Ise OP1.setSign(sign) and OP2.setSign(sign) to set the appropriate signs
+// 3. Feed the machine OP1.sign, OP1.exponent, OP1.significand, etc. for OP2.
+// 4. Use OUT.setFp(machine_output) and feed it the machine output to set the OUT value.
+// 5. Use EXP.setSR(shortreal) and feed it the shortreal result from SV.
+// 6. Use OUT.equals(EXP) to see if they are the same!
     fp_t fp;
     bit sign;
     rand bit [7:0] exponent;
@@ -283,6 +291,41 @@ class FloatingPoint;
     function new();
     endfunction
 
+    function void generateNew(fp_case op_case);
+        this.op_case = op_case;
+        assert(this.randomize())
+        else $fatal(0, "FloatingPoint::generateNew - randomize failed");
+        if (op_case !== this.op_case) $error("FloatingPoint::generateNew - Generated FP type %0s does not match specified type %0s.", this.op_case.name(), op_case.name());
+    endfunction
+
+    function void post_randomize();
+        this.updateFp();
+        this.updateType();
+    endfunction
+
+    function bit equals(FloatingPoint obj);
+        if (obj.op_case != this.op_case) return 0;
+        if (this.op_case == NAN || this.op_case == INF) return 1;
+        else if (obj.sign == this.sign && obj.exp == this.exp && obj.significand == this.signficand) return 1;      // I don't know how closely the values will match with SV
+        else return 0;
+    endfunction
+
+    function void setFp (fp_t val);
+        this.fp = val;
+        this.updateFields();
+        this.updateType();
+    endfunction
+
+    function void setSR (shortreal val);
+        this.fp.bits = $shortrealtobits(val);
+        this.updateFields();
+        this.updateType();
+    endfunction
+
+    function shortreal getSR ();
+        return $bitstoshortreal(this.fp.bits);
+    endfunction
+
     function void updateType();
         if (this.checkIsNaN()) op_case = NAN;
         else if (this.checkIsInf()) op_case = INF;
@@ -294,30 +337,33 @@ class FloatingPoint;
         else op_case = REG;
     endfunction
 
-    function void updateFields();
+    function void updateFields();                   // Should be called anytime the fp is updated manually
         this.sign = fp.unpkg.sign;
         this.exponent = fp.unpkg.exponent;
         this.significand = fp.unpkg.significand;
     endfunction
 
-    function void updateFp();
+    function void updateFp();                       // Should be called anytime a field is updated manually
         this.fp.unpkg.sign = sign;
         this.fp.unpkg.exponent = exponent;
         this.fp.unpkg.significand = significand;
     endfunction
 
-    function void setFp (fp_t val);
-        this.fp = val;
-        this.updateFields();
+    function void setSign (bit sign);
+        this.sign = sign;
+        this.updateFp();
     endfunction
 
-    function void setSRVal (shortreal val);
-        this.fp.bits = $shortrealtobits(val);
-        this.updateFields();
+    function void setExponent (bit [7:0] exponent);
+        this.exponent = exponent;
+        this.updateFp();
+        this.updateType();
     endfunction
 
-    function shortreal getSRVal ();
-        return $bitstoshortreal(this.fp.bits);
+    function void setSignificand (bit [22:0] significand);
+        this.significand = significand;
+        this.updateFp();
+        this.updateType();
     endfunction
 
     function bit checkIsNaN ();
@@ -367,6 +413,17 @@ class FloatingPoint;
 
 endclass
 
+class SignTestObj;
+    FloatingPoint op1, op2;
+    shortreal [7:0] expected_results;
+    o_err_t [7:0] expected_err, actual_err;
+    FloatingPoint [7:0] actual_results;
+
+    function new();
+        op1 = new();
+        op2 = new();
+    endfunction
+endclass
 
 typedef struct {
     int cc_id;
