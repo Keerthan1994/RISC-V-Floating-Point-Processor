@@ -1,5 +1,9 @@
 package addpkg;
 
+///////////////////////////////////////
+// Internal and External Error Codes //
+///////////////////////////////////////
+
 // Special Cases For Input Operands
 typedef enum logic [1:0] {
     NOERR, ZERO, NAN, INF
@@ -9,6 +13,10 @@ typedef enum logic [1:0] {
 typedef enum logic [2:0] {
     NONE, INVALID, DIVBYZERO, OVERFLOW, UNDERFLOW, INEXACT
 } o_err_t;
+
+////////////////////////////////////////////
+// Floating Point Definitions and Methods //
+////////////////////////////////////////////
 
 // IEEE 754 Single Precision Floating Point Format
 typedef struct packed {
@@ -37,6 +45,10 @@ function shortreal fpPack (fp_t val);
     return fp;
 endfunction
 
+//////////////////////////////////
+// Special Case Check Functions //
+//////////////////////////////////
+
 // Checks if a fp_t is NaN
 function bit checkIsNaN (fp_t fp);
     if (fp.unpkg.exponent == 8'hFF && fp.unpkg.significand != 0) return 1;
@@ -61,6 +73,40 @@ function bit checkIsSignedInf (fp_t fp, bit sign);
     else return 0;
 endfunction
 
+// Checks if fp_t is denormalized value
+function bit checkIsDenorm (fp_t fp);
+    if (fp.unpkg.exponent == 0 && fp.unpkg.significand != 0) return 1;
+    else return 0;
+endfunction
+
+// Checks if fp_t is Zero valued
+function checkIsZero (fp_t fp);
+    if (fp.unpkg.exponent == 0 && fp.unpkg.significand == 0) return 1;
+    else return 0;
+endfunction
+
+// Checks if fp_t is the max FP value
+function checkIsMax (fp_t fp);
+    if (fp.unpkg.exponent == 8'b1111_1110 && fp.unpkg.significand == 23'b111_1111_1111_1111_1111_1111) return 1;
+    else return 0;
+endfunction
+
+// Checks if fp_t is the min normalized FP value
+function checkIsNormMin (fp_t fp);
+    if (fp.unpkg.exponent == 8'b0000_0001 && fp.unpkg.significand == 0) return 1;
+    else return 0;
+endfunction
+
+// Checks if fp_t is the min normalized FP value
+function checkIsDenormMin (fp_t fp);
+    if (fp.unpkg.exponent == 8'b0000_0000 && fp.unpkg.significand == 23'b000_0000_0000_0000_0000_0001) return 1;
+    else return 0;
+endfunction
+
+//////////////////////////////////
+// Operand Generation Functions //
+//////////////////////////////////
+
 // Function that returns a NaN fp_t of a particular sign
 function fp_t createNaN (bit sign);
     fp_t fp;
@@ -79,20 +125,12 @@ function fp_t createInf (bit sign);
     return fp;
 endfunction
 
-// Function that changes the sign bit of a given fp_t to the
-// specified sign and returns the fp_t.
-function fp_t changeSign (fp_t val, bit sign);
-    val.unpkg.sign = sign;
-    return val;
-endfunction
-
 // Function that generates a random fp_t value of a particular sign
 function fp_t createRandReg (bit sign);
     fp_t fp;
     fp.unpkg.sign = sign;
     // Bounded random for exponent and sig
-    fp.unpkg.exponent = $urandom();
-    if (fp.unpkg.exponent == 8'b1111_1111) fp_unpkg.exponent -= 1'b1;
+    fp.unpkg.exponent = $urandom_range(254, 1);
     fp.unpkg.significand = $urandom();
     return fp;
 endfunction
@@ -131,7 +169,224 @@ function fp_t createDenormMin(bit sign);
     return fp;
 endfunction
 
-/* Example Functions */
+// Function that changes the sign bit of a given fp_t to the
+// specified sign and returns the fp_t.
+function fp_t changeSign (fp_t val, bit sign);
+    val.unpkg.sign = sign;
+    return val;
+endfunction
+
+/////////////////////////////
+// Tasks for Running Tests //
+/////////////////////////////
+
+// Task which takes two operands and applies the appropriate opcode, and sign
+// for each operand.
+// FIXME: Find some way to output these to the top testbench, and also need
+// someway to check the result.
+task automatic signLogicTest (input fp_t op1, op2);
+    bit [2:0] sign_tc;      // {opcode, op1_sign, op2_sign}
+    for (sign_tc = 0; sign_tc < 8; sign_tc++) begin
+        opcode = sign_tc[2];
+        op1 = changeSign(op1, sign_tc[1]);
+        op2 = changeSign(op2, sign_tc[0]);
+        #10;        // Will have some delay and will have to read the result
+    end
+endtask
+
+// Tasks/Functions we need:
+// - Generates the N set of operands for each case (49) in the Op Combination Table. Sets the expected result type. 
+//      Sets the expected error codes. Then calls the function to run through the sign logic table 
+//      for each set of generated operands
+// - Takes two generated operands and manipulates the signs and opcodes to test every case (8) in the
+//      sign logic table.
+// - Compares the results of the FPU operation ensuring that the result of is of the right type
+//      and if not a special case, that the result matches the expected result (self-checking).
+//      Should also check the resultant error codes. Will need access to complement signal.
+
+
+// --Testbench Flow--
+// 1. Define Combo Case operand types
+// 2. Generate table of 8 expected result types and error codes using sign logic table. (particularly complement logic)
+// 3. Generate two operands
+// 4. Populate an 8 element table with the expected result for each sign table case
+// 5. Adjust the signs and opcode of the operands and pass to FPU
+// 6. Delay
+// 7. Store Result to an 8 element table
+// 8. Repeat steps 5-7 for all sign table cases (8 times)
+// 9. For each of the 8 items check that result types and error codes match expected types generated in step 2.
+// 10. For each of the 8 items, if the result type is not INF or NaN, compare the values generated in step 4
+// 11. Repeat steps 3-10 N times.
+// 12. Move to next case, and repeat steps 1-11 for each case.
+
+// --SV Constructs--
+// Let's use a class for reg floating point object
+// Maybe extend the class for denorm, max, norm-min, denorm-min, NaN, and Inf
+// Base methods: 
+//  - construct floating point based on shortreal. 
+//  - output short real based on floating point.
+
+// --Reference Tables--
+// For each combo case (64 cases): 8 element tables -- expected result type, expected error code
+// For each operand pair: 8 element tables -- expected result, actual result, actual error code
+
+// OBJECT: Floating Point Object
+// DATA: Sign, Exponent, Significand, fp_t, fp_case
+// METHODS: Unpack Shortreal, Pack Shortreal, Given a special case type construct the fp_t, check the type,
+
+// OBJECT: OP Pair Test Object
+// DATA: Op1, Op2, Expected Results, Actual Results, Actual Errors, Actual Types
+// METHODS: Apply 8 sign tests and store results and errors, Identify the type of each result
+
+// OBJECT: Combo Case Object
+// DATA: Case 1, Case 2, Expected Types, Expected Errors, Op Test Objects
+// METHODS: Generate Op Pair Objects, Compare Actual Errors with Expected Errors, Compare Actual Types with Expected Types, 
+//          Compare expected result with actual result (within op pair obj) if valid
+
+typedef enum logic [2:0] {REG, NAN, INF, ZERO, DENORM, MAX, NORMMIN, DENORMMIN} fp_case;
+
+class FloatingPoint;
+    fp_t fp;
+    bit sign;
+    rand bit [7:0] exponent;
+    rand bit [22:0] significand;
+    fp_case op_case;
+
+    constraint c_fp {
+        if (op_case == NAN) {
+            exponent == 8'b1111_1111;
+            significand > 1;
+        } else if (op_case == INF) {
+            exponent == 8'b1111_1111;
+            significand == 23'b0;
+        } else if (op_case == ZERO) {
+            exponent == 8'b0;
+            significand == 23'b0;
+        } else if (op_case == DENORM) {
+            exponent == 8'b0;
+            significand > 23'b000_0000_0000_0000_0000_0001;
+        } else if (op_case == MAX) {
+            exponent == 8'b1111_1110;
+            significand == 23'b111_1111_1111_1111_1111_1111;
+        } else if (op_case == NORMMIN) {
+            exponent == 8'b0000_0001;
+            significand == 23'b0;
+        } else if (op_case == DENORMMIN) {
+            exponent == 8'b0;
+            significand == 23'b000_0000_0000_0000_0000_0001;
+        } else {        // Regular Case
+            exponent > 8'b0;
+            exponent < 8'b1111_1111;
+        }
+    }
+
+    function new();
+    endfunction
+
+    function void updateType();
+        if (this.checkIsNaN()) op_case = NAN;
+        else if (this.checkIsInf()) op_case = INF;
+        else if (this.checkIsZero()) op_case = ZERO;
+        else if (this.checkIsDenormMin()) op_case = DENORMMIN;
+        else if (this.checkIsNormMin()) op_case = NORMMIN;
+        else if (this.checkIsMax()) op_case = MAX;
+        else if (this.checkIsDenorm()) op_case = DENORM;
+        else op_case = REG;
+    endfunction
+
+    function void updateFields();
+        this.sign = fp.unpkg.sign;
+        this.exponent = fp.unpkg.exponent;
+        this.significand = fp.unpkg.significand;
+    endfunction
+
+    function void updateFp();
+        this.fp.unpkg.sign = sign;
+        this.fp.unpkg.exponent = exponent;
+        this.fp.unpkg.significand = significand;
+    endfunction
+
+    function void setFp (fp_t val);
+        this.fp = val;
+        this.updateFields();
+    endfunction
+
+    function void setSRVal (shortreal val);
+        this.fp.bits = $shortrealtobits(val);
+        this.updateFields();
+    endfunction
+
+    function shortreal getSRVal ();
+        return $bitstoshortreal(this.fp.bits);
+    endfunction
+
+    function bit checkIsNaN ();
+        if (exponent == 8'hFF && significand != 0) return 1;
+        else return 0;
+    endfunction
+
+    function bit checkIsInf ();
+        if (exponent == 8'hFF && significand == 0) return 1;
+        else return 0;
+    endfunction
+
+    function bit checkIsSignedNaN (bit sign);
+        if (sign == this.sign && exponent == 8'hFF && significand != 0) return 1;
+        else return 0;
+    endfunction
+
+    function bit checkIsSignedInf (bit sign);
+        if (sign == this.sign && exponent == 8'hFF && significand == 0) return 1;
+        else return 0;
+    endfunction
+
+    function bit checkIsDenorm ();
+        if (exponent == 0 && significand != 0) return 1;
+        else return 0;
+    endfunction
+
+    function checkIsZero ();
+        if (exponent == 0 && significand == 0) return 1;
+        else return 0;
+    endfunction
+
+    function checkIsMax ();
+        if (exponent == 8'b1111_1110 && significand == 23'b111_1111_1111_1111_1111_1111) return 1;
+        else return 0;
+    endfunction
+
+    function checkIsNormMin ();
+        if (exponent == 8'b0000_0001 && significand == 0) return 1;
+        else return 0;
+    endfunction
+
+    function checkIsDenormMin ();
+        if (exponent == 8'b0000_0000 && significand == 23'b000_0000_0000_0000_0000_0001) return 1;
+        else return 0;
+    endfunction
+
+endclass
+
+
+typedef struct {
+    int cc_id;
+    fp_case case1, case2;
+    fp_case [7:0] expected_type;
+    o_err_t [7:0] expected error;
+    op_pair [N-1:0] op_pairs;
+} combo_case;
+
+typedef struct {
+    fp_t op1, op2;
+    fp_t [7:0] expected_results;
+    fp_t [7:0] actual_results;
+    o_err_t [7:0] actual_errors;
+} op_pair;
+
+/////////////////////////////////////////////
+// Functions that Test the Other Functions //
+/////////////////////////////////////////////
+
 function void FpUnpackTest (shortreal val);
     fp_t num;
     num = fpUnpack(val);
