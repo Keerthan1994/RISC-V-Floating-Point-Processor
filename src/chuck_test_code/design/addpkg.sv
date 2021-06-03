@@ -6,13 +6,18 @@ package addpkg;
 
 // Special Cases For Input Operands
 typedef enum logic [1:0] {
-    NOERR, ZERO, NAN, INF
+    NO_ERR, ZERO_ERR, NAN_ERR, INF_ERR
 } i_err_t;
 
 // Error Codes
 typedef enum logic [2:0] {
     NONE, INVALID, DIVBYZERO, OVERFLOW, UNDERFLOW, INEXACT
 } o_err_t;
+
+typedef enum logic [2:0] {
+    REG, NAN, INF, ZERO, DENORM, MAX, NORMMIN, DENORMMIN
+} fp_case;
+
 
 ////////////////////////////////////////////
 // Floating Point Definitions and Methods //
@@ -141,7 +146,7 @@ function fp_t createRandDenorm (bit sign);
     fp.unpkg.exponent = '0;
     // Bounded random for significand
     fp.unpkg.significand = $urandom();
-    if (fp.unpkg.significand == 0) fp_unpkg.significand += 1'b1;
+    if (fp.unpkg.significand == 0) fp.unpkg.significand += 1'b1;
     return fp;
 endfunction
 
@@ -184,15 +189,15 @@ endfunction
 // for each operand.
 // FIXME: Find some way to output these to the top testbench, and also need
 // someway to check the result.
-task automatic signLogicTest (input fp_t op1, op2);
-    bit [2:0] sign_tc;      // {opcode, op1_sign, op2_sign}
-    for (sign_tc = 0; sign_tc < 8; sign_tc++) begin
-        opcode = sign_tc[2];
-        op1 = changeSign(op1, sign_tc[1]);
-        op2 = changeSign(op2, sign_tc[0]);
-        #10;        // Will have some delay and will have to read the result
-    end
-endtask
+// task automatic signLogicTest (input fp_t op1, op2);
+//     bit [2:0] sign_tc;      // {opcode, op1_sign, op2_sign}
+//     for (sign_tc = 0; sign_tc < 8; sign_tc++) begin
+//         opcode = sign_tc[2];
+//         op1 = changeSign(op1, sign_tc[1]);
+//         op2 = changeSign(op2, sign_tc[0]);
+//         #10;        // Will have some delay and will have to read the result
+//     end
+// endtask
 
 // Tasks/Functions we need:
 // - Generates the N set of operands for each case (49) in the Op Combination Table. Sets the expected result type. 
@@ -243,23 +248,24 @@ endtask
 // METHODS: Generate Op Pair Objects, Compare Actual Errors with Expected Errors, Compare Actual Types with Expected Types, 
 //          Compare expected result with actual result (within op pair obj) if valid
 
-typedef enum logic [2:0] {REG, NAN, INF, ZERO, DENORM, MAX, NORMMIN, DENORMMIN} fp_case;
 
 class FloatingPoint;
 // Using this class:
 // 1. Create FloatingPoint Objects for OP1, OP2, and OUT and EXP.
 // 2. Use generateNew(fp_case) to generate a new randomized value for OP1, and OP2 of specified type.
 // 2a. Ise OP1.setSign(sign) and OP2.setSign(sign) to set the appropriate signs
-// 3. Feed the machine OP1.sign, OP1.exponent, OP1.significand, etc. for OP2.
-// 4. Use OUT.setFp(machine_output) and feed it the machine output to set the OUT value.
-// 5. Use EXP.setSR(shortreal) and feed it the shortreal result from SV.
+// 3. Use EXP.setSR(OP1.getSR + OP2.getSR) and feed it the shortreal result from SV.
+// 4. Feed the machine OP1.sign, OP1.exponent, OP1.significand, etc. for OP2.
+// 5. Use OUT.setFp(machine_output) and feed it the machine output to set the OUT value.
 // 6. Use OUT.equals(EXP) to see if they are the same!
+
     fp_t fp;
     bit sign;
     rand bit [7:0] exponent;
     rand bit [22:0] significand;
     fp_case op_case;
 
+    // Randomization constraints
     constraint c_fp {
         if (op_case == NAN) {
             exponent == 8'b1111_1111;
@@ -288,9 +294,11 @@ class FloatingPoint;
         }
     }
 
+    // Overriding new function (nothing needed atm)
     function new();
     endfunction
 
+    // Sets op_case and randomizes accordingly
     function void generateNew(fp_case op_case);
         this.op_case = op_case;
         assert(this.randomize())
@@ -298,21 +306,47 @@ class FloatingPoint;
         if (op_case !== this.op_case) $error("FloatingPoint::generateNew - Generated FP type %0s does not match specified type %0s.", this.op_case.name(), op_case.name());
     endfunction
 
+    // After randomization, update the fp_t, and type
     function void post_randomize();
         this.updateFp();
         this.updateType();
     endfunction
 
+    // Checks if one FloatingPoint Object is the Same as this one.
     function bit equals(FloatingPoint obj);
         if (obj.op_case != this.op_case) return 0;
         if (this.op_case == NAN || this.op_case == INF) return 1;
-        else if (obj.sign == this.sign && obj.exp == this.exp && obj.significand == this.signficand) return 1;      // I don't know how closely the values will match with SV
+        else if (obj.sign == this.sign && obj.exponent == this.exponent && obj.significand == this.significand) return 1;      // I don't know how closely the values will match with SV
         else return 0;
     endfunction
 
+    // Getters and Setters
     function void setFp (fp_t val);
         this.fp = val;
         this.updateFields();
+        this.updateType();
+    endfunction
+
+    function void setBits (logic [31:0] bits);
+        this.fp.bits = bits;
+        this.updateFields();
+        this.updateType();
+    endfunction
+
+    function void setSign (bit sign);
+        this.sign = sign;
+        this.updateFp();
+    endfunction
+
+    function void setExponent (bit [7:0] exponent);
+        this.exponent = exponent;
+        this.updateFp();
+        this.updateType();
+    endfunction
+
+    function void setSignificand (bit [22:0] significand);
+        this.significand = significand;
+        this.updateFp();
         this.updateType();
     endfunction
 
@@ -326,6 +360,7 @@ class FloatingPoint;
         return $bitstoshortreal(this.fp.bits);
     endfunction
 
+    // Updating Functions
     function void updateType();
         if (this.checkIsNaN()) op_case = NAN;
         else if (this.checkIsInf()) op_case = INF;
@@ -349,23 +384,7 @@ class FloatingPoint;
         this.fp.unpkg.significand = significand;
     endfunction
 
-    function void setSign (bit sign);
-        this.sign = sign;
-        this.updateFp();
-    endfunction
-
-    function void setExponent (bit [7:0] exponent);
-        this.exponent = exponent;
-        this.updateFp();
-        this.updateType();
-    endfunction
-
-    function void setSignificand (bit [22:0] significand);
-        this.significand = significand;
-        this.updateFp();
-        this.updateType();
-    endfunction
-
+    // Check Type Functions
     function bit checkIsNaN ();
         if (exponent == 8'hFF && significand != 0) return 1;
         else return 0;
@@ -411,13 +430,18 @@ class FloatingPoint;
         else return 0;
     endfunction
 
+    // Display Functions
+    function string bitsToString();
+        return $sformatf("%1b %8b %23b", this.sign, this.exponent, this.significand);
+    endfunction
+
 endclass
 
 class SignTestObj;
     FloatingPoint op1, op2;
-    shortreal [7:0] expected_results;
-    o_err_t [7:0] expected_err, actual_err;
-    FloatingPoint [7:0] actual_results;
+    shortreal expected_results[8];
+    o_err_t expected_err[8], actual_err[8];
+    FloatingPoint actual_results[8];
 
     function new();
         op1 = new();
@@ -425,20 +449,6 @@ class SignTestObj;
     endfunction
 endclass
 
-typedef struct {
-    int cc_id;
-    fp_case case1, case2;
-    fp_case [7:0] expected_type;
-    o_err_t [7:0] expected error;
-    op_pair [N-1:0] op_pairs;
-} combo_case;
-
-typedef struct {
-    fp_t op1, op2;
-    fp_t [7:0] expected_results;
-    fp_t [7:0] actual_results;
-    o_err_t [7:0] actual_errors;
-} op_pair;
 
 /////////////////////////////////////////////
 // Functions that Test the Other Functions //
@@ -468,63 +478,5 @@ function void InfNaNTests ();
     $display("Is NaN? %b.", checkIsNaN(num));
     $display("Is Inf? %b.", checkIsInf(num));
 endfunction
-
-
-// TODO: Change the fp_t into a class, and have different classes
-// with constrained random fields, and constructor methods which
-// package it into an fp_t.
-
-
-// This is a bad implementation. Should figure this out later..
-
-// class FloatingPoint;
-//     fp_t fp;
-//     shortreal fp_sr;
-//     bit sign;
-//     bit [7:0] exponent;
-//     bit [22:0] significand;
-
-//     function new();
-//         fp.unpkg.sign = sign;
-//         fp.unpkg.exponent = exponent;
-//         fp.unpkg.significand = significand;
-//         fp_sr = fpPack(fp);
-//     endfunction
-
-//     function buildFP();
-//         fp.unpkg.sign = sign;
-//         fp.unpkg.exponent = exponent;
-//         fp.unpkg.significand = significand;
-//     endfunction
-
-//     // Function which takes a shortreal and converts it into a fp_t type to work with in the FPU
-//     function void fpUnpack ();
-//         fp.bits = $shortrealtobits(fp_sr);
-//     endfunction
-
-//     // Function which takes a fp_t number and converts it to shortreal for printing/display.
-//     function void fpPack ();
-//         fp_sr = $bitstoshortreal(fp.bits);
-//     endfunction
-
-// endclass
-
-// class RandReg extends FloatingPoint;
-//     bit sign;
-//     bit [7:0] exponent;
-//     rand bit [22:0] sigificand;
-//     constraint c {
-//         exponent < 8'b1111_1111;
-//         exponent > 8'b0000_0000;
-//     }
-// endclass
-
-// class RandDenorm extends FloatingPoint;
-//     static rand bit [7:0] exp = 0;
-//     rand bit [22:0] sig;
-//     constraint c {
-//         sig > 23'd0;
-//     }
-// endclass
 
 endpackage

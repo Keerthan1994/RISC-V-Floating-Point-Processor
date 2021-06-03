@@ -45,18 +45,18 @@ logic [22:0] sig;
 always_comb begin
     sig = sig_untrunc_i[25:3];                                  // Truncate the hidden bit and round bits
 
-    if (err_i == NAN || (exp_i == 8'hFF && sig != 0)) begin     // 1: Invalid Case -- should only happen from inputs but check just in case
+    if (err_i == NAN_ERR || (exp_i == 8'hFF && sig != 0)) begin     // 1: Invalid Case -- should only happen from inputs but check just in case
         err_o = INVALID;
         exp_o = 8'hFF;
         sig = {23{1'b1}};
-    end else if (carry || err_i == INF) begin                   // 3: Overflow Case (can happen as result or from inputs)
+    end else if (carry || err_i == INF_ERR) begin                   // 3: Overflow Case (can happen as result or from inputs)
         err_o = OVERFLOW;
         exp_o = 8'hFF;
         sig = {23{1'b0}};
     end else if (exp_i == 8'h00 && sig != 0) begin              // 4: Underflow Case (need to check result)
         err_o = UNDERFLOW;
         exp_o = exp_i;
-    end else if (err_i == ZERO) begin                           // Zero Case (not really an error but requires special handling)
+    end else if (err_i == ZERO_ERR) begin                           // Zero Case (not really an error but requires special handling)
         err_o = NONE;
         exp_o = 8'b0;
         sig = {23{1'b0}};

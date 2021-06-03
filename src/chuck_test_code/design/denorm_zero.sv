@@ -50,28 +50,28 @@ i_err_t op1_err, op2_err;
 always_comb begin
     // SPECIAL CASES
     // Operand 1 Special Case
-    if (exp1 == 8'hFF && sig1 == 23'b0) op1_err = INF;
-    else if (exp1 == 8'hFF && sig1 != 23'b0) op1_err = NAN;
-    else op1_err = NOERR;
+    if (exp1 == 8'hFF && sig1 == 23'b0) op1_err = INF_ERR;
+    else if (exp1 == 8'hFF && sig1 != 23'b0) op1_err = NAN_ERR;
+    else op1_err = NO_ERR;
 
     // Operand 2 Special Case
-    if (exp2 == 8'hFF && sig2 == 23'b0) op2_err = INF;
-    else if (exp2 == 8'hFF && sig2 != 23'b0) op2_err = NAN;
-    else op2_err = NOERR;
+    if (exp2 == 8'hFF && sig2 == 23'b0) op2_err = INF_ERR;
+    else if (exp2 == 8'hFF && sig2 != 23'b0) op2_err = NAN_ERR;
+    else op2_err = NO_ERR;
 
     // SPECIAL CASES LOGIC:
     // One of the inputs is a NaN -- Output should be NaN
-    if (op1_err == NAN || op2_err == NAN) err = NAN;
+    if (op1_err == NAN_ERR || op2_err == NAN_ERR) err = NAN_ERR;
     // One of the inputs is INF, but the other is NOT INF -- Output should be INF
-    else if (op1_err == INF && op2_err == NOERR || op1_err == NOERR && op2_err == INF) err = INF;
+    else if (op1_err == INF_ERR && op2_err == NO_ERR || op1_err == NO_ERR && op2_err == INF_ERR) err = INF_ERR;
     // Both inputs are INF, but the complement signal is false -- Output should be INF
-    else if (op1_err == INF && op2_err == INF && !complement) err = INF;
+    else if (op1_err == INF_ERR && op2_err == INF_ERR && !complement) err = INF_ERR;
     // Both inputs are INF, but the complement signal is true -- Output should be NaN
-    else if (op1_err == INF && op2_err == INF && complement) err = NAN;
+    else if (op1_err == INF_ERR && op2_err == INF_ERR && complement) err = NAN_ERR;
     // Both inputs are equal, and the complement signal is true -- Output should be ZERO.
-    else if (exp1 == exp2 && sig1 == sig2 && complement) err = ZERO;
+    else if (exp1 == exp2 && sig1 == sig2 && complement) err = ZERO_ERR;
     // Otherwise no special error case.
-    else err = NOERR;
+    else err = NO_ERR;
 
     // DENORM INPUTS PROCESSING
     // If exponent is zero, and sig is nonzero, set exponent to 1
