@@ -185,22 +185,8 @@ endfunction
 // Tasks for Running Tests //
 /////////////////////////////
 
-// Task which takes two operands and applies the appropriate opcode, and sign
-// for each operand.
-// FIXME: Find some way to output these to the top testbench, and also need
-// someway to check the result.
-// task automatic signLogicTest (input fp_t op1, op2);
-//     bit [2:0] sign_tc;      // {opcode, op1_sign, op2_sign}
-//     for (sign_tc = 0; sign_tc < 8; sign_tc++) begin
-//         opcode = sign_tc[2];
-//         op1 = changeSign(op1, sign_tc[1]);
-//         op2 = changeSign(op2, sign_tc[0]);
-//         #10;        // Will have some delay and will have to read the result
-//     end
-// endtask
-
 // Tasks/Functions we need:
-// - Generates the N set of operands for each case (49) in the Op Combination Table. Sets the expected result type. 
+// - Generates the N set of operands for each case (64) in the Op Combination Table. Sets the expected result type. 
 //      Sets the expected error codes. Then calls the function to run through the sign logic table 
 //      for each set of generated operands
 // - Takes two generated operands and manipulates the signs and opcodes to test every case (8) in the
