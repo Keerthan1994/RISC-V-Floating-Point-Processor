@@ -1,8 +1,8 @@
 package addpkg;
 
-///////////////////////////////////////
-// Internal and External Error Codes //
-///////////////////////////////////////
+//////////////////////
+// Enumerated Types //
+//////////////////////
 
 // Special Cases For Input Operands
 typedef enum logic [1:0] {
@@ -18,10 +18,9 @@ typedef enum logic [2:0] {
     REG, NAN, INF, ZERO, DENORM, MAX, NORMMIN, DENORMMIN
 } fp_case;
 
-
-////////////////////////////////////////////
-// Floating Point Definitions and Methods //
-////////////////////////////////////////////
+////////////////////////
+// Structs and Unions //
+////////////////////////
 
 // IEEE 754 Single Precision Floating Point Format
 typedef struct packed {
@@ -36,204 +35,9 @@ typedef union {
     ieee754_sp_t unpkg;      // Single Precision Floating Point Unpacked
 } fp_t;
 
-// Function which takes a shortreal and converts it into a fp_t type to work with in the FPU
-function fp_t fpUnpack (shortreal val);
-    fp_t fp;
-    fp.bits = $shortrealtobits(val);
-    return fp;
-endfunction
-
-// Function which takes a fp_t number and converts it to shortreal for printing/display.
-function shortreal fpPack (fp_t val);
-    shortreal fp;
-    fp = $bitstoshortreal(val.bits);
-    return fp;
-endfunction
-
-//////////////////////////////////
-// Special Case Check Functions //
-//////////////////////////////////
-
-// Checks if a fp_t is NaN
-function bit checkIsNaN (fp_t fp);
-    if (fp.unpkg.exponent == 8'hFF && fp.unpkg.significand != 0) return 1;
-    else return 0;
-endfunction
-
-// Checks if a fp_t is INF
-function bit checkIsInf (fp_t fp);
-    if (fp.unpkg.exponent == 8'hFF && fp.unpkg.significand == 0) return 1;
-    else return 0;
-endfunction
-
-// Checks if fp_t is NaN with added sign check
-function bit checkIsSignedNaN (fp_t fp, bit sign);
-    if (fp.unpkg.sign == sign && fp.unpkg.exponent == 8'hFF && fp.unpkg.significand != 0) return 1;
-    else return 0;
-endfunction
-
-// Checks if fp_t is INF with added sign check
-function bit checkIsSignedInf (fp_t fp, bit sign);
-    if (fp.unpkg.sign == sign && fp.unpkg.exponent == 8'hFF && fp.unpkg.significand == 0) return 1;
-    else return 0;
-endfunction
-
-// Checks if fp_t is denormalized value
-function bit checkIsDenorm (fp_t fp);
-    if (fp.unpkg.exponent == 0 && fp.unpkg.significand != 0) return 1;
-    else return 0;
-endfunction
-
-// Checks if fp_t is Zero valued
-function checkIsZero (fp_t fp);
-    if (fp.unpkg.exponent == 0 && fp.unpkg.significand == 0) return 1;
-    else return 0;
-endfunction
-
-// Checks if fp_t is the max FP value
-function checkIsMax (fp_t fp);
-    if (fp.unpkg.exponent == 8'b1111_1110 && fp.unpkg.significand == 23'b111_1111_1111_1111_1111_1111) return 1;
-    else return 0;
-endfunction
-
-// Checks if fp_t is the min normalized FP value
-function checkIsNormMin (fp_t fp);
-    if (fp.unpkg.exponent == 8'b0000_0001 && fp.unpkg.significand == 0) return 1;
-    else return 0;
-endfunction
-
-// Checks if fp_t is the min normalized FP value
-function checkIsDenormMin (fp_t fp);
-    if (fp.unpkg.exponent == 8'b0000_0000 && fp.unpkg.significand == 23'b000_0000_0000_0000_0000_0001) return 1;
-    else return 0;
-endfunction
-
-//////////////////////////////////
-// Operand Generation Functions //
-//////////////////////////////////
-
-// Function that returns a NaN fp_t of a particular sign
-function fp_t createNaN (bit sign);
-    fp_t fp;
-    fp.unpkg.sign = sign;
-    fp.unpkg.exponent = '1;
-    fp.unpkg.significand = '1;
-    return fp;
-endfunction
-
-// Function that returns a INF fp_t of a particular sign
-function fp_t createInf (bit sign);
-    fp_t fp;
-    fp.unpkg.sign = sign;
-    fp.unpkg.exponent = '1;
-    fp.unpkg.significand = '0;
-    return fp;
-endfunction
-
-// Function that generates a random fp_t value of a particular sign
-function fp_t createRandReg (bit sign);
-    fp_t fp;
-    fp.unpkg.sign = sign;
-    // Bounded random for exponent and sig
-    fp.unpkg.exponent = $urandom_range(254, 1);
-    fp.unpkg.significand = $urandom();
-    return fp;
-endfunction
-
-function fp_t createRandDenorm (bit sign);
-    fp_t fp;
-    fp.unpkg.sign = sign;
-    fp.unpkg.exponent = '0;
-    // Bounded random for significand
-    fp.unpkg.significand = $urandom();
-    if (fp.unpkg.significand == 0) fp.unpkg.significand += 1'b1;
-    return fp;
-endfunction
-
-function fp_t createMax(bit sign);
-    fp_t fp;
-    fp.unpkg.sign = sign;
-    fp.unpkg.exponent = 8'b1111_1110;
-    fp.unpkg.significand = 23'b111_1111_1111_1111_1111_1111;
-    return fp;
-endfunction
-
-function fp_t createNormMin(bit sign);
-    fp_t fp;
-    fp.unpkg.sign = sign;
-    fp.unpkg.exponent = 8'b0000_0001;
-    fp.unpkg.significand = 23'b000_0000_0000_0000_0000_0000;
-    return fp;
-endfunction
-
-function fp_t createDenormMin(bit sign);
-    fp_t fp;
-    fp.unpkg.sign = sign;
-    fp.unpkg.exponent = 8'b0000_0000;
-    fp.unpkg.significand = 23'b000_0000_0000_0000_0000_0001;
-    return fp;
-endfunction
-
-// Function that changes the sign bit of a given fp_t to the
-// specified sign and returns the fp_t.
-function fp_t changeSign (fp_t val, bit sign);
-    val.unpkg.sign = sign;
-    return val;
-endfunction
-
-/////////////////////////////
-// Tasks for Running Tests //
-/////////////////////////////
-
-// Tasks/Functions we need:
-// - Generates the N set of operands for each case (64) in the Op Combination Table. Sets the expected result type. 
-//      Sets the expected error codes. Then calls the function to run through the sign logic table 
-//      for each set of generated operands
-// - Takes two generated operands and manipulates the signs and opcodes to test every case (8) in the
-//      sign logic table.
-// - Compares the results of the FPU operation ensuring that the result of is of the right type
-//      and if not a special case, that the result matches the expected result (self-checking).
-//      Should also check the resultant error codes. Will need access to complement signal.
-
-
-// --Testbench Flow--
-// 1. Define Combo Case operand types
-// 2. Generate table of 8 expected result types and error codes using sign logic table. (particularly complement logic)
-// 3. Generate two operands
-// 4. Populate an 8 element table with the expected result for each sign table case
-// 5. Adjust the signs and opcode of the operands and pass to FPU
-// 6. Delay
-// 7. Store Result to an 8 element table
-// 8. Repeat steps 5-7 for all sign table cases (8 times)
-// 9. For each of the 8 items check that result types and error codes match expected types generated in step 2.
-// 10. For each of the 8 items, if the result type is not INF or NaN, compare the values generated in step 4
-// 11. Repeat steps 3-10 N times.
-// 12. Move to next case, and repeat steps 1-11 for each case.
-
-// --SV Constructs--
-// Let's use a class for reg floating point object
-// Maybe extend the class for denorm, max, norm-min, denorm-min, NaN, and Inf
-// Base methods: 
-//  - construct floating point based on shortreal. 
-//  - output short real based on floating point.
-
-// --Reference Tables--
-// For each combo case (64 cases): 8 element tables -- expected result type, expected error code
-// For each operand pair: 8 element tables -- expected result, actual result, actual error code
-
-// OBJECT: Floating Point Object
-// DATA: Sign, Exponent, Significand, fp_t, fp_case
-// METHODS: Unpack Shortreal, Pack Shortreal, Given a special case type construct the fp_t, check the type,
-
-// OBJECT: OP Pair Test Object
-// DATA: Op1, Op2, Expected Results, Actual Results, Actual Errors, Actual Types
-// METHODS: Apply 8 sign tests and store expected results and errors, Identify the type of each result
-
-// OBJECT: Combo Case Object
-// DATA: Case 1, Case 2, Expected Types, Expected Errors, Op Test Objects
-// METHODS: Generate Op Pair Objects, Compare Actual Errors with Expected Errors, Compare Actual Types with Expected Types, 
-//          Compare expected result with actual result (within op pair obj) if valid
-
+/////////////////////////
+// Classes and Objects //
+/////////////////////////
 
 class FloatingPoint;
 // Using this class:
@@ -280,6 +84,7 @@ class FloatingPoint;
         }
     }
 
+    // -- CLASS METHODS --
     // Overriding new function (nothing needed atm)
     function new();
     endfunction
@@ -313,6 +118,7 @@ class FloatingPoint;
         this.updateType();
     endfunction
 
+    // Set the fp value given a bit vector
     function void setBits (logic [31:0] bits);
         this.fp.bits = bits;
         this.updateFields();
@@ -423,22 +229,198 @@ class FloatingPoint;
 
 endclass
 
-class SignTestObj;
-    FloatingPoint op1, op2;
-    shortreal expected_results[8];
-    o_err_t expected_err[8], actual_err[8];
-    FloatingPoint actual_results[8];
+//////////////////////////////////
+// External Functions and Tasks //
+//////////////////////////////////
 
-    function new();
-        op1 = new();
-        op2 = new();
-    endfunction
-endclass
+// Note: With the implementation of the class object for FloatingPoint and its 
+// associated methods, many of the functions below have been phased out. We are keeping
+// them here for posterity, and also for usefulness in case we need to do something
+// specific.
 
+// -- FPU Testing Functions and Tasks --
 
-/////////////////////////////////////////////
-// Functions that Test the Other Functions //
-/////////////////////////////////////////////
+// MAIN TEST TASK
+//  Foreach op1 = fp_case: 
+//      foreach op2 = fp_case: 
+//          for {opcode, op1_sign, op2_sign} = 0-7: 
+//              for 0-N tests: 
+//                  generate op1, op2, and test output with expected. 
+//                  Check Error Code.
+
+// Tasks/Functions we need:
+// - Generates the N set of operands for each case (64) in the Op Combination Table. Sets the expected result type. 
+//      Sets the expected error codes. Then calls the function to run through the sign logic table 
+//      for each set of generated operands
+// - Takes two generated operands and manipulates the signs and opcodes to test every case (8) in the
+//      sign logic table.
+// - Compares the results of the FPU operation ensuring that the result of is of the right type
+//      and if not a special case, that the result matches the expected result (self-checking).
+//      Should also check the resultant error codes. Will need access to complement signal.
+
+// --SV Constructs--
+// {{CLASSES}}
+// OBJECT: FloatingPoint Object
+// DATA: Sign, Exponent, Significand, fp_t, fp_case
+// METHODS: Unpack Shortreal, Pack Shortreal, Given a special case type construct the fp_t, check the type,
+
+function o_err_t expectedErrorCode (FloatingPoint exp);
+    unique case (exp.op_case)
+        REG: return NONE;
+        NAN: return INVALID;
+        INF: return OVERFLOW;
+        ZERO: return NONE;
+        DENORM: return UNDERFLOW;
+        MAX: return NONE;
+        NORMMIN: return NONE;
+        DENORMMIN: return UNDERFLOW;
+    endcase
+endfunction
+
+// -- fp_t packing and unpacking functions --
+
+// Function which takes a shortreal and converts it into a fp_t type to work with in the FPU
+function fp_t fpUnpack (shortreal val);
+    fp_t fp;
+    fp.bits = $shortrealtobits(val);
+    return fp;
+endfunction
+
+// Function which takes a fp_t number and converts it to shortreal for printing/display.
+function shortreal fpPack (fp_t val);
+    shortreal fp;
+    fp = $bitstoshortreal(val.bits);
+    return fp;
+endfunction
+
+// -- Special Case Check Functions --
+
+// Checks if a fp_t is NaN
+function bit checkIsNaN (fp_t fp);
+    if (fp.unpkg.exponent == 8'hFF && fp.unpkg.significand != 0) return 1;
+    else return 0;
+endfunction
+
+// Checks if a fp_t is INF
+function bit checkIsInf (fp_t fp);
+    if (fp.unpkg.exponent == 8'hFF && fp.unpkg.significand == 0) return 1;
+    else return 0;
+endfunction
+
+// Checks if fp_t is NaN with added sign check
+function bit checkIsSignedNaN (fp_t fp, bit sign);
+    if (fp.unpkg.sign == sign && fp.unpkg.exponent == 8'hFF && fp.unpkg.significand != 0) return 1;
+    else return 0;
+endfunction
+
+// Checks if fp_t is INF with added sign check
+function bit checkIsSignedInf (fp_t fp, bit sign);
+    if (fp.unpkg.sign == sign && fp.unpkg.exponent == 8'hFF && fp.unpkg.significand == 0) return 1;
+    else return 0;
+endfunction
+
+// Checks if fp_t is denormalized value
+function bit checkIsDenorm (fp_t fp);
+    if (fp.unpkg.exponent == 0 && fp.unpkg.significand != 0) return 1;
+    else return 0;
+endfunction
+
+// Checks if fp_t is Zero valued
+function checkIsZero (fp_t fp);
+    if (fp.unpkg.exponent == 0 && fp.unpkg.significand == 0) return 1;
+    else return 0;
+endfunction
+
+// Checks if fp_t is the max FP value
+function checkIsMax (fp_t fp);
+    if (fp.unpkg.exponent == 8'b1111_1110 && fp.unpkg.significand == 23'b111_1111_1111_1111_1111_1111) return 1;
+    else return 0;
+endfunction
+
+// Checks if fp_t is the min normalized FP value
+function checkIsNormMin (fp_t fp);
+    if (fp.unpkg.exponent == 8'b0000_0001 && fp.unpkg.significand == 0) return 1;
+    else return 0;
+endfunction
+
+// Checks if fp_t is the min normalized FP value
+function checkIsDenormMin (fp_t fp);
+    if (fp.unpkg.exponent == 8'b0000_0000 && fp.unpkg.significand == 23'b000_0000_0000_0000_0000_0001) return 1;
+    else return 0;
+endfunction
+
+// --Operand Generation Functions--
+
+// Function that returns a NaN fp_t of a particular sign
+function fp_t createNaN (bit sign);
+    fp_t fp;
+    fp.unpkg.sign = sign;
+    fp.unpkg.exponent = '1;
+    fp.unpkg.significand = '1;
+    return fp;
+endfunction
+
+// Function that returns a INF fp_t of a particular sign
+function fp_t createInf (bit sign);
+    fp_t fp;
+    fp.unpkg.sign = sign;
+    fp.unpkg.exponent = '1;
+    fp.unpkg.significand = '0;
+    return fp;
+endfunction
+
+// Function that generates a random fp_t value of a particular sign
+function fp_t createRandReg (bit sign);
+    fp_t fp;
+    fp.unpkg.sign = sign;
+    // Bounded random for exponent and sig
+    fp.unpkg.exponent = $urandom_range(254, 1);
+    fp.unpkg.significand = $urandom();
+    return fp;
+endfunction
+
+function fp_t createRandDenorm (bit sign);
+    fp_t fp;
+    fp.unpkg.sign = sign;
+    fp.unpkg.exponent = '0;
+    // Bounded random for significand
+    fp.unpkg.significand = $urandom();
+    if (fp.unpkg.significand == 0) fp.unpkg.significand += 1'b1;
+    return fp;
+endfunction
+
+function fp_t createMax(bit sign);
+    fp_t fp;
+    fp.unpkg.sign = sign;
+    fp.unpkg.exponent = 8'b1111_1110;
+    fp.unpkg.significand = 23'b111_1111_1111_1111_1111_1111;
+    return fp;
+endfunction
+
+function fp_t createNormMin(bit sign);
+    fp_t fp;
+    fp.unpkg.sign = sign;
+    fp.unpkg.exponent = 8'b0000_0001;
+    fp.unpkg.significand = 23'b000_0000_0000_0000_0000_0000;
+    return fp;
+endfunction
+
+function fp_t createDenormMin(bit sign);
+    fp_t fp;
+    fp.unpkg.sign = sign;
+    fp.unpkg.exponent = 8'b0000_0000;
+    fp.unpkg.significand = 23'b000_0000_0000_0000_0000_0001;
+    return fp;
+endfunction
+
+// Function that changes the sign bit of a given fp_t to the
+// specified sign and returns the fp_t.
+function fp_t changeSign (fp_t val, bit sign);
+    val.unpkg.sign = sign;
+    return val;
+endfunction
+
+// -- Functions that Test the Other Functions --
 
 function void FpUnpackTest (shortreal val);
     fp_t num;
