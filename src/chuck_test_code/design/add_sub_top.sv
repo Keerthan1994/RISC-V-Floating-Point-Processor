@@ -37,6 +37,7 @@ module add_sub_top(opcode, sign1, exp1, sig1, sign2, exp2, sig2, fp_out, err_o);
     logic [7:0] exp1_d, exp2_d;
     logic [1:0] n_concat;
     logic [7:0] diff;
+    logic [30:0] nz_op;
     logic borrow;
     logic swap;
     logic complement;
@@ -74,6 +75,7 @@ module add_sub_top(opcode, sign1, exp1, sig1, sign2, exp2, sig2, fp_out, err_o);
         .sig1(sig1), 
         .sig2(sig2), 
         .n_concat(n_concat), 
+        .nz_op(nz_op),
         .exp1_d(exp1_d), 
         .exp2_d(exp2_d),
         .err(err_i)
@@ -164,7 +166,8 @@ module add_sub_top(opcode, sign1, exp1, sig1, sign2, exp2, sig2, fp_out, err_o);
         .sign_i(sign_r), 
         .exp_i(exp_f), 
         .sig_untrunc_i(sig_f),
-        .carry(carry5), 
+        .carry(carry5),
+        .nz_op(nz_op),
         .err_i(err_i), 
         .fp_out(fp_out), 
         .err_o(err_o)

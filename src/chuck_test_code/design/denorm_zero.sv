@@ -28,7 +28,7 @@
 // is true. If so, we need to output a zero signal in the final stage.
 
 
-module denorm_zero (complement, exp1, exp2, sig1, sig2, n_concat, exp1_d, exp2_d, err);
+module denorm_zero (complement, exp1, exp2, sig1, sig2, n_concat, nz_op, exp1_d, exp2_d, err);
 
 import addpkg::*;
 
@@ -37,6 +37,7 @@ input [7:0] exp1, exp2;
 input [22:0] sig1, sig2;
 output logic [7:0] exp1_d, exp2_d;
 output logic [1:0] n_concat;
+output logic [30:0] nz_op;              // non-zero op in ZERO cases
 output i_err_t err;
     // 0: Not Special
     // 1: Zero
@@ -52,24 +53,34 @@ always_comb begin
     // Operand 1 Special Case
     if (exp1 == 8'hFF && sig1 == 23'b0) op1_err = INF_ERR;
     else if (exp1 == 8'hFF && sig1 != 23'b0) op1_err = NAN_ERR;
+    else if (exp1 == 8'h00 && sig1 == 23'b0) op1_err = ZERO_ERR;
     else op1_err = NO_ERR;
 
     // Operand 2 Special Case
     if (exp2 == 8'hFF && sig2 == 23'b0) op2_err = INF_ERR;
     else if (exp2 == 8'hFF && sig2 != 23'b0) op2_err = NAN_ERR;
+    else if (exp2 == 8'h00 && sig2 == 23'b0) op2_err = ZERO_ERR;
     else op2_err = NO_ERR;
 
     // SPECIAL CASES LOGIC:
     // One of the inputs is a NaN -- Output should be NaN
     if (op1_err == NAN_ERR || op2_err == NAN_ERR) err = NAN_ERR;
     // One of the inputs is INF, but the other is NOT INF -- Output should be INF
-    else if (op1_err == INF_ERR && op2_err == NO_ERR || op1_err == NO_ERR && op2_err == INF_ERR) err = INF_ERR;
+    else if (((op1_err == INF_ERR) && (op2_err == NO_ERR)) || ((op1_err == NO_ERR) && (op2_err == INF_ERR))) err = INF_ERR;
     // Both inputs are INF, but the complement signal is false -- Output should be INF
-    else if (op1_err == INF_ERR && op2_err == INF_ERR && !complement) err = INF_ERR;
+    else if ((op1_err == INF_ERR) && (op2_err == INF_ERR) && !complement) err = INF_ERR;
     // Both inputs are INF, but the complement signal is true -- Output should be NaN
-    else if (op1_err == INF_ERR && op2_err == INF_ERR && complement) err = NAN_ERR;
+    else if ((op1_err == INF_ERR) && (op2_err == INF_ERR) && complement) err = NAN_ERR;
     // Both inputs are equal, and the complement signal is true -- Output should be ZERO.
-    else if (exp1 == exp2 && sig1 == sig2 && complement) err = ZERO_ERR;
+    else if ((exp1 == exp2) && (sig1 == sig2) && complement) err = ZERO_ERR;
+    // One of the operands is zero and the other isn't. Send the non-zero operand directly to error checking module
+    else if (op1_err == ZERO_ERR && op2_err != ZERO_ERR) begin
+        err = ZERO_OP_ERR;
+        nz_op = {exp2, sig2};
+    end else if (op1_err != ZERO_ERR && op2_err == ZERO_ERR) begin
+        err = ZERO_OP_ERR;
+        nz_op = {exp1, sig1};
+    end
     // Otherwise no special error case.
     else err = NO_ERR;
 
