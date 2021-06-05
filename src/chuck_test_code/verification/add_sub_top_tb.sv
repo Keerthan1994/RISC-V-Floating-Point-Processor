@@ -2,7 +2,7 @@ import addpkg::*;
 
 module top();
 
-parameter NTESTS = 500;
+parameter NTESTS = 1;
 
 // shortreal op1, op2, out;
 shortreal out_sr;

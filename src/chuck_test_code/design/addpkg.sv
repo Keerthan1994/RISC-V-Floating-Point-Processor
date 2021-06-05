@@ -250,68 +250,52 @@ endclass
 
 
 
-// task automatic singleTestCase (
-//     ref FloatingPoint op1, op2, exp, out,                                             // Declared FloatingPoint Objects
-//         logic opcode, sign1, sign2, logic [7:0] exp1, exp2, logic [22:0] sig1, sig2,        // Ports linked to add/sub module
-//         logic [31:0] fp_out, o_err_t err_o,
-//     input fp_case op1_case, op2_case, bit addsub_op, op1_sign, op2_sign                    // Non-Pass-by-Ref Variables
-//     );
-//     o_err_t exp_err;
+task automatic singleTestCase (
+    ref FloatingPoint op1, op2, exp, out,                                             // Declared FloatingPoint Objects
+        logic opcode, sign1, sign2, logic [7:0] exp1, exp2, logic [22:0] sig1, sig2,        // Ports linked to add/sub module
+        logic [31:0] fp_out, o_err_t err_o,
+        int err_count, test_count,
+    input fp_case op1_case, op2_case, bit addsub_op, op1_sign, op2_sign                    // Non-Pass-by-Ref Variables
+    );
+    o_err_t exp_err;
 
-//     // Setup Operands and Calculate Expected Value
-//     op1.generateNew(op1_case);
-//     op2.generateNew(op2_case);
-//     op1.setSign(op1_sign);
-//     op2.setSign(op2_sign);
-//     unique case (addsub_op)
-//         1'b0: exp.setSR(op1.getSR + op2.getSR);
-//         1'b1: exp.setSR(op1.getSR - op2.getSR);
-//     endcase
-//     exp_err = expectedErrorCode(exp);
-//     sign1 = op1.sign;
-//     sign2 = op2.sign;
-//     exp1 = op1.exponent;
-//     exp2 = op2.exponent;
-//     sig1 = op1.significand;
-//     sig2 = op2.significand;
-//     opcode = addsub_op;
+    // Setup Operands and Calculate Expected Value
+    op1.generateNew(op1_case);
+    op2.generateNew(op2_case);
+    op1.setSign(op1_sign);
+    op2.setSign(op2_sign);
+    unique case (addsub_op)
+        1'b0: exp.setSR(op1.getSR + op2.getSR);
+        1'b1: exp.setSR(op1.getSR - op2.getSR);
+    endcase
+    exp_err = expectedErrorCode(exp);
+    sign1 = op1.sign;
+    sign2 = op2.sign;
+    exp1 = op1.exponent;
+    exp2 = op2.exponent;
+    sig1 = op1.significand;
+    sig2 = op2.significand;
+    opcode = addsub_op;
 
-//     // DELAY HERE
-//     #50;
+    // DELAY HERE
+    #50;
 
-//     out.setBits(fp_out);
-//     if (!out.equals(exp)) begin
-//         $display("%0t::VALUE/TYPE MISMATCH: OP1=%0e %0s. OP2=%0e %0s. OP_CODE=%0b. EXP=%0e. RES=%0e. EXP_TYPE=%0s. RES_TYPE=%0s.", $time, op1.getSR(), op1.op_case.name(), op2.getSR(), op2.op_case.name(), addsub_op, exp.getSR(), out.getSR(), exp.op_case.name(), out.op_case.name());
-//         $display("RES_BITS=%0s.", out.bitsToString());
-//         // $display("%1b %8b %27b Carry: %1b", ast0.sign_r, ast0.exp_f, sig_f, ast0.carry5);
-//     end
-//     if (err_o !== exp_err) begin
-//         $display("%0t::ERROR CODE MISMATCH: OP1=%0e. OP2=%0e. OP_CODE=%0b. EXP_ERR=%0s. RES_ERR=%0s.", $time(), op1.getSR(), op2.getSR(), addsub_op, exp_err.name(), err_o.name());
-//     end
+    out.setBits(fp_out);
+    if (!out.equals(exp)) begin
+        $display("%0t::VALUE/TYPE MISMATCH: OP1=%0e %0s. OP2=%0e %0s. OP_CODE=%0b. EXP=%0e. RES=%0e. EXP_TYPE=%0s. RES_TYPE=%0s.", $time, op1.getSR(), op1.op_case.name(), op2.getSR(), op2.op_case.name(), addsub_op, exp.getSR(), out.getSR(), exp.op_case.name(), out.op_case.name());
+        err_count++;
+    end
+    if (err_o !== exp_err) begin
+        $display("%0t::ERROR CODE MISMATCH: OP1=%0e. OP2=%0e. OP_CODE=%0b. EXP_ERR=%0s. RES_ERR=%0s.", $time(), op1.getSR(), op2.getSR(), addsub_op, exp_err.name(), err_o.name());
+    end
 
-//     `ifdef DEBUG
-//     $display("%0t: OP1=%0e. OP2=%0e. OP_CODE=%0b. EXP=%0e. RES=%0e. EXP_TYPE=%0s. RES_TYPE=%0s. EXP_ERR=%0s. RES_ERR=%0s.", $time, op1.getSR(), op2.getSR(), addsub_op, exp.getSR(), out.getSR(), exp.op_case.name(), out.op_case.name(), exp_err.name(), err_o.name());
-//     `endif
+    `ifdef DEBUG
+    $display("%0t: OP1=%0e. OP2=%0e. OP_CODE=%0b. EXP=%0e. RES=%0e. EXP_TYPE=%0s. RES_TYPE=%0s. EXP_ERR=%0s. RES_ERR=%0s.", $time, op1.getSR(), op2.getSR(), addsub_op, exp.getSR(), out.getSR(), exp.op_case.name(), out.op_case.name(), exp_err.name(), err_o.name());
+    `endif
 
-// endtask
+    test_count++;
 
-    // op1.generateNew(ZERO);
-    // op2.generateNew(INF);
-
-    // $display("Op1 Value: %0e. Op2 Value: %0e. Expected Value: %0e.", op1.getSR(), op2.getSR(), exp.getSR());
-
-    // #10;
-    // sign1 = op1.sign;
-    // sign2 = op2.sign;
-    // exp1 = op1.exponent;
-    // exp2 = op2.exponent;
-    // sig1 = op1.significand;
-    // sig2 = op2.significand;
-    // opcode = 1'b1;
-
-    // #20;
-    // out.setBits(fp_out);
-    // $display("Resultant Value: %0e. Equal?: %0b", out.getSR(), out.equals(exp));
+endtask
 
 // Tasks/Functions we need:
 // - Generates the N set of operands for each case (64) in the Op Combination Table. Sets the expected result type. 
