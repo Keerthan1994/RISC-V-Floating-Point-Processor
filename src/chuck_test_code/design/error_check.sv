@@ -78,7 +78,7 @@ always_comb begin
     endcase
 
     // Hacky way to address the Overflow Case Producing a NAN with all 1s in significand
-    if (err_i != NAN_ERR && carry && exp_o == 8'hFF && sig_o == 23'b111_1111_1111_1111_1111_1111) begin
+    if (err_i != NAN_ERR && carry && exp_o == 8'hFF && sig_o != 0) begin
         sig_o = 23'b000_0000_0000_0000_0000_0000;
     end
 

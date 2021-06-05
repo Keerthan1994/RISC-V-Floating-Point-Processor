@@ -2,7 +2,7 @@ import addpkg::*;
 
 module top();
 
-parameter NTESTS = 1;
+parameter NTESTS = 500;
 
 // shortreal op1, op2, out;
 shortreal out_sr;
@@ -15,7 +15,7 @@ logic opcode;
 logic [31:0] fp_out;
 // logic [2:0] err_o;
 o_err_t err_o;
-int err_count;
+int err_count, test_count;
 
 FloatingPoint op1, op2, out, exp;
 
@@ -29,7 +29,7 @@ task automatic singleTestCase (
     ref FloatingPoint op1, op2, exp, out,                                             // Declared FloatingPoint Objects
         logic opcode, sign1, sign2, logic [7:0] exp1, exp2, logic [22:0] sig1, sig2,        // Ports linked to add/sub module
         logic [31:0] fp_out, o_err_t err_o,
-        int err_count,
+        int err_count, test_count,
     input fp_case op1_case, op2_case, bit addsub_op, op1_sign, op2_sign                    // Non-Pass-by-Ref Variables
     );
     o_err_t exp_err;
@@ -64,16 +64,19 @@ task automatic singleTestCase (
         $display("OP2_BITS=%0s.", op2.bitsToString());
         $display("EXP_BITS=%0s.", exp.bitsToString());
         $display("RES_BITS=%0s.", out.bitsToString());
-        $display("%1b %8b %27b Carry: %1b", ast0.sign_r, ast0.exp_f, ast0.sig_f, ast0.carry2);
+        $display("EXP_R1: %0d. EXP_R2: %0d. EXP_F: %0d.", ast0.exp_r1, ast0.exp_r2, ast0.exp_f);
+        $display("%1b %8b %27b Diff: %0d. Shift1: %0d. Shift2: %0d. Carry2: %1b. Carry3: %1b. Carry4: %1b. Carry5: %1b", ast0.sign_r, ast0.exp_f, ast0.sig_f, ast0.diff, ast0.shift1, ast0.shift2, ast0.carry2, ast0.carry3, ast0.carry4, ast0.carry5);
         err_count++;
     end
-    // if (err_o !== exp_err) begin
-    //     $display("%0t::ERROR CODE MISMATCH: OP1=%0e. OP2=%0e. OP_CODE=%0b. EXP_ERR=%0s. RES_ERR=%0s.", $time(), op1.getSR(), op2.getSR(), addsub_op, exp_err.name(), err_o.name());
-    // end
+    if (err_o !== exp_err) begin
+        $display("%0t::ERROR CODE MISMATCH: OP1=%0e. OP2=%0e. OP_CODE=%0b. EXP_ERR=%0s. RES_ERR=%0s.", $time(), op1.getSR(), op2.getSR(), addsub_op, exp_err.name(), err_o.name());
+    end
 
     `ifdef DEBUG
     $display("%0t: OP1=%0e. OP2=%0e. OP_CODE=%0b. EXP=%0e. RES=%0e. EXP_TYPE=%0s. RES_TYPE=%0s. EXP_ERR=%0s. RES_ERR=%0s.", $time, op1.getSR(), op2.getSR(), addsub_op, exp.getSR(), out.getSR(), exp.op_case.name(), out.op_case.name(), exp_err.name(), err_o.name());
     `endif
+
+    test_count++;
 
 endtask
 
@@ -92,14 +95,14 @@ do begin
     do begin
         for (sign_tc = 0; sign_tc < 8; sign_tc++) begin
             for (int i = 0; i < NTESTS; i++) begin
-                singleTestCase(op1, op2, exp, out, opcode, sign1, sign2, exp1, exp2, sig1, sig2, fp_out, err_o, err_count, op1_case, op2_case, sign_tc[2], sign_tc[1], sign_tc[0]);
+                singleTestCase(op1, op2, exp, out, opcode, sign1, sign2, exp1, exp2, sig1, sig2, fp_out, err_o, err_count, test_count, op1_case, op2_case, sign_tc[2], sign_tc[1], sign_tc[0]);
             end
         end
         op2_case = op2_case.next;
     end while(op2_case != op2_case.first);
     op1_case = op1_case.next;
 end while(op1_case != op1_case.first);
-$display("Total Error Count: %0d.", err_count);
+$display("Error To Test Ratio: %0d/%0d.", err_count,test_count);
 
 // Test Two Regs but all signs
 // for (sign_tc = 0; sign_tc < 8; sign_tc++) begin

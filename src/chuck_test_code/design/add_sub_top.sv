@@ -161,7 +161,7 @@ module add_sub_top(opcode, sign1, exp1, sig1, sign2, exp2, sig2, fp_out, err_o);
         .CO(carry5), 
         .A(exp_r2), 
         .B(shift3), 
-        .CI(carry4)
+        .CI(1'b0)
     );                              // Adds exp_r2 and shift3
     error_check ec0 (
         .sign_i(sign_r), 
