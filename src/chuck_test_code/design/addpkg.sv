@@ -202,22 +202,22 @@ class FloatingPoint;
         else return 0;
     endfunction
 
-    function checkIsZero ();
+    function bit checkIsZero ();
         if (exponent == 0 && significand == 0) return 1;
         else return 0;
     endfunction
 
-    function checkIsMax ();
+    function bit checkIsMax ();
         if (exponent == 8'b1111_1110 && significand == 23'b111_1111_1111_1111_1111_1111) return 1;
         else return 0;
     endfunction
 
-    function checkIsNormMin ();
+    function bit checkIsNormMin ();
         if (exponent == 8'b0000_0001 && significand == 0) return 1;
         else return 0;
     endfunction
 
-    function checkIsDenormMin ();
+    function bit checkIsDenormMin ();
         if (exponent == 8'b0000_0000 && significand == 23'b000_0000_0000_0000_0000_0001) return 1;
         else return 0;
     endfunction
