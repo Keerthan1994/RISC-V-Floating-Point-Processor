@@ -64,7 +64,7 @@ task automatic singleTestCase (
         $display("OP2_BITS=%0s.", op2.bitsToString());
         $display("EXP_BITS=%0s.", exp.bitsToString());
         $display("RES_BITS=%0s.", out.bitsToString());
-        $display("%1b %8b %27b Carry: %1b", ast0.sign_r, ast0.exp_f, ast0.sig_f, ast0.carry3);
+        $display("%1b %8b %27b Carry: %1b", ast0.sign_r, ast0.exp_f, ast0.sig_f, ast0.carry2);
         err_count++;
     end
     // if (err_o !== exp_err) begin

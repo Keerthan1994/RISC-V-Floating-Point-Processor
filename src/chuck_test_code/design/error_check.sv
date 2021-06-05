@@ -77,6 +77,11 @@ always_comb begin
         end
     endcase
 
+    // Hacky way to address the Overflow Case Producing a NAN with all 1s in significand
+    if (err_i != NAN_ERR && carry && exp_o == 8'hFF && sig_o == 23'b111_1111_1111_1111_1111_1111) begin
+        sig_o = 23'b000_0000_0000_0000_0000_0000;
+    end
+
     // Do One last Check of Bits to Output the correct error
     if (exp_o == 8'hFF && sig_o == 0) err_o = OVERFLOW;
     else if (exp_o == 8'hFF && sig_o != 0) err_o = INVALID;

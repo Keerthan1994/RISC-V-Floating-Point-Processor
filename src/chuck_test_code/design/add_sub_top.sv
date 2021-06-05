@@ -167,7 +167,7 @@ module add_sub_top(opcode, sign1, exp1, sig1, sign2, exp2, sig2, fp_out, err_o);
         .sign_i(sign_r), 
         .exp_i(exp_f), 
         .sig_untrunc_i(sig_f),
-        .carry(carry5),
+        .carry(carry2),
         .nz_op(nz_op),
         .err_i(err_i), 
         .fp_out(fp_out), 
