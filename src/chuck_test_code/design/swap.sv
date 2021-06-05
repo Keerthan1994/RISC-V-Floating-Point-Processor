@@ -20,12 +20,13 @@
  */
 
 module swap (
-    sig1, sig2, diff, borrow, shift, swap, sig1_swap, sig2_swap
+    sig1, sig2, diff, borrow, n_concat, shift, swap, sig1_swap, sig2_swap
 );
 
 input [22:0] sig1, sig2;
 input [7:0] diff;
 input borrow;
+input [1:0] n_concat;
 output logic[7:0] shift;
 output logic swap;
 output logic [22:0] sig1_swap, sig2_swap;
@@ -36,7 +37,12 @@ always_comb begin
         sig2_swap = sig1;
         shift = ~diff + 1;
         swap = 1'b1;
-    end else if (diff == 0 && (sig2 > sig1)) begin        // difference is zero and sig2 is larger than sig1, swap operands
+    end else if (diff == 0 && n_concat[1] && !n_concat[0]) begin  // The difference is zero but op1 is a denormalized number, so swap.
+        sig1_swap = sig2;
+        sig2_swap = sig1;
+        shift = diff;
+        swap = 1'b1;
+    end else if (diff == 0 && ((n_concat[1] && n_concat[0]) || (!n_concat[1] && !n_concat[0])) && (sig2 > sig1)) begin        // difference is zero and sig2 is larger than sig1, swap operands
         sig1_swap = sig2;
         sig2_swap = sig1;
         shift = diff;

@@ -92,6 +92,7 @@ module add_sub_top(opcode, sign1, exp1, sig1, sign2, exp2, sig2, fp_out, err_o);
         .sig2(sig2), 
         .diff(diff), 
         .borrow(borrow), 
+        .n_concat(n_concat),
         .shift(shift1), 
         .swap(swap), 
         .sig1_swap(sig1_s), 

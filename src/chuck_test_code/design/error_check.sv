@@ -31,6 +31,8 @@ module error_check (sign_i, exp_i, sig_untrunc_i, carry, nz_op, err_i, fp_out, e
 
 import addpkg::*;
 
+parameter OVF_EXC = 0;
+
 input sign_i;
 input [7:0] exp_i;
 input [26:0] sig_untrunc_i;

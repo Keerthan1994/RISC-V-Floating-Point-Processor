@@ -58,10 +58,13 @@ task automatic singleTestCase (
     out.setBits(fp_out);
     if (!out.equals(exp)) begin
         $display("%0t::VALUE/TYPE MISMATCH: OP1=%0e %0s. OP2=%0e %0s. OP_CODE=%0b. EXP=%0e. RES=%0e. EXP_TYPE=%0s. RES_TYPE=%0s.", $time, op1.getSR(), op1.op_case.name(), op2.getSR(), op2.op_case.name(), addsub_op, exp.getSR(), out.getSR(), exp.op_case.name(), out.op_case.name());
-        $display("Internal Error: %0s. Final Carry: %01b", ast0.err_i.name(), ast0.carry5);
+        // $display("Internal Error: %0s. Final Carry: %01b", ast0.err_i.name(), ast0.carry5);
+        $display("Swap: %01b. Complement: %01b. Borrow: %01b. Diff: %0d", ast0.swap, ast0.complement, ast0.borrow, ast0.diff);
+        $display("OP1_BITS=%0s.", op1.bitsToString());
+        $display("OP2_BITS=%0s.", op2.bitsToString());
         $display("EXP_BITS=%0s.", exp.bitsToString());
         $display("RES_BITS=%0s.", out.bitsToString());
-        // $display("%1b %8b %27b Carry: %1b", ast0.sign_r, ast0.exp_f, ast0.sig_f, ast0.carry5);
+        $display("%1b %8b %27b Carry: %1b", ast0.sign_r, ast0.exp_f, ast0.sig_f, ast0.carry3);
         err_count++;
     end
     // if (err_o !== exp_err) begin
