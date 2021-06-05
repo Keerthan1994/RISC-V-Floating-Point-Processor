@@ -106,7 +106,7 @@ class FloatingPoint;
     // Checks if one FloatingPoint Object is the Same as this one.
     function bit equals(FloatingPoint obj);
         if (obj.op_case != this.op_case) return 0;
-        if (this.op_case == NAN || this.op_case == INF) return 1;
+        if (this.op_case == NAN) return 1;
         else if (obj.sign == this.sign && obj.exponent == this.exponent && obj.significand == this.significand) return 1;      // I don't know how closely the values will match with SV
         else return 0;
     endfunction
