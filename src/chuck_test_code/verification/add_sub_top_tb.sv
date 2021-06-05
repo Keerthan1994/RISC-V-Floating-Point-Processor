@@ -19,7 +19,7 @@ int err_count, test_count;
 
 FloatingPoint op1, op2, out, exp;
 
-fp_case op1_case, op2_case;
+fp_case_t op1_case, op2_case;
 logic [3:0] sign_tc;    // {opcode, op1_sign, op2_sign}
 
 // Instantiate ADD/SUB Module
@@ -30,7 +30,7 @@ task automatic singleTestCase (
         logic opcode, sign1, sign2, logic [7:0] exp1, exp2, logic [22:0] sig1, sig2,        // Ports linked to add/sub module
         logic [31:0] fp_out, o_err_t err_o,
         int err_count, test_count,
-    input fp_case op1_case, op2_case, bit addsub_op, op1_sign, op2_sign                    // Non-Pass-by-Ref Variables
+    input fp_case_t op1_case, op2_case, bit addsub_op, op1_sign, op2_sign                    // Non-Pass-by-Ref Variables
     );
     o_err_t exp_err;
 

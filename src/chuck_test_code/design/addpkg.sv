@@ -16,7 +16,7 @@ typedef enum logic [2:0] {
 
 typedef enum logic [2:0] {
     REG, NAN, INF, ZERO, DENORM, MAX, NORMMIN, DENORMMIN
-} fp_case;
+} fp_case_t;
 
 ////////////////////////
 // Structs and Unions //
@@ -42,7 +42,7 @@ typedef union {
 class FloatingPoint;
 // Using this class:
 // 1. Create FloatingPoint Objects for OP1, OP2, and OUT and EXP.
-// 2. Use generateNew(fp_case) to generate a new randomized value for OP1, and OP2 of specified type.
+// 2. Use generateNew(fp_case_t) to generate a new randomized value for OP1, and OP2 of specified type.
 // 2a. Use OP1.setSign(sign) and OP2.setSign(sign) to set the appropriate signs
 // 3. Use EXP.setSR(OP1.getSR + OP2.getSR) and feed it the shortreal result from SV.
 // 4. Feed the machine OP1.sign, OP1.exponent, OP1.significand, etc. for OP2.
@@ -53,7 +53,7 @@ class FloatingPoint;
     bit sign;
     rand bit [7:0] exponent;
     rand bit [22:0] significand;
-    fp_case op_case;
+    fp_case_t op_case;
 
     // Randomization constraints
     constraint c_fp {
@@ -90,7 +90,7 @@ class FloatingPoint;
     endfunction
 
     // Sets op_case and randomizes accordingly
-    function void generateNew(fp_case op_case);
+    function void generateNew(fp_case_t op_case);
         this.op_case = op_case;
         assert(this.randomize())
         else $fatal(0, "FloatingPoint::generateNew - randomize failed");
@@ -241,8 +241,8 @@ endclass
 // -- FPU Testing Functions and Tasks --
 
 // MAIN TEST TASK
-//  Foreach op1 = fp_case: 
-//      foreach op2 = fp_case: 
+//  Foreach op1 = fp_case_t: 
+//      foreach op2 = fp_case_t: 
 //          for {opcode, op1_sign, op2_sign} = 0-7: 
 //              for 0-N tests: 
 //                  generate op1, op2, and test output with expected. 
@@ -254,7 +254,7 @@ endclass
 //     ref FloatingPoint op1, op2, exp, out,                                             // Declared FloatingPoint Objects
 //         logic opcode, sign1, sign2, logic [7:0] exp1, exp2, logic [22:0] sig1, sig2,        // Ports linked to add/sub module
 //         logic [31:0] fp_out, o_err_t err_o,
-//     input fp_case op1_case, op2_case, bit addsub_op, op1_sign, op2_sign                    // Non-Pass-by-Ref Variables
+//     input fp_case_t op1_case, op2_case, bit addsub_op, op1_sign, op2_sign                    // Non-Pass-by-Ref Variables
 //     );
 //     o_err_t exp_err;
 
@@ -326,7 +326,7 @@ endclass
 // --SV Constructs--
 // {{CLASSES}}
 // OBJECT: FloatingPoint Object
-// DATA: Sign, Exponent, Significand, fp_t, fp_case
+// DATA: Sign, Exponent, Significand, fp_t, fp_case_t
 // METHODS: Unpack Shortreal, Pack Shortreal, Given a special case type construct the fp_t, check the type,
 
 function o_err_t expectedErrorCode (FloatingPoint exp);
