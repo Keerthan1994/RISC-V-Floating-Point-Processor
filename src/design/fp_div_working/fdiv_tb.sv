@@ -12,8 +12,9 @@ module fdiv_tb;
 	logic stall;
 	logic [4:0] count;
 	logic [25:0] reg_x;
+	logic [2:0] err_o;
 	
-	fdiv_newton fdiv_newton(a,b,rm,fdiv,ena,clk,clrn, s,busy,stall,count,reg_x);
+	fdiv_newton fdiv_newton(a,b,rm,fdiv,ena,clk,clrn, s,busy,stall,count,reg_x,err_o);
 	
 	initial 
 		forever #10 clk = ~clk;
@@ -46,6 +47,19 @@ module fdiv_tb;
 		#350;
 		a=32'h4ac8_6898;
 		b=32'hcb07_8682;
+		
+		#350
+		a=32'h4ac8_6898;
+		b=32'h0000_0000;
+		
+		#350;
+		a=32'h0000_0000;
+		b=32'hcb07_8682;
+		
+		#350;
+		a=32'h0000_0000;
+		b=32'h0000_0000;
+		
 	end
 	
 endmodule

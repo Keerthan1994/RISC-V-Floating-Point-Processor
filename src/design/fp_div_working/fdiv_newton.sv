@@ -1,4 +1,6 @@
-module fdiv_newton (a,b,rm,fdiv,ena,clk,rstn, s,busy,stall,count,reg_x);
+import addpkg::*;
+
+module fdiv_newton (a,b,rm,fdiv,ena,clk,rstn, s,busy,stall,count,reg_x,err_o);
 	parameter ZERO = 31'h00000000;
 	parameter INF = 31'h7f800000;
 	parameter NaN = 31'h7fc00000;
@@ -14,6 +16,8 @@ module fdiv_newton (a,b,rm,fdiv,ena,clk,rstn, s,busy,stall,count,reg_x);
 	output logic [4:0] count; // for iteration control
 	output logic busy; // for generating stall
 	output logic stall; // for pipeline stall
+	output o_err_t err_o; //set the error signal
+	
 	logic a_expo_is_00; 
 	logic b_expo_is_00;
 	logic a_expo_is_ff;
@@ -45,6 +49,10 @@ module fdiv_newton (a,b,rm,fdiv,ena,clk,rstn, s,busy,stall,count,reg_x);
 	logic e3_sign,e3_ae00,e3_aeff,e3_af00,e3_be00,e3_beff,e3_bf00;
 	logic [1:0] e1_rm,e2_rm,e3_rm;
 	logic [9:0] e1_exp10,e2_exp10,e3_exp10;
+	
+
+		
+
 	always_ff @ (negedge rstn or posedge clk)
 	if (!rstn) 
 	begin // 3 pipeline registers: reg_e1, reg_e2, and reg_e3
@@ -102,7 +110,7 @@ module fdiv_newton (a,b,rm,fdiv,ena,clk,rstn, s,busy,stall,count,reg_x);
 		end
 	end
 	logic [26:0] frac;
-	logic frac_plus_1;
+	wire frac_plus_1;
 	logic [24:0] frac_round;
 	logic [9:0] exp1;
 	logic overflow;
@@ -112,7 +120,7 @@ module fdiv_newton (a,b,rm,fdiv,ena,clk,rstn, s,busy,stall,count,reg_x);
 		~e3_rm[1] & ~e3_rm[0] &  frac[2] & (frac[1] |  frac[0]) |
 		~e3_rm[1] &  e3_rm[0] & (frac[2] |  frac[1] |  frac[0]) &  e3_sign |
 		 e3_rm[1] & ~e3_rm[0] & (frac[2] |  frac[1] |  frac[0]) & ~e3_sign;
-	assign frac_round = {1'b0,frac[26:3]} + 1'b1;
+	assign frac_round = {1'b0,frac[26:3]} + frac_plus_1;
 	assign exp1 = frac_round[24]? exp0 + 10'h1 : exp0;
 	assign overflow = (exp1 >= 10'h0ff); // overflow
 	logic [7:0] exponent;
@@ -122,6 +130,13 @@ module fdiv_newton (a,b,rm,fdiv,ena,clk,rstn, s,busy,stall,count,reg_x);
 		e3_bf00},{exp1[7:0],frac_round[22:0]});
 	assign s = {e3_sign,exponent,fraction};
 	
+	always_comb begin
+		if (b == 0) err_o = DIVBYZERO;
+		else if(s[30:23] == 8'hFF && s[22:0] == 0) err_o = OVERFLOW;
+		else if (s[30:23] == 8'hFF && s[22:0] != 0) err_o = INVALID;
+		else if (s[30:23] == 8'h00 && s[22:0] != 0) err_o = UNDERFLOW;
+		else err_o = NONE;
+	end
 	/*
 	initial begin
 		$monitor("exponent=%h, fraction=%h, overflow=%h, e3_rm=%h ,e3_sign=%h, a_e00=%h , a_eff=%h, a_f00=%h, b_e00=%h, b_eff=%h, b_f00=%h, exp1=%h, frac_round=%h", 
@@ -130,18 +145,30 @@ module fdiv_newton (a,b,rm,fdiv,ena,clk,rstn, s,busy,stall,count,reg_x);
 	*/
 	function [30:0] final_result(input [9:0] sel, input [30:0] calc);
 			if(sel ==? 10'b100?_???_??? || sel ==? 10'b1011_???_??? || sel ==? 10'b1100_???_??? || sel ==? 10'b0???_011_101 || sel ==? 10'b0???_100_101 || sel ==? 10'b0???_00?_101
-			   || sel ==? 0'b0???_011_100 || sel ==? 10'b0???_011_00?)
+			   || sel ==? 0'b0???_011_100 || sel ==? 10'b0???_011_00?) begin
 				final_result = INF;
-			else if (sel ==? 10'b1010_???_??? || sel ==? 10'b1101_???_??? || sel ==? 10'b111?_???_???)
+				
+			end
+			else if (sel ==? 10'b1010_???_??? || sel ==? 10'b1101_???_??? || sel ==? 10'b111?_???_???) begin
 				final_result = MAX;
-			else if(sel ==? 0'b0???_010_??? || sel ==? 10'b0???_011_010 || sel ==? 10'b0???_100_010 || sel ==? 10'b0???_101_010 || sel ==? 10'b0???_00?_010 || sel ==? 10'b0???_011_011 || sel ==? 10'b0???_101_101)
+				
+			end
+			else if(sel ==? 0'b0???_010_??? || sel ==? 10'b0???_011_010 || sel ==? 10'b0???_100_010 || sel ==? 10'b0???_101_010 || sel ==? 10'b0???_00?_010 || sel ==? 10'b0???_011_011 || sel ==? 10'b0???_101_101) begin
 				final_result = NaN;
-			else if(sel ==? 10'b0???_100_011 || sel ==? 10'b0???_101_011 || sel ==? 10'b0???_00?_011 || sel ==? 10'b0???_101_100 || sel ==? 10'b0???_101_00?)
+				
+			end
+			else if(sel ==? 10'b0???_100_011 || sel ==? 10'b0???_101_011 || sel ==? 10'b0???_00?_011 || sel ==? 10'b0???_101_100 || sel ==? 10'b0???_101_00?) begin
 				final_result = ZERO;
-			else if(sel ==? 10'b0???_100_100 || sel ==? 10'b0???_00?_100 || sel ==? 10'b0???_100_00? || sel ==? 10'b0???_00?_00?)	
+				
+			end
+			else if(sel ==? 10'b0???_100_100 || sel ==? 10'b0???_00?_100 || sel ==? 10'b0???_100_00? || sel ==? 10'b0???_00?_00?)	begin
 				final_result = calc;
-			else 
+				
+			end
+			else begin 
 				final_result = ZERO;
+				
+			end
 			
 	endfunction
 	
