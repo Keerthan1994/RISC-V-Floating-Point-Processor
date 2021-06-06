@@ -28,16 +28,18 @@
 // is true. If so, we need to output a zero signal in the final stage.
 
 
+parameter SIG_BITS = 23;
+parameter EXP_BITS = 8;
 module denorm_zero (complement, exp1, exp2, sig1, sig2, n_concat, nz_op, exp1_d, exp2_d, err);
 
 import addpkg::*;
 
 input complement;
-input [7:0] exp1, exp2;
-input [22:0] sig1, sig2;
-output logic [7:0] exp1_d, exp2_d;
+input [EXP_BITS-1:0] exp1, exp2;
+input [SIG_BITS-1:0] sig1, sig2;
+output logic [EXP_BITS-1:0] exp1_d, exp2_d;
 output logic [1:0] n_concat;
-output logic [30:0] nz_op;              // non-zero op in ZERO cases
+output logic [SIG_BITS+EXP_BITS-1:0] nz_op;              // non-zero op in ZERO cases
 output i_err_t err;
     // 0: Not Special
     // 1: Zero
@@ -51,15 +53,15 @@ i_err_t op1_err, op2_err;
 always_comb begin
     // SPECIAL CASES
     // Operand 1 Special Case
-    if (exp1 == 8'hFF && sig1 == 23'b0) op1_err = INF_ERR;
-    else if (exp1 == 8'hFF && sig1 != 23'b0) op1_err = NAN_ERR;
-    else if (exp1 == 8'h00 && sig1 == 23'b0) op1_err = ZERO_ERR;
+    if (exp1 == {EXP_BITS{1'b1}} && sig1 == {SIG_BITS{1'b0}}) op1_err = INF_ERR;
+    else if (exp1 == {EXP_BITS{1'b1}} && sig1 != {SIG_BITS{1'b0}}) op1_err = NAN_ERR;
+    else if (exp1 == {EXP_BITS{1'b0}} && sig1 == {SIG_BITS{1'b0}}) op1_err = ZERO_ERR;
     else op1_err = NO_ERR;
 
     // Operand 2 Special Case
-    if (exp2 == 8'hFF && sig2 == 23'b0) op2_err = INF_ERR;
-    else if (exp2 == 8'hFF && sig2 != 23'b0) op2_err = NAN_ERR;
-    else if (exp2 == 8'h00 && sig2 == 23'b0) op2_err = ZERO_ERR;
+    if (exp2 == {EXP_BITS{1'b1}} && sig2 == {SIG_BITS{1'b0}}) op2_err = INF_ERR;
+    else if (exp2 == {EXP_BITS{1'b1}} && sig2 != {SIG_BITS{1'b0}}) op2_err = NAN_ERR;
+    else if (exp2 == {EXP_BITS{1'b0}} && sig2 == {SIG_BITS{1'b0}}) op2_err = ZERO_ERR;
     else op2_err = NO_ERR;
 
     // SPECIAL CASES LOGIC:
@@ -88,10 +90,10 @@ always_comb begin
     // If exponent is zero, and sig is nonzero, set exponent to 1
 
     // Exponent 1 Denorm Processing
-    if (exp1 == 8'b0) begin
+    if (exp1 == {EXP_BITS{1'b0}}) begin
         n_concat[1] = 1'b1;         // Don't add leading 1 to op1
-        if (sig1 != 23'b0) begin    // Op1 is subnormal number
-            exp1_d = 8'b1;          // Make exponent equal to 1 (-126)
+        if (sig1 != 'b0) begin    // Op1 is subnormal number
+            exp1_d = 'b1;          // Make exponent equal to 1 (-126)
         end else begin              // Op1 is zero
             exp1_d = exp1;          // Keep exponent as zero
         end
@@ -101,10 +103,10 @@ always_comb begin
     end
 
     // Exponent 2 Denorm Processing
-    if (exp2 == 8'b0) begin
+    if (exp2 == 'b0) begin
         n_concat[0] = 1'b1;         // Don't add leading 1 to op2
-        if (sig2 != 23'b0) begin    // Op2 is subnormal number
-            exp2_d = 8'b1;          // Make exponent equal to 1 (-126)
+        if (sig2 != 'b0) begin    // Op2 is subnormal number
+            exp2_d = 'b1;          // Make exponent equal to 1 (-126)
         end else begin              // Op2 is zero
             exp2_d = exp2;          // Keep exponent as zero
         end

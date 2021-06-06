@@ -1,5 +1,7 @@
 package addpkg;
 
+parameter SIG_BITS = 23;
+parameter EXP_BITS = 8;
 //////////////////////
 // Enumerated Types //
 //////////////////////
@@ -25,13 +27,13 @@ typedef enum logic [2:0] {
 // IEEE 754 Single Precision Floating Point Format
 typedef struct packed {
     logic sign;
-    logic [7:0] exponent;
-    logic [22:0] significand;
+    logic [EXP_BITS-1:0] exponent;
+    logic [SIG_BITS-1:0] significand;
 } ieee754_sp_t;                 // Breaks the 32-bit short real into bits
 
 // Generic floating point type to use for unpacking
 typedef union {
-    logic [31:0] bits;          // Shortreal (32 bit) Float value
+    logic [EXP_BITS+SIG_BITS:0] bits;          // Shortreal (32 bit) Float value
     ieee754_sp_t unpkg;      // Single Precision Floating Point Unpacked
 } fp_t;
 
@@ -49,38 +51,38 @@ class FloatingPoint;
 // 5. Use OUT.setBits(machine_output) and feed it the machine output to set the OUT value.
 // 6. Use OUT.equals(EXP) to see if they are the same!
 
-    local fp_t fp;
-    local bit sign;
-    local rand bit [7:0] exponent;
-    local rand bit [22:0] significand;
+    fp_t fp;
+    bit sign;
+    rand bit [EXP_BITS-1:0] exponent;
+    rand bit [SIG_BITS-1:0] significand;
     fp_case_t op_case;
 
     // Randomization constraints
     constraint c_fp {
         if (op_case == NAN) {
-            exponent == 8'b1111_1111;
+            exponent == {EXP_BITS{1'b1}};
             significand > 1;
         } else if (op_case == INF) {
-            exponent == 8'b1111_1111;
-            significand == 23'b0;
+            exponent == {EXP_BITS{1'b1}};
+            significand == 'b0;
         } else if (op_case == ZERO) {
-            exponent == 8'b0;
-            significand == 23'b0;
+            exponent == 'b0;
+            significand == 'b0;
         } else if (op_case == DENORM) {
-            exponent == 8'b0;
-            significand > 23'b000_0000_0000_0000_0000_0001;
+            exponent == 'b0;
+            significand > 'b1;
         } else if (op_case == MAX) {
-            exponent == 8'b1111_1110;
-            significand == 23'b111_1111_1111_1111_1111_1111;
+            exponent == {EXP_BITS{1'b1}}-1;
+            significand == {SIG_BITS{1'b1}};
         } else if (op_case == NORMMIN) {
-            exponent == 8'b0000_0001;
-            significand == 23'b0;
+            exponent == 'b1;
+            significand == 'b0;
         } else if (op_case == DENORMMIN) {
-            exponent == 8'b0;
-            significand == 23'b000_0000_0000_0000_0000_0001;
+            exponent == 'b0;
+            significand == 'b1;
         } else {        // Regular Case
-            exponent > 8'b0;
-            exponent < 8'b1111_1111;
+            exponent > 'b0;
+            exponent < {EXP_BITS{1'b1}};
         }
     }
 
@@ -119,7 +121,7 @@ class FloatingPoint;
     endfunction
 
     // Set the fp value given a bit vector
-    function void setBits (logic [31:0] bits);
+    function void setBits (logic [EXP_BITS+SIG_BITS:0] bits);
         this.fp.bits = bits;
         this.updateFields();
         this.updateType();
@@ -130,28 +132,16 @@ class FloatingPoint;
         this.updateFp();
     endfunction
 
-    function void setExponent (bit [7:0] exponent);
+    function void setExponent (bit [EXP_BITS-1:0] exponent);
         this.exponent = exponent;
         this.updateFp();
         this.updateType();
     endfunction
 
-    function void setSignificand (bit [22:0] significand);
+    function void setSignificand (bit [SIG_BITS-1:0] significand);
         this.significand = significand;
         this.updateFp();
         this.updateType();
-    endfunction
-
-    function bit getSign();
-        return this.sign;
-    endfunction
-
-    function bit [7:0] getExponent();
-        return this.exponent;
-    endfunction
-
-    function bit [22:0] getSignificand();
-        return this.significand;
     endfunction
 
     function void setSR (shortreal val);
@@ -190,17 +180,17 @@ class FloatingPoint;
 
     // Check Type Functions
     function bit checkIsNaN ();
-        if (exponent == 8'hFF && significand != 0) return 1;
+        if (exponent == {EXP_BITS{1'b1}} && significand != 0) return 1;
         else return 0;
     endfunction
 
     function bit checkIsInf ();
-        if (exponent == 8'hFF && significand == 0) return 1;
+        if (exponent == {EXP_BITS{1'b1}} && significand == 0) return 1;
         else return 0;
     endfunction
 
     function bit checkIsSignedNaN (bit sign);
-        if (sign == this.sign && exponent == 8'hFF && significand != 0) return 1;
+        if (sign == this.sign && exponent == {EXP_BITS{1'b1}} && significand != 0) return 1;
         else return 0;
     endfunction
 
@@ -220,17 +210,17 @@ class FloatingPoint;
     endfunction
 
     function bit checkIsMax ();
-        if (exponent == 8'b1111_1110 && significand == 23'b111_1111_1111_1111_1111_1111) return 1;
+        if (exponent == {EXP_BITS{1'b1}}-1 && significand == {SIG_BITS{1'b1}}) return 1;
         else return 0;
     endfunction
 
     function bit checkIsNormMin ();
-        if (exponent == 8'b0000_0001 && significand == 0) return 1;
+        if (exponent == 'b1 && significand == 0) return 1;
         else return 0;
     endfunction
 
     function bit checkIsDenormMin ();
-        if (exponent == 8'b0000_0000 && significand == 23'b000_0000_0000_0000_0000_0001) return 1;
+        if (exponent == 'b0 && significand == 'b1) return 1;
         else return 0;
     endfunction
 
@@ -374,25 +364,25 @@ endfunction
 
 // Checks if a fp_t is NaN
 function bit checkIsNaN (fp_t fp);
-    if (fp.unpkg.exponent == 8'hFF && fp.unpkg.significand != 0) return 1;
+    if (fp.unpkg.exponent == {EXP_BITS{1'b1}} && fp.unpkg.significand != 0) return 1;
     else return 0;
 endfunction
 
 // Checks if a fp_t is INF
 function bit checkIsInf (fp_t fp);
-    if (fp.unpkg.exponent == 8'hFF && fp.unpkg.significand == 0) return 1;
+    if (fp.unpkg.exponent == {EXP_BITS{1'b1}} && fp.unpkg.significand == 0) return 1;
     else return 0;
 endfunction
 
 // Checks if fp_t is NaN with added sign check
 function bit checkIsSignedNaN (fp_t fp, bit sign);
-    if (fp.unpkg.sign == sign && fp.unpkg.exponent == 8'hFF && fp.unpkg.significand != 0) return 1;
+    if (fp.unpkg.sign == sign && fp.unpkg.exponent == {EXP_BITS{1'b1}} && fp.unpkg.significand != 0) return 1;
     else return 0;
 endfunction
 
 // Checks if fp_t is INF with added sign check
 function bit checkIsSignedInf (fp_t fp, bit sign);
-    if (fp.unpkg.sign == sign && fp.unpkg.exponent == 8'hFF && fp.unpkg.significand == 0) return 1;
+    if (fp.unpkg.sign == sign && fp.unpkg.exponent == {EXP_BITS{1'b1}} && fp.unpkg.significand == 0) return 1;
     else return 0;
 endfunction
 
@@ -410,19 +400,19 @@ endfunction
 
 // Checks if fp_t is the max FP value
 function checkIsMax (fp_t fp);
-    if (fp.unpkg.exponent == 8'b1111_1110 && fp.unpkg.significand == 23'b111_1111_1111_1111_1111_1111) return 1;
+    if (fp.unpkg.exponent == {EXP_BITS{1'b1}}-1 && fp.unpkg.significand == {SIG_BITS{1'b1}}) return 1;
     else return 0;
 endfunction
 
 // Checks if fp_t is the min normalized FP value
 function checkIsNormMin (fp_t fp);
-    if (fp.unpkg.exponent == 8'b0000_0001 && fp.unpkg.significand == 0) return 1;
+    if (fp.unpkg.exponent == 'b1 && fp.unpkg.significand == 0) return 1;
     else return 0;
 endfunction
 
 // Checks if fp_t is the min normalized FP value
 function checkIsDenormMin (fp_t fp);
-    if (fp.unpkg.exponent == 8'b0000_0000 && fp.unpkg.significand == 23'b000_0000_0000_0000_0000_0001) return 1;
+    if (fp.unpkg.exponent == 'b0 && fp.unpkg.significand == 'b1) return 1;
     else return 0;
 endfunction
 
@@ -469,24 +459,24 @@ endfunction
 function fp_t createMax(bit sign);
     fp_t fp;
     fp.unpkg.sign = sign;
-    fp.unpkg.exponent = 8'b1111_1110;
-    fp.unpkg.significand = 23'b111_1111_1111_1111_1111_1111;
+    fp.unpkg.exponent = {EXP_BITS{1'b1}}-1;
+    fp.unpkg.significand = {SIG_BITS{1'b1}};
     return fp;
 endfunction
 
 function fp_t createNormMin(bit sign);
     fp_t fp;
     fp.unpkg.sign = sign;
-    fp.unpkg.exponent = 8'b0000_0001;
-    fp.unpkg.significand = 23'b000_0000_0000_0000_0000_0000;
+    fp.unpkg.exponent = 'b1;
+    fp.unpkg.significand = 'b0;
     return fp;
 endfunction
 
 function fp_t createDenormMin(bit sign);
     fp_t fp;
     fp.unpkg.sign = sign;
-    fp.unpkg.exponent = 8'b0000_0000;
-    fp.unpkg.significand = 23'b000_0000_0000_0000_0000_0001;
+    fp.unpkg.exponent = 'b0;
+    fp.unpkg.significand = 'b1;
     return fp;
 endfunction
 
@@ -503,9 +493,9 @@ function void FpUnpackTest (shortreal val);
     fp_t num;
     num = fpUnpack(val);
     // Print out the bits that make up this value:
-    $display("Val = %0f", val);
-    $display("Bits = %032b", num.bits);
-    $display("sign bit = %01b, exponent = %08b, significand = %023b.", num.unpkg.sign, num.unpkg.exponent, num.unpkg.significand);
+    $display("Val = %f", val);
+    $display("Bits = %b", num.bits);
+    $display("sign bit = %b, exponent = %b, significand = %b.", num.unpkg.sign, num.unpkg.exponent, num.unpkg.significand);
 endfunction
 
 function void InfNaNTests ();
