@@ -1,5 +1,7 @@
 import addpkg::*;
 
+parameter SIG_BITS = 23;
+parameter EXP_BITS = 8;
 module top();
 
 parameter NTESTS = 500;
@@ -9,10 +11,10 @@ shortreal out_sr;
 // fp_t op1, op2, out;
 
 logic sign1, sign2;
-logic [7:0] exp1, exp2;
-logic [22:0] sig1, sig2;
+logic [EXP_BITS-1:0] exp1, exp2;
+logic [SIG_BITS-1:0] sig1, sig2;
 logic opcode;
-logic [31:0] fp_out;
+logic [EXP_BITS+SIG_BITS:0] fp_out;
 // logic [2:0] err_o;
 o_err_t err_o;
 int err_count, test_count;
@@ -27,8 +29,8 @@ add_sub_top ast0 (.*);
 
 task automatic singleTestCase (
     ref FloatingPoint op1, op2, exp, out,                                             // Declared FloatingPoint Objects
-        logic opcode, sign1, sign2, logic [7:0] exp1, exp2, logic [22:0] sig1, sig2,        // Ports linked to add/sub module
-        logic [31:0] fp_out, o_err_t err_o,
+        logic opcode, sign1, sign2, logic [EXP_BITS-1:0] exp1, exp2, logic [SIG_BITS-1:0] sig1, sig2,        // Ports linked to add/sub module
+        logic [EXP_BITS+SIG_BITS:0] fp_out, o_err_t err_o,
         int err_count, test_count,
     input fp_case_t op1_case, op2_case, bit addsub_op, op1_sign, op2_sign                    // Non-Pass-by-Ref Variables
     );
@@ -44,12 +46,12 @@ task automatic singleTestCase (
         1'b1: exp.setSR(op1.getSR - op2.getSR);
     endcase
     exp_err = expectedErrorCode(exp);
-    sign1 = op1.getSign();
-    sign2 = op2.getSign();
-    exp1 = op1.getExponent();
-    exp2 = op2.getExponent();
-    sig1 = op1.getSignificand();
-    sig2 = op2.getSignificand();
+    sign1 = op1.sign;
+    sign2 = op2.sign;
+    exp1 = op1.exponent;
+    exp2 = op2.exponent;
+    sig1 = op1.significand;
+    sig2 = op2.significand;
     opcode = addsub_op;
 
     // DELAY HERE
