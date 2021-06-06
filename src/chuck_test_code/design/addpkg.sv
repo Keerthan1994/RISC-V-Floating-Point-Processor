@@ -45,7 +45,7 @@ class FloatingPoint;
 // 2. Use generateNew(fp_case_t) to generate a new randomized value for OP1, and OP2 of specified type.
 // 2a. Use OP1.setSign(sign) and OP2.setSign(sign) to set the appropriate signs
 // 3. Use EXP.setSR(OP1.getSR + OP2.getSR) and feed it the shortreal result from SV.
-// 4. Feed the machine OP1.sign, OP1.exponent, OP1.significand, etc. for OP2.
+// 4. Feed the machine OP1.getSign(), OP1.exponent, OP1.significand, etc. for OP2.
 // 5. Use OUT.setBits(machine_output) and feed it the machine output to set the OUT value.
 // 6. Use OUT.equals(EXP) to see if they are the same!
 
