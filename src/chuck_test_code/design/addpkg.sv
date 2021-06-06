@@ -49,10 +49,10 @@ class FloatingPoint;
 // 5. Use OUT.setBits(machine_output) and feed it the machine output to set the OUT value.
 // 6. Use OUT.equals(EXP) to see if they are the same!
 
-    fp_t fp;
-    bit sign;
-    rand bit [7:0] exponent;
-    rand bit [22:0] significand;
+    local fp_t fp;
+    local bit sign;
+    local rand bit [7:0] exponent;
+    local rand bit [22:0] significand;
     fp_case_t op_case;
 
     // Randomization constraints
@@ -140,6 +140,18 @@ class FloatingPoint;
         this.significand = significand;
         this.updateFp();
         this.updateType();
+    endfunction
+
+    function bit getSign();
+        return this.sign;
+    endfunction
+
+    function bit [7:0] getExponent();
+        return this.exponent;
+    endfunction
+
+    function bit [22:0] getSignificand();
+        return this.significand;
     endfunction
 
     function void setSR (shortreal val);

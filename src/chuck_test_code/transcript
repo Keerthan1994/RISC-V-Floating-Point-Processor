@@ -1,5 +1,5 @@
 # vsim -c top 
-# Start time: 21:14:15 on Jun 04,2021
+# Start time: 14:13:20 on Jun 06,2021
 # ** Note: (vsim-3813) Design is being optimized due to module recompilation...
 # ** Warning: design/normalize.sv(41): (vopt-2241) Connection width does not match width of port 'out'. The port definition is at: design/find_first_1.sv(1).
 # ** Warning: design/normalize.sv(41): (vopt-2241) Connection width does not match width of port 'out'. The port definition is at: design/find_first_1.sv(1).
@@ -25,5 +25,5 @@
 # Loading work.add_sub_top_tb_sv_unit(fast)
 # Loading work.top(fast)
 # Error To Test Ratio: 0/256000.
-# End time: 21:16:14 on Jun 04,2021, Elapsed time: 0:01:59
+# End time: 14:13:39 on Jun 06,2021, Elapsed time: 0:00:19
 # Errors: 0, Warnings: 3

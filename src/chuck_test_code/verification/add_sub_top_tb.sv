@@ -44,12 +44,12 @@ task automatic singleTestCase (
         1'b1: exp.setSR(op1.getSR - op2.getSR);
     endcase
     exp_err = expectedErrorCode(exp);
-    sign1 = op1.sign;
-    sign2 = op2.sign;
-    exp1 = op1.exponent;
-    exp2 = op2.exponent;
-    sig1 = op1.significand;
-    sig2 = op2.significand;
+    sign1 = op1.getSign();
+    sign2 = op2.getSign();
+    exp1 = op1.getExponent();
+    exp2 = op2.getExponent();
+    sig1 = op1.getSignificand();
+    sig2 = op2.getSignificand();
     opcode = addsub_op;
 
     // DELAY HERE
