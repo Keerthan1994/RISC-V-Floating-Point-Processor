@@ -1,9 +1,9 @@
 # vsim -c top 
-# Start time: 14:13:20 on Jun 06,2021
+# Start time: 20:27:07 on Jun 06,2021
 # ** Note: (vsim-3813) Design is being optimized due to module recompilation...
-# ** Warning: design/normalize.sv(41): (vopt-2241) Connection width does not match width of port 'out'. The port definition is at: design/find_first_1.sv(1).
-# ** Warning: design/normalize.sv(41): (vopt-2241) Connection width does not match width of port 'out'. The port definition is at: design/find_first_1.sv(1).
-# ** Warning: verification/add_sub_top_tb.sv(3): (vopt-2605) empty port name in port list.
+# ** Warning: design/normalize.sv(43): (vopt-2241) Connection width does not match width of port 'out'. The port definition is at: design/find_first_1.sv(1).
+# ** Warning: design/normalize.sv(43): (vopt-2241) Connection width does not match width of port 'out'. The port definition is at: design/find_first_1.sv(1).
+# ** Warning: verification/add_sub_top_tb.sv(5): (vopt-2605) empty port name in port list.
 # //  Questa Sim-64
 # //  Version 2019.2_1 linux_x86_64 May 13 2019
 # //
@@ -19,11 +19,20 @@
 # //  18 U.S.C. Section 1905.
 # //
 # Loading sv_std.std
+# Loading work.error_check_sv_unit(fast)
+# Loading work.rounding_sv_unit(fast)
+# Loading work.normalize_sv_unit(fast)
 # Loading work.addpkg(fast)
 # Loading work.align_significands_sv_unit(fast)
+# Loading work.complement_sv_unit(fast)
+# Loading work.concat_1_sv_unit(fast)
+# Loading work.swap_sv_unit(fast)
+# Loading work.compare_exponents_sv_unit(fast)
+# Loading work.denorm_zero_sv_unit(fast)
 # Loading work.add_sub_top_sv_unit(fast)
 # Loading work.add_sub_top_tb_sv_unit(fast)
 # Loading work.top(fast)
+# invalid command name "rn"
 # Error To Test Ratio: 0/256000.
-# End time: 14:13:39 on Jun 06,2021, Elapsed time: 0:00:19
-# Errors: 0, Warnings: 3
+# End time: 20:27:24 on Jun 06,2021, Elapsed time: 0:00:17
+# Errors: 1, Warnings: 3
