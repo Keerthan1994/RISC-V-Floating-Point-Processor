@@ -1,4 +1,4 @@
-import addpkg_div::*;
+import fp_pkg::*;
 
 module fdiv_newton (a,b,rm,fdiv,ena,clk,rstn, s,busy,stall,count,reg_x,err_o);
 	parameter ZERO = 31'h00000000;

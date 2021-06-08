@@ -22,7 +22,7 @@
 
 parameter SIG_BITS = 23;
 parameter EXP_BITS = 8;
-import addpkg::*; 
+import fp_pkg::*; 
 module add_sub_top(opcode, sign1, exp1, sig1, sign2, exp2, sig2, fp_out, err_o);
 
     // Ports

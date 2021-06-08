@@ -21,12 +21,6 @@
  * ----------	---	----------------------------------------------------------
  */
 
-// FIXME: Should also probably check if EXP represents Infinity or NaN (NaN done).
-// http://pages.cs.wisc.edu/~markhill/cs354/Fall2008/notes/flpt.apprec.html
-// If so, send a signal to final stage, and inform it to ouput NaN.
-// FIXME: Should also check if the operands equal one another AND the complement signal
-// is true. If so, we need to output a zero signal in the final stage.
-
 
 parameter SIG_BITS = 23;
 parameter EXP_BITS = 8;

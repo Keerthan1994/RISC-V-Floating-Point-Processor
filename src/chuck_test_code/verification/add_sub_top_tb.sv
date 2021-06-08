@@ -1,4 +1,4 @@
-import addpkg::*;
+import fp_pkg::*;
 
 parameter SIG_BITS = 23;
 parameter EXP_BITS = 8;

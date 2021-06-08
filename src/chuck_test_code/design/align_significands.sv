@@ -25,7 +25,7 @@
 
 parameter SIG_BITS = 23;
 parameter EXP_BITS = 8;
-import addpkg::*;
+import fp_pkg::*;
 
 module align_significands (
     sig2, shift, sig2_aligned

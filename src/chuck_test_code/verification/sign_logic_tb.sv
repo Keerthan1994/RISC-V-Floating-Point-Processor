@@ -1,6 +1,6 @@
 // cfaber - 5/16 module verified
 
-import addpkg::*;
+import fp_pkg::*;
 
 module top();
 

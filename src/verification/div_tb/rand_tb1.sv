@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-import addpkg_div::*;
+import fp_pkg::*;
 
 module top;
 	parameter NTEST= 1;

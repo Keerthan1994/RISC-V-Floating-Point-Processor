@@ -1,4 +1,4 @@
-import addpkg::*;
+import fp_pkg::*;
 
 module top();
 

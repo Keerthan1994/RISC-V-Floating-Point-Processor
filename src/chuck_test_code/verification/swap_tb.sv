@@ -2,7 +2,7 @@
 
 module top ();
 
-import addpkg::*;
+import fp_pkg::*;
 
 
 shortreal op1[] = '{1.0, 0.25, 0.05, 0, 20.1};

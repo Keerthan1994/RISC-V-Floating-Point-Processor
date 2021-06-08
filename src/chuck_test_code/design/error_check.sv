@@ -31,7 +31,7 @@ parameter SIG_BITS = 23;
 parameter EXP_BITS = 8;
 module error_check (sign_i, exp_i, sig_untrunc_i, carry, nz_op, err_i, fp_out, err_o);
 
-import addpkg::*;
+import fp_pkg::*;
 
 parameter OVF_EXC = 0;
 
