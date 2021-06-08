@@ -18,12 +18,13 @@
  * Date      	By	Comments
  * ----------	---	----------------------------------------------------------
  */
-
+parameter SIG_BITS = 23;
+parameter EXP_BITS = 8;
 module compare_exponents(
     exp1, exp2, diff, exp_r, borrow
 );
-    input [7:0] exp1, exp2;
-    output [7:0] diff, exp_r;
+    input [EXP_BITS-1:0] exp1, exp2;
+    output [EXP_BITS-1:0] diff, exp_r;
     output borrow;
 
     // This module needs to subtract the two exponents (exp1 - exp2), and then 
@@ -33,7 +34,7 @@ module compare_exponents(
 
     // Note: Technically a larger exp value is a lower fp value, and a smaller exp value is a larger fp value
     
-    nbit_fullsubtractor #(8) fs0 (
+    nbit_fullsubtractor #(EXP_BITS) fs0 (
         .D(diff), 
         .BO(borrow), 
         .A(exp1), 

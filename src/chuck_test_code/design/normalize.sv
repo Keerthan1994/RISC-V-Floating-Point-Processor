@@ -23,44 +23,46 @@
  * ----------	---	----------------------------------------------------------
  */
 
+parameter SIG_BITS = 23;
+parameter EXP_BITS = 8;
 module normalize (
     sig, carry, exp, sig_norm, shift
 );
 
-input [26:0] sig;
+input [SIG_BITS+3:0] sig;
 input carry;
-input [7:0] exp;
-output logic [26:0] sig_norm;
-output logic [7:0] shift;
+input [EXP_BITS-1:0] exp;
+output logic [SIG_BITS+3:0] sig_norm;
+output logic [EXP_BITS-1:0] shift;
 
 
 
 logic [4:0] first_one;
-logic [7:0]  norm_shift;
+logic [EXP_BITS-1:0]  norm_shift;
 
-find_first_1 #(27) ff1 (sig, first_one);
+find_first_1 #(SIG_BITS+4) ff1 (sig, first_one);
 
 always_comb begin
     if (carry) begin                     // If there is a carry we need to shift just 1 to the right, and increment the exponent.
         sig_norm = sig >> 1;
-        sig_norm[26] = carry;
+        sig_norm[SIG_BITS+3] = carry;
         shift = 1;
     end else if (sig == 0) begin            // The entire significand is 0, so the value is zero (that's only the case if using denorm numbers or zero math)
         sig_norm = sig;
         // Need to do a check if the exponent is 1 or 0. If it is 1, set it to zero. Otherwise it is already zero, so leave it at that.
-        if (exp == 8'b1) begin
+        if (exp == 'b1) begin
             shift = ~1 + 1;
         end else begin
             shift = 0;
         end
-    end else if (sig != 0 && (exp == 8'b1) && sig[26] != 1'b1) begin    // If the sig is not zero, no carry out, and no MSB and the exponent is 1 or 0, output a denorm number.
+    end else if (sig != 0 && (exp == 'b1) && sig[SIG_BITS+3] != 1'b1) begin    // If the sig is not zero, no carry out, and no MSB and the exponent is 1 or 0, output a denorm number.
         sig_norm = sig;
         shift = ~1 + 1;                     // Change the exponent to 0
-    end else if (sig != 0 && (exp == 8'b0) && sig[26] != 1'b1) begin    // If the exponent is already zero, keep it at zero.
+    end else if (sig != 0 && (exp == 'b0) && sig[SIG_BITS+3] != 1'b1) begin    // If the exponent is already zero, keep it at zero.
         sig_norm = sig;
         shift = 0;                     // Change the exponent to 0
     end else begin                          // Else keep shifting to the left and decrementing exponent until there is a 1 in the MSB.
-        norm_shift = 26 - first_one;
+        norm_shift = SIG_BITS+3 - first_one;
         sig_norm = sig << norm_shift;
         shift = ~(norm_shift)+1;
     end

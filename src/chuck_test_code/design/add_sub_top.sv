@@ -20,44 +20,45 @@
  * ----------	---	----------------------------------------------------------
  */
 
-
+parameter SIG_BITS = 23;
+parameter EXP_BITS = 8;
 import addpkg::*; 
 module add_sub_top(opcode, sign1, exp1, sig1, sign2, exp2, sig2, fp_out, err_o);
 
     // Ports
     input opcode;                       // 0: Add; 1: Subtract
-    input logic [7:0] exp1, exp2;
-    input logic [22:0] sig1, sig2;
+    input logic [EXP_BITS-1:0] exp1, exp2;
+    input logic [SIG_BITS-1:0] sig1, sig2;
     input logic sign1, sign2;
-    output logic [31:0] fp_out;
+    output logic [SIG_BITS+EXP_BITS:0] fp_out;
     output logic [2:0] err_o;
 
     // Connection Wires
     i_err_t err_i;
-    logic [7:0] exp1_d, exp2_d;
+    logic [EXP_BITS-1:0] exp1_d, exp2_d;
     logic [1:0] n_concat;
-    logic [7:0] diff;
-    logic [30:0] nz_op;
+    logic [EXP_BITS-1:0] diff;
+    logic [SIG_BITS+EXP_BITS-1:0] nz_op;
     logic borrow;
     logic swap;
     logic complement;
 
-    logic [7:0] exp_r1, exp_r2;
+    logic [EXP_BITS-1:0] exp_r1, exp_r2;
 
-    logic [22:0] sig1_s, sig2_s;
-    logic [26:0] sig1_c, sig2_c;
-    logic [26:0] sig1_cc, sig2_a;
-    logic [26:0] sig_sum;
-    logic [26:0] sig_pc;
-    logic [26:0] sig_n;
-    logic [26:0] sig_r;
+    logic [SIG_BITS-1:0] sig1_s, sig2_s;
+    logic [SIG_BITS+3:0] sig1_c, sig2_c;
+    logic [SIG_BITS+3:0] sig1_cc, sig2_a;
+    logic [SIG_BITS+3:0] sig_sum;
+    logic [SIG_BITS+3:0] sig_pc;
+    logic [SIG_BITS+3:0] sig_n;
+    logic [SIG_BITS+3:0] sig_r;
 
     logic carry1, carry2, carry3, carry4, carry5;
-    logic[7:0] shift1, shift2, shift3;
+    logic[EXP_BITS-1:0] shift1, shift2, shift3;
 
     logic sign_r;
-    logic [7:0] exp_f;
-    logic [26:0] sig_f;
+    logic [EXP_BITS-1:0] exp_f;
+    logic [SIG_BITS+3:0] sig_f;
 
     // Unpack Here
     sign_logic sl0 (
@@ -116,7 +117,7 @@ module add_sub_top(opcode, sign1, exp1, sig1, sign2, exp2, sig2, fp_out, err_o);
         .shift(shift1), 
         .sig2_aligned(sig2_a)
     );
-    nbit_fulladder #(27) fa0 (
+    nbit_fulladder #(SIG_BITS+4) fa0 (
         .S(sig_sum), 
         .CO(carry1), 
         .A(sig1_cc), 
@@ -137,7 +138,7 @@ module add_sub_top(opcode, sign1, exp1, sig1, sign2, exp2, sig2, fp_out, err_o);
         .sig_norm(sig_n), 
         .shift(shift2)
     );
-    nbit_fulladder #(8) fa1 (
+    nbit_fulladder #(EXP_BITS) fa1 (
         .S(exp_r2), 
         .CO(carry4), 
         .A(exp_r1), 
@@ -156,7 +157,7 @@ module add_sub_top(opcode, sign1, exp1, sig1, sign2, exp2, sig2, fp_out, err_o);
         .sig_norm(sig_f), 
         .shift(shift3)
     );
-    nbit_fulladder #(8) fa2 (
+    nbit_fulladder #(EXP_BITS) fa2 (
         .S(exp_f), 
         .CO(carry5), 
         .A(exp_r2), 

@@ -1,9 +1,11 @@
 // 5/23/2021 - Verified by CF and BC
 
+parameter SIG_BITS = 23;
+parameter EXP_BITS = 8;
 module top();
 
-logic [26:0] sig2, sig2_aligned;
-logic [7:0] shift;
+logic [SIG_BITS+3:0] sig2, sig2_aligned;
+logic [EXP_BITS-1:0] shift;
 
 align_significands as0 (.*);
 

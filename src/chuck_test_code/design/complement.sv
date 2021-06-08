@@ -19,13 +19,15 @@
  * ----------	---	----------------------------------------------------------
  */
 
+parameter SIG_BITS = 23;
+parameter EXP_BITS = 8;
 module complement (
     complement, operand, op_comp
 );
 
 input complement;
-input [26:0] operand;
-output logic [26:0] op_comp;
+input [SIG_BITS+3:0] operand;
+output logic [SIG_BITS+3:0] op_comp;
 
 always_comb begin
     op_comp = complement ? ~operand + 1 : operand;

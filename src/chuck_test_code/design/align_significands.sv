@@ -23,15 +23,17 @@
  * 2021-05-06	CF	Added initial code. NOT YET TESTED.
  */
 
+parameter SIG_BITS = 23;
+parameter EXP_BITS = 8;
 import addpkg::*;
 
 module align_significands (
     sig2, shift, sig2_aligned
 );
 
-input [26:0] sig2;
-input [7:0] shift;                      // Output of the subraction of the exponents
-output logic [26:0] sig2_aligned;             // Only outputting aligned op2, since op1 can just be passed through.
+input [SIG_BITS+3:0] sig2;
+input [EXP_BITS-1:0] shift;                      // Output of the subraction of the exponents
+output logic [SIG_BITS+3:0] sig2_aligned;             // Only outputting aligned op2, since op1 can just be passed through.
 logic guard, round, sticky;
 
 

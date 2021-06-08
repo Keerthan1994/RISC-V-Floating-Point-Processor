@@ -19,14 +19,16 @@
  * ----------	---	----------------------------------------------------------
  */
 
+parameter SIG_BITS = 23;
+parameter EXP_BITS = 8;
 module concat_1 (
     sig1, sig2, n_concat, swap, sig1_concat, sig2_concat
 );
 
-input logic [22:0] sig1, sig2;
+input logic [SIG_BITS-1:0] sig1, sig2;
 input logic [1:0] n_concat;
 input swap;
-output logic [26:0] sig1_concat, sig2_concat;
+output logic [SIG_BITS+3:0] sig1_concat, sig2_concat;
 logic [1:0] n_concat_s;
 
 always_comb begin

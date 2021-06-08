@@ -19,17 +19,19 @@
  * ----------	---	----------------------------------------------------------
  */
 
+parameter SIG_BITS = 23;
+parameter EXP_BITS = 8;
 module swap (
     sig1, sig2, diff, borrow, n_concat, shift, swap, sig1_swap, sig2_swap
 );
 
-input [22:0] sig1, sig2;
-input [7:0] diff;
+input [SIG_BITS-1:0] sig1, sig2;
+input [EXP_BITS-1:0] diff;
 input borrow;
 input [1:0] n_concat;
-output logic[7:0] shift;
+output logic[EXP_BITS-1:0] shift;
 output logic swap;
-output logic [22:0] sig1_swap, sig2_swap;
+output logic [SIG_BITS-1:0] sig1_swap, sig2_swap;
 
 always_comb begin
     if (borrow) begin                                   // Difference is negative, swap operands

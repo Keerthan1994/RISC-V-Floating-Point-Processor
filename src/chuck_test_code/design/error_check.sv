@@ -27,6 +27,8 @@
  */
 
 
+parameter SIG_BITS = 23;
+parameter EXP_BITS = 8;
 module error_check (sign_i, exp_i, sig_untrunc_i, carry, nz_op, err_i, fp_out, err_o);
 
 import addpkg::*;
@@ -34,42 +36,42 @@ import addpkg::*;
 parameter OVF_EXC = 0;
 
 input sign_i;
-input [7:0] exp_i;
-input [26:0] sig_untrunc_i;
+input [EXP_BITS-1:0] exp_i;
+input [SIG_BITS+3:0] sig_untrunc_i;
 input carry;
-input [30:0] nz_op;
+input [EXP_BITS+SIG_BITS-1:0] nz_op;
 input i_err_t err_i;
-output logic [31:0] fp_out;
+output logic [EXP_BITS+SIG_BITS:0] fp_out;
 output o_err_t err_o;
 
 logic sign_o;
-logic [7:0] exp_o;
-logic [22:0] sig_o;
+logic [EXP_BITS-1:0] exp_o;
+logic [SIG_BITS-1:0] sig_o;
 
 always_comb begin
-    sig_o = sig_untrunc_i[25:3];                                  // Truncate the hidden bit and round bits
+    sig_o = sig_untrunc_i[SIG_BITS+2:3];                                  // Truncate the hidden bit and round bits
 
     // Apply Logic Based on Err_i
     case (err_i)
         ZERO_OP_ERR: begin
             sign_o = sign_i;
-            exp_o = nz_op[30:23];
-            sig_o = nz_op[22:0];
+            exp_o = nz_op[SIG_BITS+EXP_BITS-1:SIG_BITS];
+            sig_o = nz_op[SIG_BITS-1:0];
         end
         INF_ERR: begin
             sign_o = sign_i;
-            exp_o = 8'hFF;
-            sig_o = {23{1'b0}};
+            exp_o = {EXP_BITS{1'b1}};
+            sig_o = {SIG_BITS{1'b0}};
         end
         NAN_ERR: begin
             sign_o = 1'b0;
-            exp_o = 8'hFF;
-            sig_o = {23{1'b1}};
+            exp_o = {EXP_BITS{1'b1}};
+            sig_o = {SIG_BITS{1'b1}};
         end
         ZERO_ERR: begin
             sign_o = 1'b0;
-            exp_o = 8'b0;
-            sig_o = {23{1'b0}};
+            exp_o = {EXP_BITS{1'b0}};
+            sig_o = {SIG_BITS{1'b0}};
         end
         default: begin
             sign_o = sign_i;
@@ -78,14 +80,14 @@ always_comb begin
     endcase
 
     // Hacky way to address the Overflow Case Producing a NAN with all 1s in significand
-    if (err_i != NAN_ERR && carry && exp_o == 8'hFF && sig_o != 0) begin
-        sig_o = 23'b000_0000_0000_0000_0000_0000;
+    if (err_i != NAN_ERR && carry && exp_o == {EXP_BITS{1'b1}} && sig_o != 0) begin
+        sig_o = {SIG_BITS{1'b0}};
     end
 
     // Do One last Check of Bits to Output the correct error
-    if (exp_o == 8'hFF && sig_o == 0) err_o = OVERFLOW;
-    else if (exp_o == 8'hFF && sig_o != 0) err_o = INVALID;
-    else if (exp_o == 8'h00 && sig_o != 0) err_o = UNDERFLOW;
+    if (exp_o == {EXP_BITS{1'b1}} && sig_o == 0) err_o = OVERFLOW;
+    else if (exp_o == {EXP_BITS{1'b1}} && sig_o != 0) err_o = INVALID;
+    else if (exp_o == {EXP_BITS{1'b0}} && sig_o != 0) err_o = UNDERFLOW;
     else err_o = NONE;
 
 
