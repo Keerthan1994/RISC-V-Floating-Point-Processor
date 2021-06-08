@@ -105,7 +105,6 @@ do begin
                 exp2 = op2.getExponent();
                 sig1 = op1.getSignificand();
                 sig2 = op2.getSignificand();
-                $display("op1 %1b %8b %23b op2 %1b %8b %23b", sign1, exp1, sig1, sign2, exp2, sig2);
                 #150;
                 out.setBits(fp_out);
                 checkResults(op1, op2, out, exp, opcode_t'(sign_tc[2]), err);

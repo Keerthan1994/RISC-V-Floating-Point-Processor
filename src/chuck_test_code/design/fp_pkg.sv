@@ -271,7 +271,7 @@ endclass
 //                  Check Error Code.
 
 task automatic generateTestCase(
-    ref FloatingPoint op1, op2, exp,
+    input FloatingPoint op1, op2, exp,
     input fp_case_t op1_case, op2_case, bit op1_sign, op2_sign, opcode_t opcode
     );
 // This task will generate two operands of the type op_case_t, and calculate the
