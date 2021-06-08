@@ -48,7 +48,7 @@ typedef union {
 class FloatingPoint;
 // Using this class:
 // 1. Create FloatingPoint Objects for OP1, OP2, and OUT and EXP.
-// 2. Use generateNew(fp_case_t) to generate a new randomized value for OP1, and OP2 of specified type.
+// 2. Use generateCase(fp_case_t) to generate a new randomized value for OP1, and OP2 of specified type.
 // 2a. Use OP1.setSign(sign) and OP2.setSign(sign) to set the appropriate signs
 // 3. Use EXP.setSR(OP1.getSR + OP2.getSR) and feed it the shortreal result from SV.
 // 4. Feed the machine OP1.sign, OP1.exponent, OP1.significand, etc. for OP2.
@@ -56,13 +56,17 @@ class FloatingPoint;
 // 6. Use OUT.equals(EXP) to see if they are the same!
 
     local fp_t fp;
-    local bit sign;
+    local rand bit sign;
     local rand bit [EXP_BITS-1:0] exponent;
     local rand bit [SIG_BITS-1:0] significand;
     fp_case_t op_case;
 
+    // Randomizaton Weight for non-edge-case testing
+    int w_exp_zero = 1, w_exp_reg = 98, w_exp_max = 1;
+    int w_sig_zero = 1, w_sig_reg = 98, w_sig_max = 1;
+
     // Randomization constraints
-    constraint c_fp {
+    constraint edge_case_c {
         if (op_case == NAN) {
             exponent == {EXP_BITS{1'b1}};
             significand > 1;
@@ -90,17 +94,35 @@ class FloatingPoint;
         }
     }
 
+    constraint rand_exp_c {
+        exponent dist {8'b0000_0000 :/ w_exp_zero, [8'b0000_0001:8'b1111_1110] :/ w_exp_reg, 8'b1111_1111 :/ w_exp_max};
+    }
+
+    constraint rand_sig_c {
+        significand dist {23'h000000 :/ w_sig_zero, [23'h000001:23'h7FFFFE] :/ w_sig_reg, 23'h7FFFFF :/ w_sig_max};
+    }
+
     // -- CLASS METHODS --
     // Overriding new function (nothing needed atm)
     function new();
     endfunction
 
     // Sets op_case and randomizes accordingly
-    function void generateNew(fp_case_t op_case);
+    function void generateCase(fp_case_t op_case);
         this.op_case = op_case;
+        this.constraint_mode(0);
+        this.edge_case_c.constraint_mode(1);
         assert(this.randomize())
-        else $fatal(0, "FloatingPoint::generateNew - randomize failed");
-        if (op_case !== this.op_case) $error("FloatingPoint::generateNew - Generated FP type %0s does not match specified type %0s.", this.op_case.name(), op_case.name());
+        else $fatal(0, "FloatingPoint::generateCase - randomize failed");
+        if (op_case !== this.op_case) $error("FloatingPoint::generateCase - Generated FP type %0s does not match specified type %0s.", this.op_case.name(), op_case.name());
+    endfunction
+
+    // Generates a random operand based on the distribution weights
+    function void generateRandom();
+        this.constraint_mode(0);
+        this.rand_exp_c.constraint_mode(1);
+        this.rand_sig_c.constraint_mode(1);
+        assert(this.randomize()) else $fatal(0, "FloatingPoint::generateRandom - randomize failed");
     endfunction
 
     // After randomization, update the fp_t, and type
@@ -124,16 +146,17 @@ class FloatingPoint;
         this.updateType();
     endfunction
 
-    // Set the fp value given a bit vector
-    function void setBits (logic [EXP_BITS+SIG_BITS:0] bits);
-        this.fp.bits = bits;
-        this.updateFields();
-        this.updateType();
+    function fp_t getFp ();
+        return this.fp;
     endfunction
 
     function void setSign (bit sign);
         this.sign = sign;
         this.updateFp();
+    endfunction
+
+    function bit getSign ();
+        return this.sign;
     endfunction
 
     function void setExponent (bit [EXP_BITS-1:0] exponent);
@@ -142,26 +165,29 @@ class FloatingPoint;
         this.updateType();
     endfunction
 
+    function bit [EXP_BITS-1:0] getExponent ();
+        return this.exponent;
+    endfunction
+
     function void setSignificand (bit [SIG_BITS-1:0] significand);
         this.significand = significand;
         this.updateFp();
         this.updateType();
     endfunction
 
-    function bit getSign ();
-        return this.sign;
-    endfunction
-
-    function bit [EXP_BITS-1:0] getExponent ();
-        return this.exponent;
-    endfunction
-
     function bit [SIG_BITS-1:0] getSignificand ();
         return this.significand;
     endfunction
 
-    function fp_t getFp ();
-        return this.fp;
+    // Set the fp value given a bit vector
+    function void setBits (logic [EXP_BITS+SIG_BITS:0] bits);
+        this.fp.bits = bits;
+        this.updateFields();
+        this.updateType();
+    endfunction
+
+    function logic [EXP_BITS+SIG_BITS:0] getBits ();
+        return this.fp.bits;
     endfunction
 
     function void setSR (shortreal val);
@@ -280,9 +306,9 @@ task automatic generateTestCase(
     //pass by ref for operand1, 2, expected result and actual output
     //FloatingPoint op1, op2, exp, out;
     //generate random input for operand 1
-    op1.generateNew(op1_case);
+    op1.generateCase(op1_case);
     //generate random input for operand 2
-    op2.generateNew(op2_case);
+    op2.generateCase(op2_case);
     //set the sign for operand 1
     op1.setSign(op1_sign);
     //set the sign for operand 2
@@ -336,8 +362,8 @@ task automatic singleTestCase (
     o_err_t exp_err;
 
     // Setup Operands and Calculate Expected Value
-    op1.generateNew(op1_case);
-    op2.generateNew(op2_case);
+    op1.generateCase(op1_case);
+    op2.generateCase(op2_case);
     op1.setSign(op1_sign);
     op2.setSign(op2_sign);
     unique case (addsub_op)
@@ -372,8 +398,8 @@ task automatic singleTestCase (
 
 endtask
 
-    // op1.generateNew(ZERO);
-    // op2.generateNew(INF);
+    // op1.generateCase(ZERO);
+    // op2.generateCase(INF);
 
     // $display("Op1 Value: %0e. Op2 Value: %0e. Expected Value: %0e.", op1.getSR(), op2.getSR(), exp.getSR());
 
