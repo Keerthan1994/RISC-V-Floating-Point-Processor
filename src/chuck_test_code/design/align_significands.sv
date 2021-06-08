@@ -25,7 +25,6 @@
 
 parameter SIG_BITS = 23;
 parameter EXP_BITS = 8;
-import fp_pkg::*;
 
 module align_significands (
     sig2, shift, sig2_aligned
@@ -38,31 +37,9 @@ logic guard, round, sticky;
 
 
 always_comb begin
-
-    // if (shift > 0) begin
-    //     shifted_out = sig2[(shift-1)+3:3];
-
-    //     sig2[GUARD] = shifted_out[shift-1];
-    //     sig2[ROUND] = shifted_out[shift-2];
-    //     sig2[STICKY] = |shifted_out[shift-3:0];
-    // end
-
     if (shift > 3) begin
-        // sticky = |sig2[shift-3:0];
         sticky = |(sig2 << (27-shift-1));
     end 
-
-    // sig_tmp = sig2[26:3];
-    // if (shift > 0) begin
-    //     sig2[GUARD] = sig_tmp[0];
-    // end
-    // if (shift > 1) begin
-    //     sig2[ROUND] = sig_tmp[1];
-    // end
-    // if (shift > 2) begin
-    //     // check if any bit between sig_tmp[shift:2] is 1
-    //     sig2[STICKY] = |sig_tmp[shift:2];
-    // end
 
     sig2_aligned = sig2 >> shift;     // First shift brings hidden bit into significand (combinational)
     if (shift > 3) begin

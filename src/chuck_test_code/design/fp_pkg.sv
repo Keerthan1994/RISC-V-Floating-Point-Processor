@@ -20,6 +20,10 @@ typedef enum logic [2:0] {
     REG, NAN, INF, ZERO, DENORM, MAX, NORMMIN, DENORMMIN
 } fp_case_t;
 
+typedef enum logic[1:0] {
+    ADD, SUB, MUL, DIV
+} opcode_t;
+
 ////////////////////////
 // Structs and Unions //
 ////////////////////////
@@ -156,6 +160,10 @@ class FloatingPoint;
         return this.significand;
     endfunction
 
+    function fp_t getFp ();
+        return this.fp;
+    endfunction
+
     function void setSR (shortreal val);
         this.fp.bits = $shortrealtobits(val);
         this.updateFields();
@@ -262,7 +270,62 @@ endclass
 //                  generate op1, op2, and test output with expected. 
 //                  Check Error Code.
 
+task automatic generateTestCase(
+    ref FloatingPoint op1, op2, exp,
+    input fp_case_t op1_case, op2_case, bit op1_sign, op2_sign, opcode_t opcode
+    );
+// This task will generate two operands of the type op_case_t, and calculate the
+// expected value given the opcode and the signs of each operand.
 
+    //pass by ref for operand1, 2, expected result and actual output
+    //FloatingPoint op1, op2, exp, out;
+    //generate random input for operand 1
+    op1.generateNew(op1_case);
+    //generate random input for operand 2
+    op2.generateNew(op2_case);
+    //set the sign for operand 1
+    op1.setSign(op1_sign);
+    //set the sign for operand 2
+    op2.setSign(op2_sign);
+    
+    //get the expected result for each operation
+    unique case (opcode)
+        ADD: exp.setSR(op1.getSR + op2.getSR);
+        SUB: exp.setSR(op1.getSR - op2.getSR);
+        MUL: exp.setSR(op1.getSR * op2.getSR);
+        DIV: exp.setSR(op1.getSR / op2.getSR);
+    endcase
+endtask
+
+
+task automatic checkResults(
+    input FloatingPoint op1, op2, out, exp, opcode_t opcode,
+    output bit err
+);
+    err = 1'b0;
+
+    if (!out.equals(exp)) begin
+        $display("%0t::VALUE/TYPE MISMATCH: OP1=%0e %0s. OP2=%0e %0s. OP_CODE=%0s. EXP=%0e. RES=%0e. EXP_TYPE=%0s. RES_TYPE=%0s.", $time, op1.getSR(), op1.op_case.name(), op2.getSR(), op2.op_case.name(), opcode.name(), exp.getSR(), out.getSR(), exp.op_case.name(), out.op_case.name());
+        err = 1'b1;
+    end
+
+    `ifdef DEBUG
+        $display("%0t: OP1=%0e. OP2=%0e. OP_CODE=%0s. EXP=%0e. RES=%0e. EXP_TYPE=%0s. RES_TYPE=%0s.", $time, op1.getSR(), op2.getSR(), opcode.name(), exp.getSR(), out.getSR(), exp.op_case.name(), out.op_case.name());
+    `endif
+
+endtask
+
+task automatic checkErrorCode(
+    input FloatingPoint exp, o_err_t err_o
+);
+    if (err_o !== expectedErrorCode(exp)) begin
+        $display("%0t::ERROR CODE MISMATCH: EXP_ERR=%0s. RES_ERR=%0s.", $time(), expectedErrorCode(exp).name(), err_o.name());
+    end
+    
+    `ifdef DEBUG
+        $display("%0t: EXP_ERR=%0s. RES_ERR=%0s.", $time, expectedErrorCode(exp).name(), err_o.name());
+    `endif
+endtask
 
 // task automatic singleTestCase (
 //     ref FloatingPoint op1, op2, exp, out,                                             // Declared FloatingPoint Objects
@@ -282,12 +345,12 @@ endclass
 //         1'b1: exp.setSR(op1.getSR - op2.getSR);
 //     endcase
 //     exp_err = expectedErrorCode(exp);
-//     sign1 = op1.sign;
-//     sign2 = op2.sign;
-//     exp1 = op1.exponent;
-//     exp2 = op2.exponent;
-//     sig1 = op1.significand;
-//     sig2 = op2.significand;
+//     sign1 = op1.getSign;
+//     sign2 = op2.getSign;
+//     exp1 = op1.getExponent;
+//     exp2 = op2.getExponent;
+//     sig1 = op1.getSignificand;
+//     sig2 = op2.getSignificand;
 //     opcode = addsub_op;
 
 //     // DELAY HERE
