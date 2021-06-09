@@ -20,23 +20,23 @@ n@_opt
 Z4 OL;O;2019.2_1;69
 R0
 T_opt1
-!s110 1623196585
-V]2JdXYI?C^SP[1gHM9aUf1
+!s110 1623209931
+VDfO`U7e0nhYCcMZ0eHD[@1
 R1
-=1-5254006cf05e-60c003a9-3b81c-8ee4
+=1-5254006cf05e-60c037cb-1976f-9190
 R2
 R3
 n@_opt1
 R4
 vadd_significands
 Z5 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
-DXx4 work 16 add_sigs_sv_unit 0 22 7UUPnGW?KOD1PlEgXJd=z3
+DXx4 work 16 add_sigs_sv_unit 0 22 V7:z7cg;ii`2<bD`I;icA0
 Z6 VDg1SIo80bB@j0V0VzS_@n1
 r1
 !s85 0
 !i10b 1
 !s100 ca^PgIVgRN:EWNMS3`dP^3
-IXcGoK0HC1TaVkl<80N8733
+IW?a?ahla<iSbZm4:0Y0h]1
 !s105 add_sigs_sv_unit
 S1
 Z7 d/home/cfaber/common/Documents/ECE571/RISC-V-Floating-Point-Processor/src/chuck_test_code
@@ -46,20 +46,21 @@ Z10 Fdesign/add_sigs.sv
 L0 4
 Z11 OL;L;2019.2_1;69
 31
-Z12 !s108 1623196580.000000
-Z13 !s107 verification/add_sub_top_tb.sv|design/swap.sv|design/sign_logic.sv|design/shift.sv|design/rounding.sv|design/postcomplement.sv|design/normalize.sv|design/newton24.sv|design/nbit_fullsubt.sv|design/nbit_fulladdr.sv|design/fullsubt.sv|design/fulladdr.sv|design/fp_pkg.sv|design/find_first_1.sv|design/fdiv_newton.sv|design/error_check.sv|design/denorm_zero.sv|design/concat_1.sv|design/complement.sv|design/compare_exponents.sv|design/align_significands.sv|design/add_sub_top.sv|design/add_sigs.sv|
-Z14 !s90 design/add_sigs.sv|design/add_sub_top.sv|design/align_significands.sv|design/compare_exponents.sv|design/complement.sv|design/concat_1.sv|design/denorm_zero.sv|design/error_check.sv|design/fdiv_newton.sv|design/find_first_1.sv|design/fp_pkg.sv|design/fulladdr.sv|design/fullsubt.sv|design/nbit_fulladdr.sv|design/nbit_fullsubt.sv|design/newton24.sv|design/normalize.sv|design/postcomplement.sv|design/rounding.sv|design/shift.sv|design/sign_logic.sv|design/swap.sv|verification/add_sub_top_tb.sv|-lint=full|
+Z12 !s108 1623209928.000000
+Z13 !s107 verification/add_sub_top_tb.sv|design/swap.sv|design/sign_logic.sv|design/shift.sv|design/rounding.sv|design/postcomplement.sv|design/normalize.sv|design/newton24.sv|design/nbit_fullsubt.sv|design/nbit_fulladdr.sv|design/fullsubt.sv|design/fulladdr.sv|design/fp_pkg.sv|design/fp_mul.sv|design/find_first_1.sv|design/fdiv_newton.sv|design/error_check.sv|design/denorm_zero.sv|design/concat_1.sv|design/complement.sv|design/compare_exponents.sv|design/align_significands.sv|design/add_sub_top.sv|design/add_sigs.sv|
+Z14 !s90 design/add_sigs.sv|design/add_sub_top.sv|design/align_significands.sv|design/compare_exponents.sv|design/complement.sv|design/concat_1.sv|design/denorm_zero.sv|design/error_check.sv|design/fdiv_newton.sv|design/find_first_1.sv|design/fp_mul.sv|design/fp_pkg.sv|design/fulladdr.sv|design/fullsubt.sv|design/nbit_fulladdr.sv|design/nbit_fullsubt.sv|design/newton24.sv|design/normalize.sv|design/postcomplement.sv|design/rounding.sv|design/shift.sv|design/sign_logic.sv|design/swap.sv|verification/add_sub_top_tb.sv|-lint=full|+define+DEBUG|
 !i113 0
 Z15 o-lint=full -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+Z16 !s92 -lint=full +define+DEBUG -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
 R3
 Xadd_sigs_sv_unit
 R5
-V7UUPnGW?KOD1PlEgXJd=z3
+VV7:z7cg;ii`2<bD`I;icA0
 r1
 !s85 0
 !i10b 1
 !s100 UndHiN7P24`kjQ>Pm?gcP3
-I7UUPnGW?KOD1PlEgXJd=z3
+IV7:z7cg;ii`2<bD`I;icA0
 !i103 1
 S1
 R7
@@ -74,24 +75,25 @@ R13
 R14
 !i113 0
 R15
+R16
 R3
 vadd_sub_top
 R5
-Z16 DXx4 work 6 fp_pkg 0 22 87eQ?_l9aSQ@[B[kVb7Hl3
-DXx4 work 19 add_sub_top_sv_unit 0 22 EVP>7jHOkWjL;A4ETIV_M3
+Z17 DXx4 work 6 fp_pkg 0 22 ??:XVGjz5KoIEMR=12V;z3
+DXx4 work 19 add_sub_top_sv_unit 0 22 6H1V:W6]BLh]aCPQonUfb3
 R6
 r1
 !s85 0
 !i10b 1
 !s100 ;GMj^[COYJ>e?zokjdSz61
-I`?ajk>G=2=YB2;3lcm07^1
+Ie;6F_JZ5zHa1RE@7UbbYj1
 !s105 add_sub_top_sv_unit
 S1
 R7
-Z17 w1623178791
-Z18 8design/add_sub_top.sv
-Z19 Fdesign/add_sub_top.sv
-Z20 L0 26
+Z18 w1623178791
+Z19 8design/add_sub_top.sv
+Z20 Fdesign/add_sub_top.sv
+Z21 L0 26
 R11
 31
 R12
@@ -99,23 +101,24 @@ R13
 R14
 !i113 0
 R15
+R16
 R3
 Xadd_sub_top_sv_unit
 R5
-R16
-VEVP>7jHOkWjL;A4ETIV_M3
+R17
+V6H1V:W6]BLh]aCPQonUfb3
 r1
 !s85 0
 !i10b 1
 !s100 aIKCRF;J=l0f0GnGiDzKO0
-IEVP>7jHOkWjL;A4ETIV_M3
+I6H1V:W6]BLh]aCPQonUfb3
 !i103 1
 S1
 R7
-R17
 R18
 R19
-Z21 L0 23
+R20
+Z22 L0 23
 R11
 31
 R12
@@ -123,20 +126,21 @@ R13
 R14
 !i113 0
 R15
+R16
 R3
 Xadd_sub_top_tb_sv_unit
 R5
-Z22 DXx4 work 6 fp_pkg 0 22 <O[6oBW[A=NK_I?Vd9^4o2
-V>PAQ=EQeMTz^ng:XlTYNZ2
+R17
+V[=XH^[kR@QIda`ABg2TSG0
 r1
 !s85 0
 !i10b 1
-!s100 1;5BaCam3Y3fC5PiHdV8?2
-I>PAQ=EQeMTz^ng:XlTYNZ2
+!s100 ild;46Wd?V:SVh=N7Kz@W0
+I[=XH^[kR@QIda`ABg2TSG0
 !i103 1
 S1
 R7
-Z23 w1623180915
+Z23 w1623209923
 Z24 8verification/add_sub_top_tb.sv
 Z25 Fverification/add_sub_top_tb.sv
 L0 1
@@ -147,6 +151,7 @@ R13
 R14
 !i113 0
 R15
+R16
 R3
 Xaddpkg
 R5
@@ -174,17 +179,17 @@ R15
 R3
 valign_significands
 R5
-DXx4 work 26 align_significands_sv_unit 0 22 U<T?7>_PeE;I_gEFE9UUX0
+DXx4 work 26 align_significands_sv_unit 0 22 94[QcgC6LGH7ac5eziCA]2
 R6
 r1
 !s85 0
 !i10b 1
 !s100 ]Ei6XWoGmC3@biL4b`PPY3
-INhZnZ?Fd?:n;9G^9z2?fY0
+I8`hio3JY1zjHg;mf[oS_G1
 !s105 align_significands_sv_unit
 S1
 R7
-R17
+R18
 Z26 8design/align_significands.sv
 Z27 Fdesign/align_significands.sv
 L0 29
@@ -195,45 +200,22 @@ R13
 R14
 !i113 0
 R15
+R16
 R3
 Xalign_significands_sv_unit
 R5
-VU<T?7>_PeE;I_gEFE9UUX0
+V94[QcgC6LGH7ac5eziCA]2
 r1
 !s85 0
 !i10b 1
 !s100 E[4meCWSFlKj3M0cLWknf2
-IU<T?7>_PeE;I_gEFE9UUX0
+I94[QcgC6LGH7ac5eziCA]2
 !i103 1
 S1
 R7
-R17
+R18
 R26
 R27
-R20
-R11
-31
-R12
-R13
-R14
-!i113 0
-R15
-R3
-vcompare_exponents
-R5
-DXx4 work 25 compare_exponents_sv_unit 0 22 3Nl<]ET44;>TESW`be<`n0
-R6
-r1
-!s85 0
-!i10b 1
-!s100 zYNM02:SfVcn==]^A6WOL1
-IUGNG7F5VYMIYbadDfK_S01
-!s105 compare_exponents_sv_unit
-S1
-R7
-R8
-Z28 8design/compare_exponents.sv
-Z29 Fdesign/compare_exponents.sv
 R21
 R11
 31
@@ -242,15 +224,41 @@ R13
 R14
 !i113 0
 R15
+R16
+R3
+vcompare_exponents
+R5
+DXx4 work 25 compare_exponents_sv_unit 0 22 Ef5dbO4[;=m2I57?nQ5W=2
+R6
+r1
+!s85 0
+!i10b 1
+!s100 zYNM02:SfVcn==]^A6WOL1
+IHeY:dJK_Pg[J8GhZ0F0390
+!s105 compare_exponents_sv_unit
+S1
+R7
+R8
+Z28 8design/compare_exponents.sv
+Z29 Fdesign/compare_exponents.sv
+R22
+R11
+31
+R12
+R13
+R14
+!i113 0
+R15
+R16
 R3
 Xcompare_exponents_sv_unit
 R5
-V3Nl<]ET44;>TESW`be<`n0
+VEf5dbO4[;=m2I57?nQ5W=2
 r1
 !s85 0
 !i10b 1
 !s100 o[PQP^E@=5a`L?_OIPWVW2
-I3Nl<]ET44;>TESW`be<`n0
+IEf5dbO4[;=m2I57?nQ5W=2
 !i103 1
 S1
 R7
@@ -265,16 +273,17 @@ R13
 R14
 !i113 0
 R15
+R16
 R3
 vcomplement
 R5
-DXx4 work 18 complement_sv_unit 0 22 dgkla0`9;aJVU]zVmCVFm0
+DXx4 work 18 complement_sv_unit 0 22 ZJQac2:48>N36bM]ae<[e2
 R6
 r1
 !s85 0
 !i10b 1
 !s100 <Hg5afJZlWHi4i29VkGCC0
-IBljmnB0NJZFo8@R9jNFY03
+IfE3hCb46GfKLWz6ZN7dIe2
 !s105 complement_sv_unit
 S1
 R7
@@ -289,15 +298,16 @@ R13
 R14
 !i113 0
 R15
+R16
 R3
 Xcomplement_sv_unit
 R5
-Vdgkla0`9;aJVU]zVmCVFm0
+VZJQac2:48>N36bM]ae<[e2
 r1
 !s85 0
 !i10b 1
 !s100 W>nAX9IlXWR5eWCbM=YIh3
-Idgkla0`9;aJVU]zVmCVFm0
+IZJQac2:48>N36bM]ae<[e2
 !i103 1
 S1
 R7
@@ -312,16 +322,17 @@ R13
 R14
 !i113 0
 R15
+R16
 R3
 vconcat_1
 R5
-DXx4 work 16 concat_1_sv_unit 0 22 V57MOTPbH88hVn?:GHM3g1
+DXx4 work 16 concat_1_sv_unit 0 22 Y][0>GoIUK7bF`>^_3FZD2
 R6
 r1
 !s85 0
 !i10b 1
 !s100 ?=_2W^O?MIM`E2;`5@M7G2
-I76X@0:JZh7eKU4^M<oE2l0
+IfdRVnQDaL;oebA<aGA_Nn0
 !s105 concat_1_sv_unit
 S1
 R7
@@ -336,15 +347,16 @@ R13
 R14
 !i113 0
 R15
+R16
 R3
 Xconcat_1_sv_unit
 R5
-VV57MOTPbH88hVn?:GHM3g1
+VY][0>GoIUK7bF`>^_3FZD2
 r1
 !s85 0
 !i10b 1
 !s100 =JQ8A`oPgK74i>:L3]36`0
-IV57MOTPbH88hVn?:GHM3g1
+IY][0>GoIUK7bF`>^_3FZD2
 !i103 1
 S1
 R7
@@ -359,21 +371,22 @@ R13
 R14
 !i113 0
 R15
+R16
 R3
 vdenorm_zero
 R5
-DXx4 work 19 denorm_zero_sv_unit 0 22 @lUGT9i9PK9j8`bO9YheT3
+DXx4 work 19 denorm_zero_sv_unit 0 22 ]6iNLb843H60Jck:D=@O02
 DXx4 work 6 addpkg 0 22 kSP31Y;`9eT69bNBi6W>J3
 R6
 r1
 !s85 0
 !i10b 1
 !s100 _Y8Bj;7HoUDDbGhS5YKcz1
-I2jC@]_5CPBjP2m;4TCO1<1
+IUcV:kQ9Ul^X9eYf1k?Uj>1
 !s105 denorm_zero_sv_unit
 S1
 R7
-R17
+R18
 Z36 8design/denorm_zero.sv
 Z37 Fdesign/denorm_zero.sv
 L0 27
@@ -384,19 +397,20 @@ R13
 R14
 !i113 0
 R15
+R16
 R3
 Xdenorm_zero_sv_unit
 R5
-V@lUGT9i9PK9j8`bO9YheT3
+V]6iNLb843H60Jck:D=@O02
 r1
 !s85 0
 !i10b 1
 !s100 KdTmn>i5XI8SFeijmAm9i1
-I@lUGT9i9PK9j8`bO9YheT3
+I]6iNLb843H60Jck:D=@O02
 !i103 1
 S1
 R7
-R17
+R18
 R36
 R37
 L0 25
@@ -407,21 +421,22 @@ R13
 R14
 !i113 0
 R15
+R16
 R3
 verror_check
 R5
-DXx4 work 19 error_check_sv_unit 0 22 7gA0T^UcF4J9@=`fTLO2a1
-R16
+DXx4 work 19 error_check_sv_unit 0 22 m11P<>@k>H2m_]njlhbzZ2
+R17
 R6
 r1
 !s85 0
 !i10b 1
 !s100 SUW71zT=`SH>4kj;>]RfR2
-I_iFBjQLoIO=mUKUUMB81z0
+IZ:iE]2:B014c`J1=ejble2
 !s105 error_check_sv_unit
 S1
 R7
-R17
+R18
 Z38 8design/error_check.sv
 Z39 Fdesign/error_check.sv
 L0 32
@@ -432,19 +447,20 @@ R13
 R14
 !i113 0
 R15
+R16
 R3
 Xerror_check_sv_unit
 R5
-V7gA0T^UcF4J9@=`fTLO2a1
+Vm11P<>@k>H2m_]njlhbzZ2
 r1
 !s85 0
 !i10b 1
 !s100 H@WdWS3;G_Z>PLnP6AgDM3
-I7gA0T^UcF4J9@=`fTLO2a1
+Im11P<>@k>H2m_]njlhbzZ2
 !i103 1
 S1
 R7
-R17
+R18
 R38
 R39
 L0 30
@@ -455,21 +471,22 @@ R13
 R14
 !i113 0
 R15
+R16
 R3
 vfdiv_newton
 R5
-R16
-DXx4 work 19 fdiv_newton_sv_unit 0 22 _mRXQcH9;cjFe8ZZ:7[oe1
+R17
+DXx4 work 19 fdiv_newton_sv_unit 0 22 7o1fOIbYnkfZclP8H>BGP3
 R6
 r1
 !s85 0
 !i10b 1
 !s100 z0UK^7WOW1H`5iDeoI7431
-IJf2T6z9VIf@[HBo7Fjb6X1
+I=d2Jjm?f:`kl[1;YOW;C:0
 !s105 fdiv_newton_sv_unit
 S1
 R7
-R17
+R18
 Z40 8design/fdiv_newton.sv
 Z41 Fdesign/fdiv_newton.sv
 L0 3
@@ -480,20 +497,21 @@ R13
 R14
 !i113 0
 R15
+R16
 R3
 Xfdiv_newton_sv_unit
 R5
-R16
-V_mRXQcH9;cjFe8ZZ:7[oe1
+R17
+V7o1fOIbYnkfZclP8H>BGP3
 r1
 !s85 0
 !i10b 1
 !s100 Xn0[T10IVmeU:M77P[Ql02
-I_mRXQcH9;cjFe8ZZ:7[oe1
+I7o1fOIbYnkfZclP8H>BGP3
 !i103 1
 S1
 R7
-R17
+R18
 R40
 R41
 L0 1
@@ -504,6 +522,7 @@ R13
 R14
 !i113 0
 R15
+R16
 R3
 vfdiv_tb
 R5
@@ -531,15 +550,15 @@ R15
 R3
 vfind_first_1
 R5
-Z42 !s110 1623196580
+Z42 !s110 1623209928
 !i10b 1
 !s100 ]6@G?2i?zH`8gZQ<2Nd8S2
 !s11b D<YN4;ZEz]@J8e8U_7zHo1
-I1i39YPQA6Oc9?oae_g1W=0
+I>PfQ8`IO^mlLOO;M1=8bz0
 R6
 S1
 R7
-w1621820603
+w1623209479
 8design/find_first_1.sv
 Fdesign/find_first_1.sv
 L0 1
@@ -552,18 +571,44 @@ R13
 R14
 !i113 0
 R15
+R16
+R3
+vfp_multiplier
+R5
+R42
+!i10b 1
+!s100 :4L4<S8TL=JZRz;X:nQm;2
+!s11b W?I25mCJS21YC:_?_ABF]0
+IV9a`oD3>7F^Q_z44i^[2l1
+R6
+S1
+R7
+w1623209562
+8design/fp_mul.sv
+Fdesign/fp_mul.sv
+L0 1
+R11
+r1
+!s85 0
+31
+R12
+R13
+R14
+!i113 0
+R15
+R16
 R3
 Xfp_pkg
 R5
 R42
 !i10b 1
-!s100 ;JFWn`U`kH7SiSk6KL3Ee3
-!s11b XLVAB2oCC1e2c]c^K<0l;3
-I<O[6oBW[A=NK_I?Vd9^4o2
-V<O[6oBW[A=NK_I?Vd9^4o2
+!s100 TjSiMiKUSbCFR^`V`Q3S_1
+!s11b >AoMeh=_;QP9V`eO<O=g:1
+I??:XVGjz5KoIEMR=12V;z3
+V??:XVGjz5KoIEMR=12V;z3
 S1
 R7
-w1623196576
+w1623209218
 8design/fp_pkg.sv
 Fdesign/fp_pkg.sv
 L0 1
@@ -576,10 +621,36 @@ R13
 R14
 !i113 0
 R15
+R16
+R3
+vfulladder
+R5
+R42
+!i10b 1
+!s100 Jd;fh;:M:N3K@GHJBPgd53
+!s11b Noa7H9G0m_1XRdMLaO84Y2
+IN^c`BOfiH`0PWBfDKbOfO2
+R6
+S1
+R7
+w1622484932
+Z43 8design/fulladdr.sv
+Z44 Fdesign/fulladdr.sv
+L0 1
+R11
+r1
+!s85 0
+31
+R12
+R13
+R14
+!i113 0
+R15
+R16
 R3
 vFullAdder
 R5
-Z43 !s110 1622412181
+Z45 !s110 1622412181
 !i10b 1
 !s100 7OZYKKmkom8JzB9AfTF]A3
 !s11b 1S^;GmPIK<]R[nzf<_>:n3
@@ -588,8 +659,8 @@ R6
 S1
 R0
 w1621811737
-Z44 8design/fulladdr.sv
-Z45 Fdesign/fulladdr.sv
+R43
+R44
 L0 1
 R11
 r1
@@ -602,19 +673,19 @@ Z48 !s90 design/add_sigs.sv|design/add_sub_top.sv|design/addpkg.sv|design/align_
 R15
 R3
 n@full@adder
-vfulladder
+vfullsubtractor
 R5
 R42
 !i10b 1
-!s100 Jd;fh;:M:N3K@GHJBPgd53
-!s11b Noa7H9G0m_1XRdMLaO84Y2
-I@14M`XL9TT4UBRRS64n_82
+!s100 0cg3cjlAUKijXT9W71Vk?3
+Z49 !s11b QNiN=W0hJe7@fS[W_Sh2c2
+I_4CD_6eES>aD:<CjLV6=z2
 R6
 S1
 R7
-w1622484932
-R44
-R45
+w1622412267
+Z50 8design/fullsubt.sv
+Z51 Fdesign/fullsubt.sv
 L0 1
 R11
 r1
@@ -625,20 +696,21 @@ R13
 R14
 !i113 0
 R15
+R16
 R3
 vFullSubtractor
 R5
-R43
+R45
 !i10b 1
 !s100 B8[KB?IjaAce`T;R`klNk3
-Z49 !s11b QNiN=W0hJe7@fS[W_Sh2c2
+R49
 Ia<@imQN=8dD1<9ANRVK?g1
 R6
 S1
 R0
-Z50 w1621811738
-Z51 8design/fullsubt.sv
-Z52 Fdesign/fullsubt.sv
+Z52 w1621811738
+R50
+R51
 L0 1
 R11
 r1
@@ -651,19 +723,19 @@ R48
 R15
 R3
 n@full@subtractor
-vfullsubtractor
+vnbit_fulladder
 R5
 R42
 !i10b 1
-!s100 0cg3cjlAUKijXT9W71Vk?3
-R49
-I^2iXKY@LU@P9Azch0X:<U2
+!s100 _[eWAF32^TCaXX<Lz@A8G3
+!s11b ;G[g30[5<CglJn44Cllj^2
+IjjS@LQNL:B?oP2llVUjLP2
 R6
 S1
 R7
-w1622412267
-R51
-R52
+w1622412274
+Z53 8design/nbit_fulladdr.sv
+Z54 Fdesign/nbit_fulladdr.sv
 L0 1
 R11
 r1
@@ -674,10 +746,11 @@ R13
 R14
 !i113 0
 R15
+R16
 R3
 vNbit_FullAdder
 R5
-R43
+R45
 !i10b 1
 !s100 nFmg?4AA0h_M1e]_NG_a=1
 !s11b G1ege?@Leh?6fOT6;B3>?3
@@ -685,9 +758,9 @@ IYdZCbzRf0iBe@:A@JNR?b1
 R6
 S1
 R0
-R50
-Z53 8design/nbit_fulladdr.sv
-Z54 Fdesign/nbit_fulladdr.sv
+R52
+R53
+R54
 L0 1
 R11
 r1
@@ -700,19 +773,19 @@ R48
 R15
 R3
 n@nbit_@full@adder
-vnbit_fulladder
+vnbit_fullsubtractor
 R5
 R42
 !i10b 1
-!s100 _[eWAF32^TCaXX<Lz@A8G3
-!s11b ;G[g30[5<CglJn44Cllj^2
-IZO6J]HS44^5M<bcLdPjde1
+!s100 1b=9[]RQf[o56=9[8`54@0
+!s11b CZ2VPVMoD4HfSSeQ3MH8@3
+IBWnVk9ME]zZ:OHUOQ228]3
 R6
 S1
 R7
-w1622412274
-R53
-R54
+w1622412281
+Z55 8design/nbit_fullsubt.sv
+Z56 Fdesign/nbit_fullsubt.sv
 L0 1
 R11
 r1
@@ -723,10 +796,11 @@ R13
 R14
 !i113 0
 R15
+R16
 R3
 vNbit_FullSubtractor
 R5
-R43
+R45
 !i10b 1
 !s100 D26I3NI4zQUgTN;AF>baL1
 !s11b ekC9cUH4jK4BkU>Z==II:0
@@ -734,9 +808,9 @@ I^nXAU1PBMdfNPFPniYQ631
 R6
 S1
 R0
-R50
-Z55 8design/nbit_fullsubt.sv
-Z56 Fdesign/nbit_fullsubt.sv
+R52
+R55
+R56
 L0 1
 R11
 r1
@@ -749,41 +823,17 @@ R48
 R15
 R3
 n@nbit_@full@subtractor
-vnbit_fullsubtractor
-R5
-R42
-!i10b 1
-!s100 1b=9[]RQf[o56=9[8`54@0
-!s11b CZ2VPVMoD4HfSSeQ3MH8@3
-IzJhH2iV4Lz;ogVoGfVS[d3
-R6
-S1
-R7
-w1622412281
-R55
-R56
-L0 1
-R11
-r1
-!s85 0
-31
-R12
-R13
-R14
-!i113 0
-R15
-R3
 vnewton24
 R5
 R42
 !i10b 1
 !s100 4n:i^mE>A0a23_U[z7VY30
 !s11b KUfQBnPaHU_cIcX];X;lE2
-I1OYlMmRT;6=:V]DEE9AEV0
+ICShINnKW59W6jF[EZFZ1O0
 R6
 S1
 R7
-R17
+R18
 8design/newton24.sv
 Fdesign/newton24.sv
 L0 2
@@ -796,16 +846,17 @@ R13
 R14
 !i113 0
 R15
+R16
 R3
 vnormalize
 R5
-DXx4 work 17 normalize_sv_unit 0 22 ?KJAgYTBBgTfHcC[V]Z692
+DXx4 work 17 normalize_sv_unit 0 22 TWl0zDBgbnI<[REo?EzX=2
 R6
 r1
 !s85 0
 !i10b 1
 !s100 W5X[a]6MmSbkf_``_KY8U3
-IPG;>7iOSUDnjM5Agk7EfS1
+IXNQE8OOnZl73Rzg0O8WaO1
 !s105 normalize_sv_unit
 S1
 R7
@@ -820,22 +871,23 @@ R13
 R14
 !i113 0
 R15
+R16
 R3
 Xnormalize_sv_unit
 R5
-V?KJAgYTBBgTfHcC[V]Z692
+VTWl0zDBgbnI<[REo?EzX=2
 r1
 !s85 0
 !i10b 1
 !s100 EazFe<6l7kQkHc7f6VgMZ2
-I?KJAgYTBBgTfHcC[V]Z692
+ITWl0zDBgbnI<[REo?EzX=2
 !i103 1
 S1
 R7
 R8
 R57
 R58
-R20
+R21
 R11
 31
 R12
@@ -843,6 +895,7 @@ R13
 R14
 !i113 0
 R15
+R16
 R3
 vpostcomplement
 R5
@@ -850,7 +903,7 @@ R42
 !i10b 1
 !s100 AXclNG@M4E]c[3]9W7ZHM3
 !s11b o6oLzYSQQ78;YdjRKAe7=1
-I7PE@2WLY_``D>1h_OM<B^0
+I6_o==So1hHXeZ=TFf?IGF1
 R6
 S1
 R7
@@ -867,16 +920,17 @@ R13
 R14
 !i113 0
 R15
+R16
 R3
 vrounding
 R5
-DXx4 work 16 rounding_sv_unit 0 22 ]<4`EcDYMeSeVEG7Ugf<j0
+DXx4 work 16 rounding_sv_unit 0 22 mARZo<UhG4nJ`@Fg>D;1a1
 R6
 r1
 !s85 0
 !i10b 1
 !s100 FY0D3P?nHaaKn[?AB_@4H1
-ITGQ8Ekgle65oRJ_I>67le3
+IfHojA6a9zHK?hL2gI[K:c0
 !s105 rounding_sv_unit
 S1
 R7
@@ -891,15 +945,16 @@ R13
 R14
 !i113 0
 R15
+R16
 R3
 Xrounding_sv_unit
 R5
-V]<4`EcDYMeSeVEG7Ugf<j0
+VmARZo<UhG4nJ`@Fg>D;1a1
 r1
 !s85 0
 !i10b 1
 !s100 M]VWeJAh4a[PAPClS0KhK2
-I]<4`EcDYMeSeVEG7Ugf<j0
+ImARZo<UhG4nJ`@Fg>D;1a1
 !i103 1
 S1
 R7
@@ -914,6 +969,7 @@ R13
 R14
 !i113 0
 R15
+R16
 R3
 vshift_to_msb_equ_1
 R5
@@ -921,11 +977,11 @@ R42
 !i10b 1
 !s100 F4Ej>b8hch6^`aa53^JXI2
 !s11b nRDhT2D5J^EIZ<^bi>hYf1
-IfYW:]]GBA?^_gTG@k==KW2
+ILRNfDYhcH07h;QlOeXV8H0
 R6
 S1
 R7
-R17
+R18
 8design/shift.sv
 Fdesign/shift.sv
 L0 1
@@ -938,6 +994,7 @@ R13
 R14
 !i113 0
 R15
+R16
 R3
 vsign_logic
 R5
@@ -945,7 +1002,7 @@ R42
 !i10b 1
 !s100 4QR`4H6=[h:M=QUj:CMf;3
 !s11b J`H0Z5fDobYJ=OOHKT`eo3
-I^FDc7:OTRBLOm^O5fESNo3
+I]k_0>h3Wjd^_PmhD_b0WD0
 R6
 S1
 R7
@@ -962,16 +1019,17 @@ R13
 R14
 !i113 0
 R15
+R16
 R3
 vswap
 R5
-DXx4 work 12 swap_sv_unit 0 22 [O0@7[SnGB_OVDOkC3hEW3
+DXx4 work 12 swap_sv_unit 0 22 cWfOAYfn6M[>nHz:911@e3
 R6
 r1
 !s85 0
 !i10b 1
 !s100 VWVVBYYkdz^=bCAd?:jcH3
-I^62ji^REX>M4?FHkgXnGI0
+I<7^89NR>9f:[zWLdn0FEG2
 !s105 swap_sv_unit
 S1
 R7
@@ -986,15 +1044,16 @@ R13
 R14
 !i113 0
 R15
+R16
 R3
 Xswap_sv_unit
 R5
-V[O0@7[SnGB_OVDOkC3hEW3
+VcWfOAYfn6M[>nHz:911@e3
 r1
 !s85 0
 !i10b 1
 !s100 mn=b^;VPD:je7zWN=fNlL0
-I[O0@7[SnGB_OVDOkC3hEW3
+IcWfOAYfn6M[>nHz:911@e3
 !i103 1
 S1
 R7
@@ -1009,17 +1068,18 @@ R13
 R14
 !i113 0
 R15
+R16
 R3
 vtop
 R5
-R22
-DXx4 work 22 add_sub_top_tb_sv_unit 0 22 >PAQ=EQeMTz^ng:XlTYNZ2
+R17
+DXx4 work 22 add_sub_top_tb_sv_unit 0 22 [=XH^[kR@QIda`ABg2TSG0
 R6
 r1
 !s85 0
 !i10b 1
-!s100 BE6zQ2iF@l=A7=5GPVFU@1
-IYg5[mEe]OHgNmC84L4bAj1
+!s100 MKze6UKl=`:i;1z[cSR670
+IGRQ54^CTmQgT2UD;[56PO1
 !s105 add_sub_top_tb_sv_unit
 S1
 R7
@@ -1034,4 +1094,5 @@ R13
 R14
 !i113 0
 R15
+R16
 R3

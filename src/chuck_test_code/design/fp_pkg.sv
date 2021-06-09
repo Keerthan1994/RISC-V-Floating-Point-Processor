@@ -97,15 +97,15 @@ class FloatingPoint;
     }
 
     constraint rand_exp_c {
-        exponent dist {8'b0000_0000 :/ w_exp_zero, 
-        [8'b0000_0001:8'b1111_1110] :/ w_exp_reg, 
-        8'b1111_1111 :/ w_exp_max};
+        exponent dist {8'b0000_0000 :/ exp_zero_w, 
+        [8'b0000_0001:8'b1111_1110] :/ exp_reg_w, 
+        8'b1111_1111 :/ exp_max_w};
     }
 
     constraint rand_sig_c {
-        significand dist {23'h000000 :/ w_sig_zero, 
-        [23'h000001:23'h7FFFFE] :/ w_sig_reg, 
-        23'h7FFFFF :/ w_sig_max};
+        significand dist {23'h000000 :/ sig_zero_w, 
+        [23'h000001:23'h7FFFFE] :/ sig_reg_w, 
+        23'h7FFFFF :/ sig_max_w};
     }
 
     // -- CLASS METHODS --

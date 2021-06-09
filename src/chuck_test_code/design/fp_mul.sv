@@ -5,7 +5,7 @@ module fp_multiplier(
   strb_B,
   out_prod_ack,
   clk,
-  reset,
+  reset_n,
   output_prod,
   output_prod_stb,
   in_A_ack,
@@ -13,14 +13,14 @@ module fp_multiplier(
 );
   
   input clk;
-  input reset;
+  input reset_n;
   
   input [31:0] in_A ;
   input strb_A;
   output in_A_ack;
   
   input [31:0] in_B ;
-  input strb_b;
+  input strb_B;
   output in_B_ack;
   
   output output_prod;
@@ -34,21 +34,21 @@ module fp_multiplier(
   reg s_in_b_ack;
   
   
-  reg state [3:0];
+  reg [3:0] state;
   
-  parameter get_A = 4'b0000;
-            get_B = 4'b0001;
-            unpack =  4'b0010;
-  			special_case = 4'b0011;
-  			normalise_A = 4'b0100;
-  			normalise_B = 4'b0101;
-  			multiply_0 = 4'b0110;
-            multiply_1 = 4'b0111;
-  			normalise_1 = 4'b1000;
-  			normalise_2 = 4'b1001;
-  			round = 4'b1010;
-            pack = 4'b1011;
-  			putz = 4'b1100;
+  parameter get_A = 4'b0000,
+            get_B = 4'b0001,
+            unpack =  4'b0010,
+            special_case = 4'b0011,
+            normalise_A = 4'b0100,
+            normalise_B = 4'b0101,
+            multiply_0 = 4'b0110,
+            multiply_1 = 4'b0111,
+            normalise_1 = 4'b1000,
+            normalise_2 = 4'b1001,
+            round = 4'b1010,
+            pack = 4'b1011,
+            putz = 4'b1100;
   
   
   
@@ -56,8 +56,9 @@ module fp_multiplier(
   reg [23:0] x_m,y_m,z_m;
   reg [9:0] x_e,y_e,z_e;
   reg x_s,y_s,z_s;
-  reg gaurd, round_bit, sticky;
+  reg guard, round_bit, sticky;
   reg [49:0] prod;
+
   
   
   always@(posedge clk) begin
@@ -86,21 +87,22 @@ module fp_multiplier(
     end
     
     unpack:
-      x_m <= x[22:0];
-      y_m <= y[22:0];
-  	  x_e <= x[30:23] - 127;
-   	  y_e <= y[30:23] - 127;
-      x_s <= x[31]
-      y_s <= y[31]
-      state <= special_case;
-    end
+        begin
+            x_m <= x[22:0];
+            y_m <= y[22:0];
+            x_e <= x[30:23] - 127;
+            y_e <= y[30:23] - 127;
+            x_s <= x[31];
+            y_s <= y[31];
+            state <= special_case;
+        end
     
     
     special_case:
       begin
         
     // if x and y are not a number return NaN
-        if(x_e == 128 && x_m != 0) || (y_e == 128 && y_m != 0) begin
+        if((x_e == 128 && x_m != 0) || (y_e == 128 && y_m != 0)) begin
           z[31] <= 1;
           z[30:23] <= 255;
           z[22] <= 0;
@@ -158,7 +160,7 @@ module fp_multiplier(
           end else begin
             y_m[23] <= 1;
           end
-          state <= normalise_a;
+          state <= normalise_A;
         end
       end
           
@@ -255,10 +257,10 @@ module fp_multiplier(
         state <= putz;
       end
 
-      put_z:
+      putz:
       begin
         s_outprod_stb <= 1;
-        s_output_z <= z;
+        s_out_prod <= z;
         if (s_outprod_stb && out_prod_ack) begin
           s_outprod_stb <= 0;
           state <= get_A;
@@ -267,7 +269,7 @@ module fp_multiplier(
 
     endcase
 
-    if (rst == 1) begin
+    if (!reset_n) begin
       state <= get_A;
       s_in_a_ack <= 0;
       s_in_b_ack <= 0;

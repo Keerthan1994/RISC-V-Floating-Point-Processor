@@ -35,6 +35,18 @@ logic [25:0] reg_x;     // Partial Product Output for Debugging
 opcode_t opc;           // opcode
 o_err_t err_o_div;
 
+// MUL Signals
+logic reset_n;              // Reset active low signal
+logic [31:0] in_A ;         // 32 Bit FP operand A.
+logic strb_A;               // Asserted to module when input A is valid
+logic in_A_ack;             // Asserted by module when input A is received
+logic [31:0] in_B ;         // 32 Bit FP operan
+logic strb_B;               // Asserted to module when input A is valid
+logic in_B_ack;             // Asserted by module when input A is received
+logic output_prod;          // Output produce
+logic output_prod_stb;      // Asserted when output is valid
+logic out_prod_ack;         // probably not required.
+
 // Verification Signals
 FloatingPoint op1, op2, out, exp;
 
@@ -45,9 +57,10 @@ bit err;
 initial 
     forever #10 clk = ~clk;
 
-// Instantiate ADD/SUB Module
+// Instantiate FP Modules
 add_sub_top ast0 (.*);
 fdiv_newton fdiv0 (.*, .err_o(err_o_div));
+fp_multiplier fmul0 (.*);
 
 initial begin
     op1 = new();
@@ -59,7 +72,10 @@ initial begin
     op2_case = op2_case.first;
     sign_tc = '0;
 
-// FULL ADD/SUB TEST
+///////////////////////
+// FULL ADD/SUB TEST //
+///////////////////////
+
 // FIXME: Need to implement multiply and divide in this later.
 // and need to change opcode handling.
 // do begin
@@ -93,59 +109,120 @@ initial begin
 //     op1_case = op1_case.next;
 // end while(op1_case != op1_case.first);
 
-// DIV Test
+// //////////////
+// // DIV Test //
+// //////////////
 
-//clk
-clk = 1'b0;
-// assert reset
-rstn = 1'b0;
-#10 rstn = 1'b1;
-ena = 1'b0;
-fdiv = 1'b0;
-rm = 2'b0;
-sign_tc = 0;
-opc = DIV;
+//     clk = 1'b0;
+//     // assert reset
+//     rstn = 1'b0;
+//     #10 rstn = 1'b1;
+//     ena = 1'b0;
+//     fdiv = 1'b0;
+//     rm = 2'b0;
+//     sign_tc = 0;
+//     opc = DIV;
 
-do begin
+//     do begin
+//         do begin
+//             for (sign_tc = 0; sign_tc < 4; sign_tc++) begin
+//                 for (int i = 0; i < NTESTS; i++) begin
+//                     if (opc == DIV) begin
+//                         ena = 1'b1;
+//                         fdiv = 1'b1;
+//                     end else begin
+//                         ena = 1'b0;
+//                         fdiv = 1'b0;
+//                     end
+//                     generateTestCase(op1, op2, exp, op1_case, op2_case, sign_tc[1], sign_tc[0], opc);
+//                     sign1 = op1.getSign();
+//                     sign2 = op2.getSign();
+//                     exp1 = op1.getExponent();
+//                     exp2 = op2.getExponent();
+//                     sig1 = op1.getSignificand();
+//                     sig2 = op2.getSignificand();
+//                     wait(!busy);
+//                     a = {sign1, exp1, sig1};
+//                     b = {sign2, exp2, sig2};
+
+//                     #300;
+//                     wait(!busy);
+//                     out.setBits(s);
+//                     checkResults(op1, op2, out, exp, opc, err);
+//                     if (err) begin 
+//                         err_count += 1;
+//                         $display("EXP: %0b", exp.bitsToString);
+//                         $display("OUT: %0b", out.bitsToString);
+//                     end
+//                     checkErrorCode(exp, err_o);
+//                     test_count += 1;
+//                     // singleTestCase(op1, op2, exp, out, opcode, sign1, sign2, exp1, exp2, sig1, sig2, fp_out, err_o, op1_case, op2_case, sign_tc[2], sign_tc[1], sign_tc[0]);
+//                 end
+//             end
+//             op2_case = op2_case.next;
+//         end while(op2_case != op2_case.first);
+//         op1_case = op1_case.next;
+//     end while(op1_case != op1_case.first);
+
+
+//////////////
+// MUL Test //
+//////////////
+
+    clk = 1'b0;
+    // assert reset
+    reset_n = 1'b0;
+    #10 reset_n = 1'b1;
+    opc = MUL;
+
+
     do begin
-        for (sign_tc = 0; sign_tc < 4; sign_tc++) begin
-            for (int i = 0; i < NTESTS; i++) begin
-                if (opc == DIV) begin
-                    ena = 1'b1;
-                    fdiv = 1'b1;
-                end else begin
-                    ena = 1'b0;
-                    fdiv = 1'b0;
-                end
-                generateTestCase(op1, op2, exp, op1_case, op2_case, sign_tc[1], sign_tc[0], opc);
-                sign1 = op1.getSign();
-                sign2 = op2.getSign();
-                exp1 = op1.getExponent();
-                exp2 = op2.getExponent();
-                sig1 = op1.getSignificand();
-                sig2 = op2.getSignificand();
-                wait(!busy);
-                a = {sign1, exp1, sig1};
-                b = {sign2, exp2, sig2};
+        do begin
+            for (sign_tc = 0; sign_tc < 4; sign_tc++) begin
+                for (int i = 0; i < NTESTS; i++) begin
+                    $display("Generating Test Case");
+                    generateTestCase(op1, op2, exp, op1_case, op2_case, sign_tc[1], sign_tc[0], opc);
+                    sign1 = op1.getSign();
+                    sign2 = op2.getSign();
+                    exp1 = op1.getExponent();
+                    exp2 = op2.getExponent();
+                    sig1 = op1.getSignificand();
+                    sig2 = op2.getSignificand();
+                    in_A = {sign1, exp1, sig1};
+                    in_B = {sign2, exp2, sig2};
+                    #1;
+                    $display("Setting Strobe Signals");
+                    strb_A = 1'b1;
+                    strb_B = 1'b1;
+                    repeat (1) @(negedge clk);
+                    strb_A = 1'b0;
+                    strb_B = 1'b0;
 
-                #300;
-                wait(!busy);
-                out.setBits(s);
-                checkResults(op1, op2, out, exp, opc, err);
-                if (err) begin 
-                    err_count += 1;
-                    $display("EXP: %0b", exp.bitsToString);
-                    $display("OUT: %0b", out.bitsToString);
+                    #300;
+                    $display("Waiting for output strobe");
+                    wait(output_prod_stb);
+                    $display("Finished waiting, setting out");
+                    out.setBits(output_prod);
+                    out_prod_ack = 1'b1;
+                    repeat (1) @(negedge clk);
+                    out_prod_ack = 1'b0;
+                    $display("Checking Results");
+                    checkResults(op1, op2, out, exp, opc, err);
+                    if (err) begin 
+                        err_count += 1;
+                        $display("EXP: %0b", exp.bitsToString);
+                        $display("OUT: %0b", out.bitsToString);
+                    end
+                    $display("Checking Error Code");
+                    checkErrorCode(exp, err_o);
+                    test_count += 1;
+                    // singleTestCase(op1, op2, exp, out, opcode, sign1, sign2, exp1, exp2, sig1, sig2, fp_out, err_o, op1_case, op2_case, sign_tc[2], sign_tc[1], sign_tc[0]);
                 end
-                checkErrorCode(exp, err_o);
-                test_count += 1;
-                // singleTestCase(op1, op2, exp, out, opcode, sign1, sign2, exp1, exp2, sig1, sig2, fp_out, err_o, op1_case, op2_case, sign_tc[2], sign_tc[1], sign_tc[0]);
             end
-        end
-        op2_case = op2_case.next;
-    end while(op2_case != op2_case.first);
-    op1_case = op1_case.next;
-end while(op1_case != op1_case.first);
+            op2_case = op2_case.next;
+        end while(op2_case != op2_case.first);
+        op1_case = op1_case.next;
+    end while(op1_case != op1_case.first);
 
 
     $finish();
