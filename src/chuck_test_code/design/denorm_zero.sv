@@ -26,7 +26,7 @@ parameter SIG_BITS = 23;
 parameter EXP_BITS = 8;
 module denorm_zero (complement, exp1, exp2, sig1, sig2, n_concat, nz_op, exp1_d, exp2_d, err);
 
-import addpkg::*;
+import fp_pkg::*;
 
 input complement;
 input [EXP_BITS-1:0] exp1, exp2;
