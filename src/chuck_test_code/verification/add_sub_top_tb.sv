@@ -235,6 +235,9 @@ if (op_arg == "ALL") begin
         `ifdef CORNERCASES
             testCornerCases();
         `endif
+        `ifdef RANDCASES
+            testRandCases();
+        `endif
         opc = opc.next;
     end while(opc != opc.first);
 end else begin
