@@ -31,7 +31,8 @@ module add_sub_top(opcode, sign1, exp1, sig1, sign2, exp2, sig2, fp_out, err_o);
     input logic [SIG_BITS-1:0] sig1, sig2;
     input logic sign1, sign2;
     output logic [SIG_BITS+EXP_BITS:0] fp_out;
-    output logic [2:0] err_o;
+    // output logic [2:0] err_o;
+    output o_err_t err_o;
 
     // Connection Wires
     i_err_t err_i;
