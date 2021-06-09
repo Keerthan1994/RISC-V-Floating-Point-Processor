@@ -129,6 +129,7 @@ module top;
 					for(sign_tc = 0; sign_tc < 4; sign_tc++) begin
 						for(int i=0; i<NTEST; i++) begin
 							divideTestCaseGenerator(op1_case, op2_case, sign_tc[1], sign_tc[0], choice);
+                        end
 					end
 				end
 				op2_case = op2_case.next;
