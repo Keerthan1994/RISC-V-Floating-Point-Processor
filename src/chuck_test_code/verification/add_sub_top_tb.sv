@@ -16,7 +16,6 @@ logic [EXP_BITS-1:0] exp1, exp2;
 logic [SIG_BITS-1:0] sig1, sig2;
 logic opcode;
 logic [EXP_BITS+SIG_BITS:0] fp_out;
-// logic [2:0] err_o;
 o_err_t err_o;
 int err_count, test_count;
 
