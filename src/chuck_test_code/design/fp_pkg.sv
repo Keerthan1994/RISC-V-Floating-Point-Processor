@@ -2,24 +2,27 @@ package fp_pkg;
 
 parameter SIG_BITS = 23;
 parameter EXP_BITS = 8;
+
 //////////////////////
 // Enumerated Types //
 //////////////////////
 
-// Special Cases For Input Operands
+// Internal Error Codes and Flags
 typedef enum logic [2:0] {
     NO_ERR, ZERO_ERR, ZERO_OP_ERR, NAN_ERR, INF_ERR
 } i_err_t;
 
-// Error Codes
+// Output Error Codes
 typedef enum logic [2:0] {
     NONE, INVALID, DIVBYZERO, OVERFLOW, UNDERFLOW, INEXACT
 } o_err_t;
 
+// Special Test Cases
 typedef enum logic [2:0] {
     REG, NAN, INF, ZERO, DENORM, MAX, NORMMIN, DENORMMIN
 } fp_case_t;
 
+// Operation Codes
 typedef enum logic[1:0] {
     ADD, SUB, MUL, DIV
 } opcode_t;
@@ -33,18 +36,20 @@ typedef struct packed {
     logic sign;
     logic [EXP_BITS-1:0] exponent;
     logic [SIG_BITS-1:0] significand;
-} ieee754_sp_t;                 // Breaks the 32-bit short real into bits
+} ieee754_sp_t; // Breaks the 32-bit short real into bits
 
 // Generic floating point type to use for unpacking
 typedef union {
-    logic [EXP_BITS+SIG_BITS:0] bits;          // Shortreal (32 bit) Float value
-    ieee754_sp_t unpkg;      // Single Precision Floating Point Unpacked
+    logic [EXP_BITS+SIG_BITS:0] bits; // Shortreal (32 bit) Float value
+    ieee754_sp_t unpkg; // Single Precision Floating Point Unpacked
 } fp_t;
+
 
 /////////////////////////
 // Classes and Objects //
 /////////////////////////
 
+class FloatingPoint;
 
 // Using this class:
 // 1. Create FloatingPoint Objects for OP1, OP2, and OUT and EXP.
@@ -54,8 +59,6 @@ typedef union {
 // 4. Feed the machine OP1.sign, OP1.exponent, OP1.significand, etc. Also for OP2.
 // 5. Use OUT.setBits(machine_output) and feed it the machine output to set the OUT value.
 // 6. Use OUT.equals(EXP) to see if they are the same!
-
-class FloatingPoint;
 
     local fp_t fp;
     local rand bit sign;
@@ -288,27 +291,13 @@ endclass
 // External Functions and Tasks //
 //////////////////////////////////
 
-// Note: With the implementation of the class object for FloatingPoint and its 
-// associated methods, many of the functions below have been phased out. We are keeping
-// them here for posterity, and also for usefulness in case we need to do something
-// specific.
 
-// -- FPU Testing Functions and Tasks --
-
-// MAIN TEST TASK
-//  Foreach op1 = fp_case_t: 
-//      foreach op2 = fp_case_t: 
-//          for {opcode, op1_sign, op2_sign} = 0-7: 
-//              for 0-N tests: 
-//                  generate op1, op2, and test output with expected. 
-//                  Check Error Code.
-
-task automatic generateTestCase(
+// This task will generate two operands of the type op_case_t, and calculate the
+// expected value given the opcode and the signs of each operand.
+task automatic generateCornerCase(
     input FloatingPoint op1, op2, exp,
     input fp_case_t op1_case, op2_case, bit op1_sign, op2_sign, opcode_t opcode
     );
-// This task will generate two operands of the type op_case_t, and calculate the
-// expected value given the opcode and the signs of each operand.
 
     //pass by ref for operand1, 2, expected result and actual output
     //FloatingPoint op1, op2, exp, out;
@@ -330,6 +319,21 @@ task automatic generateTestCase(
     endcase
 endtask
 
+task automatic generateRandCase(
+    input FloatingPoint op1, op2, exp, opcode_t opcode
+    );
+
+    op1.generateRandom();
+    op2.generateRandom();
+    
+    //get the expected result for each operation
+    unique case (opcode)
+        ADD: exp.setSR(op1.getSR + op2.getSR);
+        SUB: exp.setSR(op1.getSR - op2.getSR);
+        MUL: exp.setSR(op1.getSR * op2.getSR);
+        DIV: exp.setSR(op1.getSR / op2.getSR);
+    endcase
+endtask
 
 task automatic checkResults(
     input FloatingPoint op1, op2, out, exp, opcode_t opcode,

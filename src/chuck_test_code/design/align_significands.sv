@@ -38,7 +38,7 @@ logic guard, round, sticky;
 
 always_comb begin
     if (shift > 3) begin
-        sticky = |(sig2 << (27-shift-1));
+        sticky = |(sig2 << ((SIG_BITS+4)-shift-1));
     end 
 
     sig2_aligned = sig2 >> shift;     // First shift brings hidden bit into significand (combinational)
