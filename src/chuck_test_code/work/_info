@@ -10,146 +10,161 @@ z2
 cModel Technology
 Z0 d/home/cfaber/common/Documents/ECE571/RISC-V-Floating-Point-Processor/src/design/chuck_test_code
 T_opt
-!s110 1622429751
-VdZB^JjR44znYVECK_O:Ng2
+!s110 1623267765
+Vlnn:??K<D:IA?7PJ@e^F[0
 Z1 04 3 4 work top fast 0
-=1-5254006cf05e-60b45036-e6aad-526f
-Z2 o-quiet -auto_acc_if_foreign -work work
-Z3 tCvgOpt 0
+=1-5254006cf05e-60c119b5-64908-dd25
+o-quiet -auto_acc_if_foreign -work work -g OP=1
+Z2 tCvgOpt 0
 n@_opt
-Z4 OL;O;2019.2_1;69
+Z3 OL;O;2019.2_1;69
 R0
 T_opt1
-!s110 1623264017
-VXYdUDELm8l4oDmLcz@`Gc0
+!s110 1623270328
+V3P:aY?QaHlmfj9Gj5lmkJ0
 R1
-=1-5254006cf05e-60c10b11-6e846-9150
+=1-5254006cf05e-60c123b8-6d0d3-1f84
+o-quiet -auto_acc_if_foreign -work work
 R2
-R3
 n@_opt1
-R4
+R3
+T_opt2
+!s110 1623267428
+Vj10BU@_c6DEA@?LTX8MCk2
+R1
+=1-5254006cf05e-60c11863-de365-d6c7
+o-quiet -auto_acc_if_foreign -work work -g OP=SUB
+R2
+n@_opt2
+R3
+R0
 vadd_significands
-Z5 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
-DXx4 work 16 add_sigs_sv_unit 0 22 7UUPnGW?KOD1PlEgXJd=z3
-Z6 VDg1SIo80bB@j0V0VzS_@n1
+Z4 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
+DXx4 work 16 add_sigs_sv_unit 0 22 1m@N:eE=z]EldQkGFH=UQ3
+Z5 VDg1SIo80bB@j0V0VzS_@n1
 r1
 !s85 0
 !i10b 1
 !s100 ca^PgIVgRN:EWNMS3`dP^3
-IXcGoK0HC1TaVkl<80N8733
+ITJ9QWJJMFN25:9884I0_20
 !s105 add_sigs_sv_unit
 S1
-Z7 d/home/cfaber/common/Documents/ECE571/RISC-V-Floating-Point-Processor/src/chuck_test_code
-Z8 w1623036206
-Z9 8design/add_sigs.sv
-Z10 Fdesign/add_sigs.sv
+Z6 d/home/cfaber/common/Documents/ECE571/RISC-V-Floating-Point-Processor/src/chuck_test_code
+Z7 w1623036206
+Z8 8design/add_sigs.sv
+Z9 Fdesign/add_sigs.sv
 L0 4
-Z11 OL;L;2019.2_1;69
+Z10 OL;L;2019.2_1;69
 31
-Z12 !s108 1623264009.000000
-Z13 !s107 verification/add_sub_top_tb.sv|design/swap.sv|design/sign_logic.sv|design/shift.sv|design/rounding.sv|design/postcomplement.sv|design/normalize.sv|design/newton24.sv|design/nbit_fullsubt.sv|design/nbit_fulladdr.sv|design/fullsubt.sv|design/fulladdr.sv|design/fp_pkg.sv|design/fp_mul.sv|design/find_first_1.sv|design/fdiv_newton.sv|design/error_check.sv|design/denorm_zero.sv|design/concat_1.sv|design/complement.sv|design/compare_exponents.sv|design/align_significands.sv|design/add_sub_top.sv|design/add_sigs.sv|
-Z14 !s90 design/add_sigs.sv|design/add_sub_top.sv|design/align_significands.sv|design/compare_exponents.sv|design/complement.sv|design/concat_1.sv|design/denorm_zero.sv|design/error_check.sv|design/fdiv_newton.sv|design/find_first_1.sv|design/fp_mul.sv|design/fp_pkg.sv|design/fulladdr.sv|design/fullsubt.sv|design/nbit_fulladdr.sv|design/nbit_fullsubt.sv|design/newton24.sv|design/normalize.sv|design/postcomplement.sv|design/rounding.sv|design/shift.sv|design/sign_logic.sv|design/swap.sv|verification/add_sub_top_tb.sv|-lint=full|
+Z11 !s108 1623270318.000000
+Z12 !s107 verification/add_sub_top_tb.sv|design/swap.sv|design/sign_logic.sv|design/shift.sv|design/rounding.sv|design/postcomplement.sv|design/normalize.sv|design/newton24.sv|design/nbit_fullsubt.sv|design/nbit_fulladdr.sv|design/fullsubt.sv|design/fulladdr.sv|design/fp_pkg.sv|design/fp_mul.sv|design/find_first_1.sv|design/fdiv_newton.sv|design/error_check.sv|design/denorm_zero.sv|design/concat_1.sv|design/complement.sv|design/compare_exponents.sv|design/align_significands.sv|design/add_sub_top.sv|design/add_sigs.sv|
+Z13 !s90 design/add_sigs.sv|design/add_sub_top.sv|design/align_significands.sv|design/compare_exponents.sv|design/complement.sv|design/concat_1.sv|design/denorm_zero.sv|design/error_check.sv|design/fdiv_newton.sv|design/find_first_1.sv|design/fp_mul.sv|design/fp_pkg.sv|design/fulladdr.sv|design/fullsubt.sv|design/nbit_fulladdr.sv|design/nbit_fullsubt.sv|design/newton24.sv|design/normalize.sv|design/postcomplement.sv|design/rounding.sv|design/shift.sv|design/sign_logic.sv|design/swap.sv|verification/add_sub_top_tb.sv|-lint=full|+define+RANDCASES|
 !i113 0
-Z15 o-lint=full -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
-R3
+Z14 o-lint=full -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+Z15 !s92 -lint=full +define+RANDCASES -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R2
 Xadd_sigs_sv_unit
-R5
-V7UUPnGW?KOD1PlEgXJd=z3
+R4
+V1m@N:eE=z]EldQkGFH=UQ3
 r1
 !s85 0
 !i10b 1
 !s100 UndHiN7P24`kjQ>Pm?gcP3
-I7UUPnGW?KOD1PlEgXJd=z3
+I1m@N:eE=z]EldQkGFH=UQ3
 !i103 1
 S1
+R6
 R7
 R8
 R9
-R10
 L0 2
-R11
+R10
 31
+R11
 R12
 R13
-R14
 !i113 0
+R14
 R15
-R3
+R2
 vadd_sub_top
+R4
+Z16 DXx4 work 6 fp_pkg 0 22 47F99Rg=k@UlXCdXj=B9e0
+DXx4 work 19 add_sub_top_sv_unit 0 22 `G6^EL;]jQ7QcTNP8G=[?3
 R5
-Z16 DXx4 work 6 fp_pkg 0 22 V8@H:>IJhOHUl7_VT5=;`2
-DXx4 work 19 add_sub_top_sv_unit 0 22 PHdIafo1kSDlQ`EWLd:jT2
-R6
 r1
 !s85 0
 !i10b 1
 !s100 e1ZGG@0[94fO<^A>2[fli3
-Icj`<kHZ_SAIlW1iOolYcP0
+IWMchThJCl5X^6>mT4>c<C2
 !s105 add_sub_top_sv_unit
 S1
-R7
+R6
 Z17 w1623264005
 Z18 8design/add_sub_top.sv
 Z19 Fdesign/add_sub_top.sv
 Z20 L0 26
-R11
+R10
 31
+R11
 R12
 R13
-R14
 !i113 0
+R14
 R15
-R3
+R2
 Xadd_sub_top_sv_unit
-R5
+R4
 R16
-VPHdIafo1kSDlQ`EWLd:jT2
+V`G6^EL;]jQ7QcTNP8G=[?3
 r1
 !s85 0
 !i10b 1
 !s100 OP7D1H91oZoF<cDG0f]l]0
-IPHdIafo1kSDlQ`EWLd:jT2
+I`G6^EL;]jQ7QcTNP8G=[?3
 !i103 1
 S1
-R7
+R6
 R17
 R18
 R19
 Z21 L0 23
-R11
+R10
 31
+R11
 R12
 R13
-R14
 !i113 0
+R14
 R15
-R3
+R2
 Xadd_sub_top_tb_sv_unit
-R5
+R4
 R16
-VR1YH]GYCod<zi@3CL9<CF0
+VCLk9RHOLbZ9U5G[987Dz73
 r1
 !s85 0
 !i10b 1
-!s100 B2hLfTcSgkLbGH<G_QaX41
-IR1YH]GYCod<zi@3CL9<CF0
+!s100 NOT0jAY0[J93B9@hmV6;71
+ICLk9RHOLbZ9U5G[987Dz73
 !i103 1
 S1
-R7
-Z22 w1623261092
+R6
+Z22 w1623270316
 Z23 8verification/add_sub_top_tb.sv
 Z24 Fverification/add_sub_top_tb.sv
 L0 1
-R11
+R10
 31
+R11
 R12
 R13
-R14
 !i113 0
+R14
 R15
-R3
+R2
 Xaddpkg
-R5
+R4
 !s110 1623036422
 !i10b 1
 !s100 n3O9oGfHEdm6ZB_h>F@KI0
@@ -157,12 +172,12 @@ R5
 IkSP31Y;`9eT69bNBi6W>J3
 VkSP31Y;`9eT69bNBi6W>J3
 S1
-R7
+R6
 w1623036418
 8design/addpkg.sv
 Fdesign/addpkg.sv
 L0 1
-R11
+R10
 r1
 !s85 0
 31
@@ -170,356 +185,370 @@ r1
 !s107 verification/add_sub_top_tb.sv|design/swap.sv|design/sign_logic.sv|design/rounding.sv|design/postcomplement.sv|design/normalize.sv|design/nbit_fullsubt.sv|design/nbit_fulladdr.sv|design/fullsubt.sv|design/fulladdr.sv|design/find_first_1.sv|design/error_check.sv|design/denorm_zero.sv|design/concat_1.sv|design/complement.sv|design/compare_exponents.sv|design/align_significands.sv|design/add_sub_top.sv|design/add_sigs.sv|design/addpkg.sv|
 !s90 design/addpkg.sv|design/add_sigs.sv|design/add_sub_top.sv|design/align_significands.sv|design/compare_exponents.sv|design/complement.sv|design/concat_1.sv|design/denorm_zero.sv|design/error_check.sv|design/find_first_1.sv|design/fulladdr.sv|design/fullsubt.sv|design/nbit_fulladdr.sv|design/nbit_fullsubt.sv|design/normalize.sv|design/postcomplement.sv|design/rounding.sv|design/sign_logic.sv|design/swap.sv|verification/add_sub_top_tb.sv|-lint=full|
 !i113 0
-R15
-R3
+R14
+R2
 valign_significands
+R4
+DXx4 work 26 align_significands_sv_unit 0 22 J[8UGLYU`KUQ^LmIcedWJ0
 R5
-DXx4 work 26 align_significands_sv_unit 0 22 U<T?7>_PeE;I_gEFE9UUX0
-R6
 r1
 !s85 0
 !i10b 1
 !s100 W>1U7WiDD20UEfz6c`KU^0
-In8d2IV`YEB1mBoa5j?_DE1
+IWW@n;XFe;enn1>z4S9Y?H1
 !s105 align_significands_sv_unit
 S1
-R7
+R6
 Z25 w1623256772
 Z26 8design/align_significands.sv
 Z27 Fdesign/align_significands.sv
 L0 29
-R11
+R10
 31
+R11
 R12
 R13
-R14
 !i113 0
+R14
 R15
-R3
+R2
 Xalign_significands_sv_unit
-R5
-VU<T?7>_PeE;I_gEFE9UUX0
+R4
+VJ[8UGLYU`KUQ^LmIcedWJ0
 r1
 !s85 0
 !i10b 1
 !s100 E[4meCWSFlKj3M0cLWknf2
-IU<T?7>_PeE;I_gEFE9UUX0
+IJ[8UGLYU`KUQ^LmIcedWJ0
 !i103 1
 S1
-R7
+R6
 R25
 R26
 R27
 R20
-R11
+R10
 31
+R11
 R12
 R13
-R14
 !i113 0
+R14
 R15
-R3
+R2
 vcompare_exponents
+R4
+DXx4 work 25 compare_exponents_sv_unit 0 22 P=daf6M]a34oWH8Jn`bG;3
 R5
-DXx4 work 25 compare_exponents_sv_unit 0 22 3Nl<]ET44;>TESW`be<`n0
-R6
 r1
 !s85 0
 !i10b 1
 !s100 zYNM02:SfVcn==]^A6WOL1
-IUGNG7F5VYMIYbadDfK_S01
+I:FAO^0[nc_zL^^NgPM4[g3
 !s105 compare_exponents_sv_unit
 S1
+R6
 R7
-R8
 Z28 8design/compare_exponents.sv
 Z29 Fdesign/compare_exponents.sv
 R21
-R11
+R10
 31
+R11
 R12
 R13
-R14
 !i113 0
+R14
 R15
-R3
+R2
 Xcompare_exponents_sv_unit
-R5
-V3Nl<]ET44;>TESW`be<`n0
+R4
+VP=daf6M]a34oWH8Jn`bG;3
 r1
 !s85 0
 !i10b 1
 !s100 o[PQP^E@=5a`L?_OIPWVW2
-I3Nl<]ET44;>TESW`be<`n0
+IP=daf6M]a34oWH8Jn`bG;3
 !i103 1
 S1
+R6
 R7
-R8
 R28
 R29
 L0 21
-R11
+R10
 31
+R11
 R12
 R13
-R14
 !i113 0
+R14
 R15
-R3
+R2
 vcomplement
+R4
+DXx4 work 18 complement_sv_unit 0 22 jj3BfVbBm_I]Plg=<njM`2
 R5
-DXx4 work 18 complement_sv_unit 0 22 dgkla0`9;aJVU]zVmCVFm0
-R6
 r1
 !s85 0
 !i10b 1
 !s100 <Hg5afJZlWHi4i29VkGCC0
-IBljmnB0NJZFo8@R9jNFY03
+I:G@G93SU@F:>NoPThoGhQ2
 !s105 complement_sv_unit
 S1
+R6
 R7
-R8
 Z30 8design/complement.sv
 Z31 Fdesign/complement.sv
 Z32 L0 24
-R11
+R10
 31
+R11
 R12
 R13
-R14
 !i113 0
+R14
 R15
-R3
+R2
 Xcomplement_sv_unit
-R5
-Vdgkla0`9;aJVU]zVmCVFm0
+R4
+Vjj3BfVbBm_I]Plg=<njM`2
 r1
 !s85 0
 !i10b 1
 !s100 W>nAX9IlXWR5eWCbM=YIh3
-Idgkla0`9;aJVU]zVmCVFm0
+Ijj3BfVbBm_I]Plg=<njM`2
 !i103 1
 S1
+R6
 R7
-R8
 R30
 R31
 Z33 L0 22
-R11
+R10
 31
+R11
 R12
 R13
-R14
 !i113 0
+R14
 R15
-R3
+R2
 vconcat_1
+R4
+DXx4 work 16 concat_1_sv_unit 0 22 CJCgb`[<]Q2JB]2TzB;Lh3
 R5
-DXx4 work 16 concat_1_sv_unit 0 22 V57MOTPbH88hVn?:GHM3g1
-R6
 r1
 !s85 0
 !i10b 1
 !s100 ?=_2W^O?MIM`E2;`5@M7G2
-I76X@0:JZh7eKU4^M<oE2l0
+IgVoUL8cjle=c]8:jei=E=2
 !s105 concat_1_sv_unit
 S1
+R6
 R7
-R8
 Z34 8design/concat_1.sv
 Z35 Fdesign/concat_1.sv
 R32
-R11
+R10
 31
+R11
 R12
 R13
-R14
 !i113 0
+R14
 R15
-R3
+R2
 Xconcat_1_sv_unit
-R5
-VV57MOTPbH88hVn?:GHM3g1
+R4
+VCJCgb`[<]Q2JB]2TzB;Lh3
 r1
 !s85 0
 !i10b 1
 !s100 =JQ8A`oPgK74i>:L3]36`0
-IV57MOTPbH88hVn?:GHM3g1
+ICJCgb`[<]Q2JB]2TzB;Lh3
 !i103 1
 S1
+R6
 R7
-R8
 R34
 R35
 R33
-R11
+R10
 31
+R11
 R12
 R13
-R14
 !i113 0
+R14
 R15
-R3
+R2
 vdenorm_zero
+R4
+DXx4 work 19 denorm_zero_sv_unit 0 22 COC:L3l6=CnQLomM?V`CA2
+R16
 R5
-DXx4 work 19 denorm_zero_sv_unit 0 22 @lUGT9i9PK9j8`bO9YheT3
-DXx4 work 6 addpkg 0 22 kSP31Y;`9eT69bNBi6W>J3
-R6
 r1
 !s85 0
 !i10b 1
-!s100 _Y8Bj;7HoUDDbGhS5YKcz1
-I2jC@]_5CPBjP2m;4TCO1<1
+!s100 zc<AK>VK93A[L5Rk0ciai2
+IZb[_C?U8OemE4=2@QP<MA3
 !s105 denorm_zero_sv_unit
 S1
-R7
-Z36 w1623178791
+R6
+Z36 w1623265257
 Z37 8design/denorm_zero.sv
 Z38 Fdesign/denorm_zero.sv
 L0 27
-R11
+R10
 31
+R11
 R12
 R13
-R14
 !i113 0
+R14
 R15
-R3
+R2
 Xdenorm_zero_sv_unit
-R5
-V@lUGT9i9PK9j8`bO9YheT3
+R4
+VCOC:L3l6=CnQLomM?V`CA2
 r1
 !s85 0
 !i10b 1
 !s100 KdTmn>i5XI8SFeijmAm9i1
-I@lUGT9i9PK9j8`bO9YheT3
+ICOC:L3l6=CnQLomM?V`CA2
 !i103 1
 S1
-R7
+R6
 R36
 R37
 R38
 L0 25
-R11
+R10
 31
+R11
 R12
 R13
-R14
 !i113 0
+R14
 R15
-R3
+R2
 verror_check
-R5
-DXx4 work 19 error_check_sv_unit 0 22 7gA0T^UcF4J9@=`fTLO2a1
+R4
+DXx4 work 19 error_check_sv_unit 0 22 GAP^gmPmTlAlZ]bBb92lZ2
 R16
-R6
+R5
 r1
 !s85 0
 !i10b 1
 !s100 SUW71zT=`SH>4kj;>]RfR2
-I:aNSMEWh7D8QUbbdNTQ:D3
+IVi_ei5Ec[?>RGeU@l`;A@0
 !s105 error_check_sv_unit
 S1
-R7
-R36
-Z39 8design/error_check.sv
-Z40 Fdesign/error_check.sv
+R6
+Z39 w1623178791
+Z40 8design/error_check.sv
+Z41 Fdesign/error_check.sv
 L0 32
-R11
+R10
 31
+R11
 R12
 R13
-R14
 !i113 0
+R14
 R15
-R3
+R2
 Xerror_check_sv_unit
-R5
-V7gA0T^UcF4J9@=`fTLO2a1
+R4
+VGAP^gmPmTlAlZ]bBb92lZ2
 r1
 !s85 0
 !i10b 1
 !s100 H@WdWS3;G_Z>PLnP6AgDM3
-I7gA0T^UcF4J9@=`fTLO2a1
+IGAP^gmPmTlAlZ]bBb92lZ2
 !i103 1
 S1
-R7
-R36
+R6
 R39
 R40
+R41
 L0 30
-R11
+R10
 31
+R11
 R12
 R13
-R14
 !i113 0
+R14
 R15
-R3
+R2
 vfdiv_newton
-R5
+R4
 R16
-DXx4 work 19 fdiv_newton_sv_unit 0 22 624Nd1@Fe]5c^_ANAbhe:1
-R6
+DXx4 work 19 fdiv_newton_sv_unit 0 22 KWNG1<K2hFFTUfzW:GiB91
+R5
 r1
 !s85 0
 !i10b 1
 !s100 z0UK^7WOW1H`5iDeoI7431
-IJf2T6z9VIf@[HBo7Fjb6X1
+Ib_;o1iJI9>icJO;[ZAeQS1
 !s105 fdiv_newton_sv_unit
 S1
-R7
-R36
-Z41 8design/fdiv_newton.sv
-Z42 Fdesign/fdiv_newton.sv
+R6
+R39
+Z42 8design/fdiv_newton.sv
+Z43 Fdesign/fdiv_newton.sv
 L0 3
-R11
+R10
 31
+R11
 R12
 R13
-R14
 !i113 0
+R14
 R15
-R3
+R2
 Xfdiv_newton_sv_unit
-R5
+R4
 R16
-V624Nd1@Fe]5c^_ANAbhe:1
+VKWNG1<K2hFFTUfzW:GiB91
 r1
 !s85 0
 !i10b 1
 !s100 Xn0[T10IVmeU:M77P[Ql02
-I624Nd1@Fe]5c^_ANAbhe:1
+IKWNG1<K2hFFTUfzW:GiB91
 !i103 1
 S1
-R7
-R36
-R41
+R6
+R39
 R42
+R43
 L0 1
-R11
+R10
 31
+R11
 R12
 R13
-R14
 !i113 0
+R14
 R15
-R3
+R2
 vfdiv_tb
-R5
+R4
 !s110 1623174781
 !i10b 1
 !s100 VK49@H7L>^e_;1DFBh]?m3
 !s11b 7;CmgmdC:IbfNI9fL^gV62
 I203KaV8TRBJI=F5GcW6>g1
-R6
+R5
 S1
-R7
+R6
 w1623174477
 8design/fdiv_tb.sv
 Fdesign/fdiv_tb.sv
 L0 3
-R11
+R10
 r1
 !s85 0
 31
@@ -527,535 +556,553 @@ r1
 !s107 verification/add_sub_top_tb.sv|design/swap.sv|design/sign_logic.sv|design/shift.sv|design/rounding.sv|design/postcomplement.sv|design/normalize.sv|design/newton24.sv|design/nbit_fullsubt.sv|design/nbit_fulladdr.sv|design/fullsubt.sv|design/fulladdr.sv|design/fp_pkg.sv|design/find_first_1.sv|design/fdiv_tb.sv|design/fdiv_newton.sv|design/error_check.sv|design/denorm_zero.sv|design/concat_1.sv|design/complement.sv|design/compare_exponents.sv|design/align_significands.sv|design/add_sub_top.sv|design/add_sigs.sv|
 !s90 design/add_sigs.sv|design/add_sub_top.sv|design/align_significands.sv|design/compare_exponents.sv|design/complement.sv|design/concat_1.sv|design/denorm_zero.sv|design/error_check.sv|design/fdiv_newton.sv|design/fdiv_tb.sv|design/find_first_1.sv|design/fp_pkg.sv|design/fulladdr.sv|design/fullsubt.sv|design/nbit_fulladdr.sv|design/nbit_fullsubt.sv|design/newton24.sv|design/normalize.sv|design/postcomplement.sv|design/rounding.sv|design/shift.sv|design/sign_logic.sv|design/swap.sv|verification/add_sub_top_tb.sv|-lint=full|
 !i113 0
-R15
-R3
+R14
+R2
 vfind_first_1
-R5
-Z43 !s110 1623264009
+R4
+Z44 !s110 1623270318
 !i10b 1
 !s100 KiNIa0f56Z9i@:cP^m4<Z2
 !s11b i7RG?WoiPUI3ZMh<`:Ic^1
-I_BmU5CbU09L29Uz4AUf1>0
-R6
+I]?[`HZg^PH;U6JZ2?o3070
+R5
 S1
-R7
+R6
 w1623263273
 8design/find_first_1.sv
 Fdesign/find_first_1.sv
 L0 1
-R11
+R10
 r1
 !s85 0
 31
+R11
 R12
 R13
-R14
 !i113 0
+R14
 R15
-R3
+R2
 vfp_multiplier
-R5
-R43
+R4
+R44
 !i10b 1
 !s100 :4L4<S8TL=JZRz;X:nQm;2
 !s11b W?I25mCJS21YC:_?_ABF]0
-INVCP?lk=mK_gj3E1WUEK10
-R6
+IG=dM5kaDNj@z>EUDEBjC52
+R5
 S1
-R7
+R6
 w1623209562
 8design/fp_mul.sv
 Fdesign/fp_mul.sv
 L0 1
-R11
+R10
 r1
 !s85 0
 31
+R11
 R12
 R13
-R14
 !i113 0
+R14
 R15
-R3
+R2
 Xfp_pkg
-R5
-R43
+R4
+R44
 !i10b 1
 !s100 Ldg;z1d]0CkfT9e[R?]Fm3
 !s11b lJb;lU`TL;h]9M3Y10CbK2
-IV8@H:>IJhOHUl7_VT5=;`2
-VV8@H:>IJhOHUl7_VT5=;`2
+I47F99Rg=k@UlXCdXj=B9e0
+V47F99Rg=k@UlXCdXj=B9e0
 S1
-R7
+R6
 w1623213556
 8design/fp_pkg.sv
 Fdesign/fp_pkg.sv
 L0 1
-R11
+R10
 r1
 !s85 0
 31
+R11
 R12
 R13
-R14
 !i113 0
+R14
 R15
-R3
-vFullAdder
+R2
+vfulladder
+R4
+R44
+!i10b 1
+!s100 Jd;fh;:M:N3K@GHJBPgd53
+!s11b Noa7H9G0m_1XRdMLaO84Y2
+I?2AS@UN]b@i]JT4]o;OV20
 R5
-Z44 !s110 1622412181
+S1
+R6
+w1622484932
+Z45 8design/fulladdr.sv
+Z46 Fdesign/fulladdr.sv
+L0 1
+R10
+r1
+!s85 0
+31
+R11
+R12
+R13
+!i113 0
+R14
+R15
+R2
+vFullAdder
+R4
+Z47 !s110 1622412181
 !i10b 1
 !s100 7OZYKKmkom8JzB9AfTF]A3
 !s11b 1S^;GmPIK<]R[nzf<_>:n3
 I=zigbA=T?c;1e?:98GWk_2
-R6
+R5
 S1
 R0
 w1621811737
-Z45 8design/fulladdr.sv
-Z46 Fdesign/fulladdr.sv
-L0 1
-R11
-r1
-!s85 0
-31
-Z47 !s108 1622412181.000000
-Z48 !s107 verification/add_sub_top_tb.sv|design/swap.sv|design/sign_logic.sv|design/rounding.sv|design/postcomplement.sv|design/normalize.sv|design/nbit_fullsubt.sv|design/nbit_fulladdr.sv|design/fullsubt.sv|design/fulladdr.sv|design/find_first_1.sv|design/error_check.sv|design/denorm_zero.sv|design/concat_1.sv|design/complement.sv|design/compare_exponents.sv|design/align_significands.sv|design/addpkg.sv|design/add_sub_top.sv|design/add_sigs.sv|
-Z49 !s90 design/add_sigs.sv|design/add_sub_top.sv|design/addpkg.sv|design/align_significands.sv|design/compare_exponents.sv|design/complement.sv|design/concat_1.sv|design/denorm_zero.sv|design/error_check.sv|design/find_first_1.sv|design/fulladdr.sv|design/fullsubt.sv|design/nbit_fulladdr.sv|design/nbit_fullsubt.sv|design/normalize.sv|design/postcomplement.sv|design/rounding.sv|design/sign_logic.sv|design/swap.sv|verification/add_sub_top_tb.sv|-lint=full|
-!i113 0
-R15
-R3
-n@full@adder
-vfulladder
-R5
-R43
-!i10b 1
-!s100 Jd;fh;:M:N3K@GHJBPgd53
-!s11b Noa7H9G0m_1XRdMLaO84Y2
-I@14M`XL9TT4UBRRS64n_82
-R6
-S1
-R7
-w1622484932
 R45
 R46
 L0 1
-R11
+R10
 r1
 !s85 0
 31
-R12
-R13
-R14
+Z48 !s108 1622412181.000000
+Z49 !s107 verification/add_sub_top_tb.sv|design/swap.sv|design/sign_logic.sv|design/rounding.sv|design/postcomplement.sv|design/normalize.sv|design/nbit_fullsubt.sv|design/nbit_fulladdr.sv|design/fullsubt.sv|design/fulladdr.sv|design/find_first_1.sv|design/error_check.sv|design/denorm_zero.sv|design/concat_1.sv|design/complement.sv|design/compare_exponents.sv|design/align_significands.sv|design/addpkg.sv|design/add_sub_top.sv|design/add_sigs.sv|
+Z50 !s90 design/add_sigs.sv|design/add_sub_top.sv|design/addpkg.sv|design/align_significands.sv|design/compare_exponents.sv|design/complement.sv|design/concat_1.sv|design/denorm_zero.sv|design/error_check.sv|design/find_first_1.sv|design/fulladdr.sv|design/fullsubt.sv|design/nbit_fulladdr.sv|design/nbit_fullsubt.sv|design/normalize.sv|design/postcomplement.sv|design/rounding.sv|design/sign_logic.sv|design/swap.sv|verification/add_sub_top_tb.sv|-lint=full|
 !i113 0
-R15
-R3
-vFullSubtractor
-R5
+R14
+R2
+n@full@adder
+vfullsubtractor
+R4
 R44
 !i10b 1
-!s100 B8[KB?IjaAce`T;R`klNk3
-Z50 !s11b QNiN=W0hJe7@fS[W_Sh2c2
-Ia<@imQN=8dD1<9ANRVK?g1
-R6
+!s100 0cg3cjlAUKijXT9W71Vk?3
+Z51 !s11b QNiN=W0hJe7@fS[W_Sh2c2
+I@YgonBdN2:8WO>AY?O6=o0
+R5
 S1
-R0
-Z51 w1621811738
+R6
+w1622412267
 Z52 8design/fullsubt.sv
 Z53 Fdesign/fullsubt.sv
 L0 1
-R11
+R10
 r1
 !s85 0
 31
-R47
-R48
-R49
+R11
+R12
+R13
 !i113 0
+R14
 R15
-R3
-n@full@subtractor
-vfullsubtractor
-R5
-R43
+R2
+vFullSubtractor
+R4
+R47
 !i10b 1
-!s100 0cg3cjlAUKijXT9W71Vk?3
-R50
-I^2iXKY@LU@P9Azch0X:<U2
-R6
+!s100 B8[KB?IjaAce`T;R`klNk3
+R51
+Ia<@imQN=8dD1<9ANRVK?g1
+R5
 S1
-R7
-w1622412267
+R0
+Z54 w1621811738
 R52
 R53
 L0 1
-R11
+R10
 r1
 !s85 0
 31
+R48
+R49
+R50
+!i113 0
+R14
+R2
+n@full@subtractor
+vnbit_fulladder
+R4
+R44
+!i10b 1
+!s100 _[eWAF32^TCaXX<Lz@A8G3
+!s11b ;G[g30[5<CglJn44Cllj^2
+I>U[cO>1kSL`f_I2KVL_>33
+R5
+S1
+R6
+w1622412274
+Z55 8design/nbit_fulladdr.sv
+Z56 Fdesign/nbit_fulladdr.sv
+L0 1
+R10
+r1
+!s85 0
+31
+R11
 R12
 R13
-R14
 !i113 0
+R14
 R15
-R3
+R2
 vNbit_FullAdder
-R5
-R44
+R4
+R47
 !i10b 1
 !s100 nFmg?4AA0h_M1e]_NG_a=1
 !s11b G1ege?@Leh?6fOT6;B3>?3
 IYdZCbzRf0iBe@:A@JNR?b1
-R6
+R5
 S1
 R0
-R51
-Z54 8design/nbit_fulladdr.sv
-Z55 Fdesign/nbit_fulladdr.sv
-L0 1
-R11
-r1
-!s85 0
-31
-R47
-R48
-R49
-!i113 0
-R15
-R3
-n@nbit_@full@adder
-vnbit_fulladder
-R5
-R43
-!i10b 1
-!s100 _[eWAF32^TCaXX<Lz@A8G3
-!s11b ;G[g30[5<CglJn44Cllj^2
-IZO6J]HS44^5M<bcLdPjde1
-R6
-S1
-R7
-w1622412274
 R54
 R55
+R56
 L0 1
-R11
+R10
 r1
 !s85 0
 31
+R48
+R49
+R50
+!i113 0
+R14
+R2
+n@nbit_@full@adder
+vnbit_fullsubtractor
+R4
+R44
+!i10b 1
+!s100 1b=9[]RQf[o56=9[8`54@0
+!s11b CZ2VPVMoD4HfSSeQ3MH8@3
+IU;LZ:T``2L`cQKHP2Ohz_0
+R5
+S1
+R6
+w1622412281
+Z57 8design/nbit_fullsubt.sv
+Z58 Fdesign/nbit_fullsubt.sv
+L0 1
+R10
+r1
+!s85 0
+31
+R11
 R12
 R13
-R14
 !i113 0
+R14
 R15
-R3
+R2
 vNbit_FullSubtractor
-R5
-R44
+R4
+R47
 !i10b 1
 !s100 D26I3NI4zQUgTN;AF>baL1
 !s11b ekC9cUH4jK4BkU>Z==II:0
 I^nXAU1PBMdfNPFPniYQ631
-R6
+R5
 S1
 R0
-R51
-Z56 8design/nbit_fullsubt.sv
-Z57 Fdesign/nbit_fullsubt.sv
+R54
+R57
+R58
 L0 1
-R11
+R10
 r1
 !s85 0
 31
-R47
 R48
 R49
+R50
 !i113 0
-R15
-R3
-n@nbit_@full@subtractor
-vnbit_fullsubtractor
-R5
-R43
-!i10b 1
-!s100 1b=9[]RQf[o56=9[8`54@0
-!s11b CZ2VPVMoD4HfSSeQ3MH8@3
-IzJhH2iV4Lz;ogVoGfVS[d3
-R6
-S1
-R7
-w1622412281
-R56
-R57
-L0 1
-R11
-r1
-!s85 0
-31
-R12
-R13
 R14
-!i113 0
-R15
-R3
+R2
+n@nbit_@full@subtractor
 vnewton24
-R5
-R43
+R4
+R44
 !i10b 1
 !s100 4n:i^mE>A0a23_U[z7VY30
 !s11b KUfQBnPaHU_cIcX];X;lE2
-I1OYlMmRT;6=:V]DEE9AEV0
-R6
+I5FMLFF83`1=K4T=jX3mUE2
+R5
 S1
-R7
-R36
+R6
+R39
 8design/newton24.sv
 Fdesign/newton24.sv
 L0 2
-R11
+R10
 r1
 !s85 0
 31
+R11
 R12
 R13
-R14
 !i113 0
+R14
 R15
-R3
+R2
 vnormalize
+R4
+DXx4 work 17 normalize_sv_unit 0 22 :kJRiceS;6fbEfo8[K@Mh2
 R5
-DXx4 work 17 normalize_sv_unit 0 22 bj=4zkjCoUe6_AjLSRNfa0
-R6
 r1
 !s85 0
 !i10b 1
 !s100 4Va?l@kb?`f=[I4M;Ybag0
-I61^`]Fa;P2`8hli1QzGJ<1
+I^o:476@`5I@ZJbJ5E6SX41
 !s105 normalize_sv_unit
 S1
-R7
-Z58 w1623261823
-Z59 8design/normalize.sv
-Z60 Fdesign/normalize.sv
+R6
+Z59 w1623261823
+Z60 8design/normalize.sv
+Z61 Fdesign/normalize.sv
 L0 28
-R11
+R10
 31
+R11
 R12
 R13
-R14
 !i113 0
+R14
 R15
-R3
+R2
 Xnormalize_sv_unit
-R5
-Vbj=4zkjCoUe6_AjLSRNfa0
+R4
+V:kJRiceS;6fbEfo8[K@Mh2
 r1
 !s85 0
 !i10b 1
 !s100 >GSBo>HC6bX4cGl0gZJej0
-Ibj=4zkjCoUe6_AjLSRNfa0
+I:kJRiceS;6fbEfo8[K@Mh2
 !i103 1
 S1
-R7
-R58
+R6
 R59
 R60
+R61
 R20
-R11
+R10
 31
+R11
 R12
 R13
-R14
 !i113 0
+R14
 R15
-R3
+R2
 vpostcomplement
-R5
-R43
+R4
+R44
 !i10b 1
 !s100 AXclNG@M4E]c[3]9W7ZHM3
 !s11b o6oLzYSQQ78;YdjRKAe7=1
-I7PE@2WLY_``D>1h_OM<B^0
-R6
+Ik7n]n]C8AT1940R[eh^c`1
+R5
 S1
-R7
+R6
 w1621824593
 8design/postcomplement.sv
 Fdesign/postcomplement.sv
 L0 1
-R11
+R10
 r1
 !s85 0
 31
+R11
 R12
 R13
-R14
 !i113 0
+R14
 R15
-R3
+R2
 vrounding
+R4
+DXx4 work 16 rounding_sv_unit 0 22 YWF;oHQ95:jlLEHK>ZgJW3
 R5
-DXx4 work 16 rounding_sv_unit 0 22 ]<4`EcDYMeSeVEG7Ugf<j0
-R6
 r1
 !s85 0
 !i10b 1
 !s100 FY0D3P?nHaaKn[?AB_@4H1
-ITGQ8Ekgle65oRJ_I>67le3
+I`zj47D26@z>52<WjY[^OJ0
 !s105 rounding_sv_unit
 S1
+R6
 R7
-R8
-Z61 8design/rounding.sv
-Z62 Fdesign/rounding.sv
+Z62 8design/rounding.sv
+Z63 Fdesign/rounding.sv
 L0 4
-R11
+R10
 31
+R11
 R12
 R13
-R14
 !i113 0
+R14
 R15
-R3
+R2
 Xrounding_sv_unit
-R5
-V]<4`EcDYMeSeVEG7Ugf<j0
+R4
+VYWF;oHQ95:jlLEHK>ZgJW3
 r1
 !s85 0
 !i10b 1
 !s100 M]VWeJAh4a[PAPClS0KhK2
-I]<4`EcDYMeSeVEG7Ugf<j0
+IYWF;oHQ95:jlLEHK>ZgJW3
 !i103 1
 S1
+R6
 R7
-R8
-R61
 R62
+R63
 L0 2
-R11
+R10
 31
+R11
 R12
 R13
-R14
 !i113 0
+R14
 R15
-R3
+R2
 vshift_to_msb_equ_1
-R5
-R43
+R4
+R44
 !i10b 1
 !s100 F4Ej>b8hch6^`aa53^JXI2
 !s11b nRDhT2D5J^EIZ<^bi>hYf1
-IfYW:]]GBA?^_gTG@k==KW2
-R6
+I2C?X^kC[DLHPY>_fG[5YB0
+R5
 S1
-R7
-R36
+R6
+R39
 8design/shift.sv
 Fdesign/shift.sv
 L0 1
-R11
+R10
 r1
 !s85 0
 31
+R11
 R12
 R13
-R14
 !i113 0
+R14
 R15
-R3
+R2
 vsign_logic
-R5
-R43
+R4
+R44
 !i10b 1
 !s100 4QR`4H6=[h:M=QUj:CMf;3
 !s11b J`H0Z5fDobYJ=OOHKT`eo3
-I^FDc7:OTRBLOm^O5fESNo3
-R6
+IM5Z`TBF3N7_kUbWDHf@2U3
+R5
 S1
-R7
+R6
 w1621811739
 8design/sign_logic.sv
 Fdesign/sign_logic.sv
 L0 31
-R11
+R10
 r1
 !s85 0
 31
+R11
 R12
 R13
-R14
 !i113 0
+R14
 R15
-R3
+R2
 vswap
+R4
+DXx4 work 12 swap_sv_unit 0 22 f=RiP`9ZUYfYONd_QCga;0
 R5
-DXx4 work 12 swap_sv_unit 0 22 [O0@7[SnGB_OVDOkC3hEW3
-R6
 r1
 !s85 0
 !i10b 1
 !s100 VWVVBYYkdz^=bCAd?:jcH3
-I^62ji^REX>M4?FHkgXnGI0
+I^?30k6GH8ND:Roc5^2]521
 !s105 swap_sv_unit
 S1
+R6
 R7
-R8
-Z63 8design/swap.sv
-Z64 Fdesign/swap.sv
+Z64 8design/swap.sv
+Z65 Fdesign/swap.sv
 R32
-R11
+R10
 31
+R11
 R12
 R13
-R14
 !i113 0
+R14
 R15
-R3
+R2
 Xswap_sv_unit
-R5
-V[O0@7[SnGB_OVDOkC3hEW3
+R4
+Vf=RiP`9ZUYfYONd_QCga;0
 r1
 !s85 0
 !i10b 1
 !s100 mn=b^;VPD:je7zWN=fNlL0
-I[O0@7[SnGB_OVDOkC3hEW3
+If=RiP`9ZUYfYONd_QCga;0
 !i103 1
 S1
+R6
 R7
-R8
-R63
 R64
+R65
 R33
-R11
+R10
 31
+R11
 R12
 R13
-R14
 !i113 0
+R14
 R15
-R3
+R2
 vtop
-R5
+R4
 R16
-DXx4 work 22 add_sub_top_tb_sv_unit 0 22 R1YH]GYCod<zi@3CL9<CF0
-R6
+DXx4 work 22 add_sub_top_tb_sv_unit 0 22 CLk9RHOLbZ9U5G[987Dz73
+R5
 r1
 !s85 0
 !i10b 1
-!s100 DXjQ2hnBAR]nY49ZV<zk`3
-I9Ec>hNDS:njdPMkUS1Lh63
+!s100 hz[0z3;ZTo?HISn^Q9:M71
+I7=9ok_HN;VBTV5bbYoHzK3
 !s105 add_sub_top_tb_sv_unit
 S1
-R7
+R6
 R22
 R23
 R24
-L0 5
-R11
+L0 6
+R10
 31
+R11
 R12
 R13
-R14
 !i113 0
+R14
 R15
-R3
+R2
