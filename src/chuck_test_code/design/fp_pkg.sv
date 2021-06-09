@@ -45,15 +45,17 @@ typedef union {
 // Classes and Objects //
 /////////////////////////
 
-class FloatingPoint;
+
 // Using this class:
 // 1. Create FloatingPoint Objects for OP1, OP2, and OUT and EXP.
 // 2. Use generateCase(fp_case_t) to generate a new randomized value for OP1, and OP2 of specified type.
 // 2a. Use OP1.setSign(sign) and OP2.setSign(sign) to set the appropriate signs
 // 3. Use EXP.setSR(OP1.getSR + OP2.getSR) and feed it the shortreal result from SV.
-// 4. Feed the machine OP1.sign, OP1.exponent, OP1.significand, etc. for OP2.
+// 4. Feed the machine OP1.sign, OP1.exponent, OP1.significand, etc. Also for OP2.
 // 5. Use OUT.setBits(machine_output) and feed it the machine output to set the OUT value.
 // 6. Use OUT.equals(EXP) to see if they are the same!
+
+class FloatingPoint;
 
     local fp_t fp;
     local rand bit sign;
@@ -62,8 +64,8 @@ class FloatingPoint;
     fp_case_t op_case;
 
     // Randomizaton Weight for non-edge-case testing
-    int w_exp_zero = 1, w_exp_reg = 98, w_exp_max = 1;
-    int w_sig_zero = 1, w_sig_reg = 98, w_sig_max = 1;
+    int exp_zero_w = 1, exp_reg_w = 98, exp_max_w = 1;
+    int sig_zero_w = 1, sig_reg_w = 98, sig_max_w = 1;
 
     // Randomization constraints
     constraint edge_case_c {
@@ -95,11 +97,15 @@ class FloatingPoint;
     }
 
     constraint rand_exp_c {
-        exponent dist {8'b0000_0000 :/ w_exp_zero, [8'b0000_0001:8'b1111_1110] :/ w_exp_reg, 8'b1111_1111 :/ w_exp_max};
+        exponent dist {8'b0000_0000 :/ w_exp_zero, 
+        [8'b0000_0001:8'b1111_1110] :/ w_exp_reg, 
+        8'b1111_1111 :/ w_exp_max};
     }
 
     constraint rand_sig_c {
-        significand dist {23'h000000 :/ w_sig_zero, [23'h000001:23'h7FFFFE] :/ w_sig_reg, 23'h7FFFFF :/ w_sig_max};
+        significand dist {23'h000000 :/ w_sig_zero, 
+        [23'h000001:23'h7FFFFE] :/ w_sig_reg, 
+        23'h7FFFFF :/ w_sig_max};
     }
 
     // -- CLASS METHODS --
@@ -135,7 +141,8 @@ class FloatingPoint;
     function bit equals(FloatingPoint obj);
         if (obj.op_case != this.op_case) return 0;
         if (this.op_case == NAN) return 1;
-        else if (obj.sign == this.sign && obj.exponent == this.exponent && obj.significand == this.significand) return 1;      // I don't know how closely the values will match with SV
+        else if (obj.sign == this.sign && obj.exponent == this.exponent 
+        && obj.significand == this.significand) return 1;
         else return 0;
     endfunction
 
