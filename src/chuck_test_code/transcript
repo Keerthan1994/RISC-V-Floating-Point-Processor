@@ -1,8 +1,6 @@
 # vsim -c top 
-# Start time: 09:39:59 on Jun 09,2021
+# Start time: 11:28:08 on Jun 09,2021
 # ** Note: (vsim-3813) Design is being optimized due to module recompilation...
-# ** Warning: design/normalize.sv(43): (vopt-2241) Connection width does not match width of port 'out'. The port definition is at: design/find_first_1.sv(1).
-# ** Warning: design/normalize.sv(43): (vopt-2241) Connection width does not match width of port 'out'. The port definition is at: design/find_first_1.sv(1).
 # ** Warning: verification/add_sub_top_tb.sv(5): (vopt-2605) empty port name in port list.
 # //  Questa Sim-64
 # //  Version 2019.2_1 linux_x86_64 May 13 2019
@@ -34,11 +32,5 @@
 # Loading work.add_sub_top_sv_unit(fast)
 # Loading work.add_sub_top_tb_sv_unit(fast)
 # Loading work.top(fast)
-# 142960::VALUE/TYPE MISMATCH: OP1=2.379718e+32 REG. OP2=2.069561e+34 REG. OP_CODE=ADD. EXP=2.093358e+34. RES=2.093358e+34. EXP_TYPE=REG. RES_TYPE=REG.
-# EXP: 0 11110001 00000010000001101011101
-# OUT: 0 11110001 00000010000001101011100
-# ** Note: $finish    : verification/add_sub_top_tb.sv(281)
-#    Time: 38400010 ns  Iteration: 0  Instance: /top
-# 1 Errors Out of 256000 Tests.
-# End time: 09:40:10 on Jun 09,2021, Elapsed time: 0:00:11
-# Errors: 0, Warnings: 3
+# End time: 11:28:53 on Jun 09,2021, Elapsed time: 0:00:45
+# Errors: 0, Warnings: 1

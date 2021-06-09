@@ -112,111 +112,111 @@ initial begin
 // end while(op1_case != op1_case.first);
 
 
-// for (int i = 0; i < (NTESTS * 512); i++) begin
-//     opc = opcode_t'($urandom_range(1,0));
-//     generateRandCase(op1, op2, exp, opc);
-//     opcode = bit'(opc);
-//     sign1 = op1.getSign();
-//     sign2 = op2.getSign();
-//     exp1 = op1.getExponent();
-//     exp2 = op2.getExponent();
-//     sig1 = op1.getSignificand();
-//     sig2 = op2.getSignificand();
+for (int i = 0; i < (NTESTS * 512); i++) begin
+    opc = opcode_t'($urandom_range(1,0));
+    generateRandCase(op1, op2, exp, opc);
+    opcode = bit'(opc);
+    sign1 = op1.getSign();
+    sign2 = op2.getSign();
+    exp1 = op1.getExponent();
+    exp2 = op2.getExponent();
+    sig1 = op1.getSignificand();
+    sig2 = op2.getSignificand();
 
-//     #150;
-//     out.setBits(fp_out);
-//     checkResults(op1, op2, out, exp, opc, err);
-//     if (err) begin 
-//         err_count += 1;
-//         $display("EXP: %0b", exp.bitsToString);
-//         $display("OUT: %0b", out.bitsToString);
-//     end
-//     checkErrorCode(exp, err_o);
-//     test_count += 1;
-// end
+    #150;
+    out.setBits(fp_out);
+    checkResults(op1, op2, out, exp, opc, err);
+    if (err) begin 
+        err_count += 1;
+        $display("EXP: %0b", exp.bitsToString);
+        $display("OUT: %0b", out.bitsToString);
+    end
+    checkErrorCode(exp, err_o);
+    test_count += 1;
+end
 
 
 //////////////////////////////////
 // DIV Test -- Now Generic Test //
 //////////////////////////////////
 
-    clk = 1'b0;
-    // assert reset
-    rstn = 1'b0;
-    #10 rstn = 1'b1;
-    ena = 1'b0;
-    fdiv = 1'b0;
-    rm = 2'b0;
-    ena = 1'b1;
-    fdiv = 1'b1;
-    sign_tc = 0;
-    opc = ADD;
+    // clk = 1'b0;
+    // // assert reset
+    // rstn = 1'b0;
+    // #10 rstn = 1'b1;
+    // ena = 1'b0;
+    // fdiv = 1'b0;
+    // rm = 2'b0;
+    // ena = 1'b1;
+    // fdiv = 1'b1;
+    // sign_tc = 0;
+    // opc = ADD;
 
-    do begin
-        do begin
-            for (sign_tc = 0; sign_tc < 4; sign_tc++) begin
-                for (int i = 0; i < NTESTS; i++) begin
-                    generateCornerCase(op1, op2, exp, op1_case, op2_case, sign_tc[1], sign_tc[0], opc);
+    // do begin
+    //     do begin
+    //         for (sign_tc = 0; sign_tc < 4; sign_tc++) begin
+    //             for (int i = 0; i < NTESTS; i++) begin
+    //                 generateCornerCase(op1, op2, exp, op1_case, op2_case, sign_tc[1], sign_tc[0], opc);
                     
-                    // Add/Sub Inputs
-                    opcode = bit'(opc);
-                    sign1 = op1.getSign();
-                    sign2 = op2.getSign();
-                    exp1 = op1.getExponent();
-                    exp2 = op2.getExponent();
-                    sig1 = op1.getSignificand();
-                    sig2 = op2.getSignificand();
+    //                 // Add/Sub Inputs
+    //                 opcode = bit'(opc);
+    //                 sign1 = op1.getSign();
+    //                 sign2 = op2.getSign();
+    //                 exp1 = op1.getExponent();
+    //                 exp2 = op2.getExponent();
+    //                 sig1 = op1.getSignificand();
+    //                 sig2 = op2.getSignificand();
 
-                    // Mult/Div Specific Input Handling
-                    if (opc == DIV) begin
-                        wait(!busy);
-                        a = {sign1, exp1, sig1};    // Div Input
-                        b = {sign2, exp2, sig2};    // Div Input
-                    end else if (opc == MUL) begin
-                        in_A = {sign1, exp1, sig1};                   // Mult Input
-                        in_B = {sign2, exp2, sig2};                   // Mult Input
-                        repeat (1) @(negedge clk);
-                        strb_A = 1'b1;
-                        strb_B = 1'b1;
-                        repeat (1) @(negedge clk);
-                        strb_A = 1'b0;
-                        strb_B = 1'b0;
-                    end
+    //                 // Mult/Div Specific Input Handling
+    //                 if (opc == DIV) begin
+    //                     wait(!busy);
+    //                     a = {sign1, exp1, sig1};    // Div Input
+    //                     b = {sign2, exp2, sig2};    // Div Input
+    //                 end else if (opc == MUL) begin
+    //                     in_A = {sign1, exp1, sig1};                   // Mult Input
+    //                     in_B = {sign2, exp2, sig2};                   // Mult Input
+    //                     repeat (1) @(negedge clk);
+    //                     strb_A = 1'b1;
+    //                     strb_B = 1'b1;
+    //                     repeat (1) @(negedge clk);
+    //                     strb_A = 1'b0;
+    //                     strb_B = 1'b0;
+    //                 end
 
 
-                    // Op Code Specific Waits and Outputs
-                    case (opc)
-                        ADD: begin 
-                            #150;
-                            out.setBits(fp_out);
-                        end
-                        SUB: begin
-                            #50;
-                            out.setBits(fp_out);
-                        end
-                        MUL: begin 
-                            out.setBits(output_prod);
-                        end
-                        DIV: begin
-                            #300;
-                            wait(!busy);
-                            out.setBits(s);
-                        end
-                    endcase
-                    checkResults(op1, op2, out, exp, opc, err);
-                    if (err) begin 
-                        err_count += 1;
-                        $display("EXP: %0b", exp.bitsToString);
-                        $display("OUT: %0b", out.bitsToString);
-                    end
-                    checkErrorCode(exp, err_o);
-                    test_count += 1;
-                end
-            end
-            op2_case = op2_case.next;
-        end while(op2_case != op2_case.first);
-        op1_case = op1_case.next;
-    end while(op1_case != op1_case.first);
+    //                 // Op Code Specific Waits and Outputs
+    //                 case (opc)
+    //                     ADD: begin 
+    //                         #150;
+    //                         out.setBits(fp_out);
+    //                     end
+    //                     SUB: begin
+    //                         #50;
+    //                         out.setBits(fp_out);
+    //                     end
+    //                     MUL: begin 
+    //                         out.setBits(output_prod);
+    //                     end
+    //                     DIV: begin
+    //                         #300;
+    //                         wait(!busy);
+    //                         out.setBits(s);
+    //                     end
+    //                 endcase
+    //                 checkResults(op1, op2, out, exp, opc, err);
+    //                 if (err) begin 
+    //                     err_count += 1;
+    //                     $display("EXP: %0b", exp.bitsToString);
+    //                     $display("OUT: %0b", out.bitsToString);
+    //                 end
+    //                 checkErrorCode(exp, err_o);
+    //                 test_count += 1;
+    //             end
+    //         end
+    //         op2_case = op2_case.next;
+    //     end while(op2_case != op2_case.first);
+    //     op1_case = op1_case.next;
+    // end while(op1_case != op1_case.first);
 
 
 //////////////

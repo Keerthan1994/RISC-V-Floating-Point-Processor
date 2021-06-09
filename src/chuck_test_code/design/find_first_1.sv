@@ -1,7 +1,7 @@
 module find_first_1 (in, out);
 
 parameter IN_WIDTH = 27;
-localparam OUT_WIDTH = $clog2(IN_WIDTH)+1;          // FIXME: Possible remove the +1 to make port width match
+localparam OUT_WIDTH = $clog2(IN_WIDTH);          // FIXME: Possible remove the +1 to make port width match
 
 input [IN_WIDTH-1:0]in;
 output [OUT_WIDTH-1:0]out;

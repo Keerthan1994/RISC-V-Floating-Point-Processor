@@ -56,13 +56,16 @@ always_comb begin
             shift = 0;
         end
     end else if (sig != 0 && (exp == 'b1) && sig[SIG_BITS+3] != 1'b1) begin    // If the sig is not zero, no carry out, and no MSB and the exponent is 1 or 0, output a denorm number.
-        sig_norm = sig;
+        sig_norm = sig; 
         shift = ~1 + 1;                     // Change the exponent to 0
     end else if (sig != 0 && (exp == 'b0) && sig[SIG_BITS+3] != 1'b1) begin    // If the exponent is already zero, keep it at zero.
         sig_norm = sig;
-        shift = 0;                     // Change the exponent to 0
+        shift = 0;                          // Leave the Exponent where it is
     end else begin                          // Else keep shifting to the left and decrementing exponent until there is a 1 in the MSB.
         norm_shift = SIG_BITS+3 - first_one;
+        if (norm_shift > exp) begin     // The value to shift is larger than the exponent, so the full shift can't happen resulting in a denormal number
+            norm_shift = exp-1;           // Shift the exponent all the way to zero FIXME: Experiment
+        end
         sig_norm = sig << norm_shift;
         shift = ~(norm_shift)+1;
     end
