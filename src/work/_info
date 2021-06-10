@@ -10,10 +10,10 @@ z2
 cModel Technology
 Z0 d/home/cfaber/common/Documents/ECE571/RISC-V-Floating-Point-Processor/src
 T_opt
-!s110 1623362649
-VO59YRiKiT<0@UIl^:^GNZ2
+!s110 1623363265
+VAFT6GUmdTW>GBJ`cXRciB2
 04 3 4 work top fast 0
-=1-5254006cf05e-60c28c58-e7635-89b3
+=1-5254006cf05e-60c28ec1-a8419-9862
 o-quiet -auto_acc_if_foreign -work work
 Z1 tCvgOpt 0
 n@_opt
@@ -36,7 +36,7 @@ Z6 Fdesign/add_sigs.sv
 L0 4
 Z7 OL;L;2019.2_1;69
 31
-Z8 !s108 1623362646.000000
+Z8 !s108 1623363258.000000
 Z9 !s107 verification/add_sub_top_tb.sv|design/swap.sv|design/sign_logic.sv|design/shift.sv|design/rounding.sv|design/postcomplement.sv|design/normalize.sv|design/newton24.sv|design/nbit_fullsubt.sv|design/nbit_fulladdr.sv|design/fullsubt.sv|design/fulladdr.sv|design/fp_pkg.sv|design/fp_mul.sv|design/find_first_1.sv|design/fdiv_newton.sv|design/error_check.sv|design/denorm_zero.sv|design/concat_1.sv|design/complement.sv|design/compare_exponents.sv|design/align_significands.sv|design/add_sub_top.sv|design/add_sigs.sv|
 Z10 !s90 design/add_sigs.sv|design/add_sub_top.sv|design/align_significands.sv|design/compare_exponents.sv|design/complement.sv|design/concat_1.sv|design/denorm_zero.sv|design/error_check.sv|design/fdiv_newton.sv|design/find_first_1.sv|design/fp_mul.sv|design/fp_pkg.sv|design/fulladdr.sv|design/fullsubt.sv|design/nbit_fulladdr.sv|design/nbit_fullsubt.sv|design/newton24.sv|design/normalize.sv|design/postcomplement.sv|design/rounding.sv|design/shift.sv|design/sign_logic.sv|design/swap.sv|verification/add_sub_top_tb.sv|-lint=full|+define+RANDCASES|
 !i113 0
@@ -121,16 +121,16 @@ R1
 Xadd_sub_top_tb_sv_unit
 R2
 R13
-VXdJ@WYcl@MQRVZhdZajHZ0
+VK7SI6??h`Dl:XnT8U:3X70
 r1
 !s85 0
 !i10b 1
-!s100 iO@_E@HbY_Oo54I05@]PS3
-IXdJ@WYcl@MQRVZhdZajHZ0
+!s100 18f`;E`TWAFhFGg]L7IjR0
+IK7SI6??h`Dl:XnT8U:3X70
 !i103 1
 S1
 R0
-Z18 w1623362642
+Z18 w1623362678
 Z19 8verification/add_sub_top_tb.sv
 Z20 Fverification/add_sub_top_tb.sv
 L0 1
@@ -492,7 +492,7 @@ R12
 R1
 vfind_first_1
 R2
-Z37 !s110 1623362646
+Z37 !s110 1623363258
 !i10b 1
 !s100 KiNIa0f56Z9i@:cP^m4<Z2
 !s11b i7RG?WoiPUI3ZMh<`:Ic^1
@@ -915,13 +915,13 @@ R1
 vtop
 R2
 R13
-DXx4 work 22 add_sub_top_tb_sv_unit 0 22 XdJ@WYcl@MQRVZhdZajHZ0
+DXx4 work 22 add_sub_top_tb_sv_unit 0 22 K7SI6??h`Dl:XnT8U:3X70
 R3
 r1
 !s85 0
 !i10b 1
-!s100 IfOdFFBU77`8o8D8dCTe13
-I9n_6oOVaZOCFCPBmAg5Jh3
+!s100 ^WQ@i>dg48PNKV@jWl]Dn0
+InNWlfOPNn[lImD<ZQ?zEj1
 !s105 add_sub_top_tb_sv_unit
 S1
 R0

@@ -5,7 +5,7 @@ parameter EXP_BITS = 8;
 
 module top();
 
-parameter NTESTS = 1;
+parameter NTESTS = 1000;
 
 // shortreal op1, op2, out;
 shortreal out_sr;
