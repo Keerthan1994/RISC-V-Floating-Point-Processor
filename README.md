@@ -1,9 +1,16 @@
 # Floating-Point-Co-Processor
-Design of a floating point processor.
+## Chuck Faber, Bhargavi Chunchu, Ramprakash Baskar, Keerthan Nayak
 
-![image](https://user-images.githubusercontent.com/61081801/119273450-d9134b00-bbbf-11eb-83bd-e3b631af86db.png)
+For this project, we attempted to implmement a IEEE 754 single precision floating point processor in SystemVerilog.
 
-
+### Contents
+ - /docs/: Includes the final presentation report
+ - /src/: Includes all source files
+    - /design/: Includes the module design files.
+    - /verification/: Includes the testbenches and verification files.
+        - add_sub_top_tb.sv: Our main top level testbench.
+    - /dev/: This folder includes test code and other code snippets
+    - makefile: This makefile includes compilation and simulation targets.
 
 
 
