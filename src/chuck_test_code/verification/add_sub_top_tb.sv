@@ -6,7 +6,6 @@ parameter EXP_BITS = 8;
 module top();
 
 parameter NTESTS = 1000;
-parameter OP = 0;
 
 // shortreal op1, op2, out;
 shortreal out_sr;
@@ -197,6 +196,7 @@ initial begin
 end
 
 initial begin
+
     if ($value$plusargs ("OP=%s", op_arg)) begin
         $display("Running Test with %s operation(s).", op_arg);
         case (op_arg)
@@ -207,9 +207,7 @@ initial begin
             default: opc = opc.first();
         endcase
     end else opc = ADD;
-end
 
-initial begin
     op1 = new();
     op2 = new();
     out = new();
@@ -242,7 +240,6 @@ if (op_arg == "ALL") begin
     end while(opc != opc.first);
 end else begin
 end
-opc = opcode_t'(OP);
 
 `ifdef CORNERCASES
     testCornerCases();
