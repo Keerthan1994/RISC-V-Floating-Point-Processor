@@ -5,7 +5,7 @@ parameter EXP_BITS = 8;
 
 module top();
 
-parameter NTESTS = 1000;
+parameter NTESTS = 1;
 
 // shortreal op1, op2, out;
 shortreal out_sr;
@@ -83,11 +83,13 @@ task testCornerCases();
                         a = {sign1, exp1, sig1};    // Div Input
                         b = {sign2, exp2, sig2};    // Div Input
                     end else if (opc == MUL) begin
-                        in_A = {sign1, exp1, sig1};                   // Mult Input
-                        in_B = {sign2, exp2, sig2};                   // Mult Input
                         repeat (1) @(negedge clk);
                         strb_A = 1'b1;
                         strb_B = 1'b1;
+                        repeat (1) @(negedge clk);
+                        out_prod_ack = 1'b1;
+                        in_A = {sign1, exp1, sig1};                   // Mult Input
+                        in_B = {sign2, exp2, sig2};                   // Mult Input
                         repeat (1) @(negedge clk);
                         strb_A = 1'b0;
                         strb_B = 1'b0;
@@ -105,8 +107,8 @@ task testCornerCases();
                             out.setBits(fp_out);
                         end
                         MUL: begin 
-                            wait(output_prod_stb);
                             out.setBits(output_prod);
+                            out_prod_ack = 1'b0;
                         end
                         DIV: begin
                             repeat (30) @(negedge clk)
@@ -148,11 +150,13 @@ task testRandCases();
             a = {sign1, exp1, sig1};    // Div Input
             b = {sign2, exp2, sig2};    // Div Input
         end else if (opc == MUL) begin
-            in_A = {sign1, exp1, sig1};                   // Mult Input
-            in_B = {sign2, exp2, sig2};                   // Mult Input
             repeat (1) @(negedge clk);
             strb_A = 1'b1;
             strb_B = 1'b1;
+            repeat (1) @(negedge clk);
+            out_prod_ack = 1'b1;
+            in_A = {sign1, exp1, sig1};                   // Mult Input
+            in_B = {sign2, exp2, sig2};                   // Mult Input
             repeat (1) @(negedge clk);
             strb_A = 1'b0;
             strb_B = 1'b0;
@@ -170,8 +174,9 @@ task testRandCases();
                 out.setBits(fp_out);
             end
             MUL: begin 
-                wait(output_prod_stb);
+                // wait(output_prod_stb);
                 out.setBits(output_prod);
+                out_prod_ack = 1'b0;
             end
             DIV: begin
                 repeat (30) @(negedge clk);
