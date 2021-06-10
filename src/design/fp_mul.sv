@@ -26,13 +26,13 @@ module fp_multiplier(in_A,in_B,strb_A,strb_B,out_prod_ack,clk,reset_n,output_pro
   parameter get_A = 4'b0000,
             get_B = 4'b0001,
             unpack =  4'b0010,
-            special_case = 4'b0011,
-            normalise_A = 4'b0100,
-            normalise_B = 4'b0101,
-            multiply_0 = 4'b0110,
-            multiply_1 = 4'b0111,
-            normalise_1 = 4'b1000,
-            normalise_2 = 4'b1001,
+            splcase = 4'b0011,
+            normA = 4'b0100,
+            normB = 4'b0101,
+            MulA = 4'b0110,
+            MulB = 4'b0111,
+            norm1 = 4'b1000,
+            norm2 = 4'b1001,
             round = 4'b1010,
             pack = 4'b1011,
             putz = 4'b1100;
@@ -52,8 +52,7 @@ module fp_multiplier(in_A,in_B,strb_A,strb_B,out_prod_ack,clk,reset_n,output_pro
       
   case(state)
         
-  get_A :      
-    begin
+  get_A : begin
       s_in_a_ack <= 1;
       if(s_in_a_ack && strb_A) begin
         x <= in_A;
@@ -63,8 +62,7 @@ module fp_multiplier(in_A,in_B,strb_A,strb_B,out_prod_ack,clk,reset_n,output_pro
     end
     
     
-    get_B: 
-      begin 
+    get_B: begin 
         s_in_b_ack <= 1;
         if(s_in_b_ack && strb_B) begin
         y <= in_B;
@@ -73,22 +71,20 @@ module fp_multiplier(in_A,in_B,strb_A,strb_B,out_prod_ack,clk,reset_n,output_pro
       end
     end
     
-    unpack:
-        begin
+    unpack:begin
             x_m <= x[22:0];
             y_m <= y[22:0];
             x_e <= x[30:23] - 127;
             y_e <= y[30:23] - 127;
             x_s <= x[31];
             y_s <= y[31];
-            state <= special_case;
+            state <= splcase;
         end
     
     
-    special_case:
-      begin
+    splcase: begin
         
-    // if x and y are not a number return NaN
+    // Case 1:return NaN
         if((x_e == 128 && x_m != 0) || (y_e == 128 && y_m != 0)) begin
           z[31] <= 1;
           z[30:23] <= 255;
@@ -147,24 +143,22 @@ module fp_multiplier(in_A,in_B,strb_A,strb_B,out_prod_ack,clk,reset_n,output_pro
           end else begin
             y_m[23] <= 1;
           end
-          state <= normalise_A;
+          state <= normA;
         end
       end
           
-    normalise_A:
-      begin
+    normA:begin
         if (x_m[23]) begin
-          state <= normalise_B;
+          state <= normB;
         end else begin
           x_m <= x_m << 1;
           x_e <= x_e - 1;
         end
       end
 
-      normalise_B:
-      begin
+      normB: begin
         if (y_m[23]) begin
-          state <= multiply_0;
+          state <= MulA;
         end else begin
           y_m <= y_m << 1;
           y_e <= y_e - 1;
@@ -172,25 +166,22 @@ module fp_multiplier(in_A,in_B,strb_A,strb_B,out_prod_ack,clk,reset_n,output_pro
       end
   
     
-    multiply_0:
-      begin
+    MulA:begin
         z_s <= x_s ^ y_s;
         z_e <= x_e + y_e + 1;
         prod <= x_m * y_m * 4;
-        state <= multiply_1;
+        state <= MulB;
       end
 
-      multiply_1:
-      begin
+      MulB:begin
         z_m <= prod[49:26];
         guard <= prod[25];
         round_bit <= prod[24];
         sticky <= (prod[23:0] != 0);
-        state <= normalise_1;
+        state <= norm1;
       end
 
-      normalise_1:
-      begin
+      norm1:begin
         if (z_m[23] == 0) begin
           z_e <= z_e - 1;
           z_m <= z_m << 1;
@@ -198,12 +189,11 @@ module fp_multiplier(in_A,in_B,strb_A,strb_B,out_prod_ack,clk,reset_n,output_pro
           guard <= round_bit;
           round_bit <= 0;
         end else begin
-          state <= normalise_2;
+          state <= norm2;
         end
       end
 
-      normalise_2:
-      begin
+      norm2:begin
         if ($signed(z_e) < -126) begin
           z_e <= z_e + 1;
           z_m <= z_m >> 1;
@@ -215,8 +205,7 @@ module fp_multiplier(in_A,in_B,strb_A,strb_B,out_prod_ack,clk,reset_n,output_pro
         end
       end
 
-      round:
-      begin
+      round:begin
         if (guard && (round_bit | sticky | z_m[0])) begin
           z_m <= z_m + 1;
           if (z_m == 24'hffffff) begin
@@ -226,15 +215,14 @@ module fp_multiplier(in_A,in_B,strb_A,strb_B,out_prod_ack,clk,reset_n,output_pro
         state <= pack;
       end
 
-      pack:
-      begin
+      pack:begin
         z[22 : 0] <= z_m[22:0];
         z[30 : 23] <= z_e[7:0] + 127;
         z[31] <= z_s;
         if ($signed(z_e) == -126 && z_m[23] == 0) begin
           z[30 : 23] <= 0;
         end
-        //if overflow occurs, return inf
+        //Case: if Overflow, return inf
         if ($signed(z_e) > 127) begin
           z[22 : 0] <= 0;
           z[30 : 23] <= 255;
@@ -255,7 +243,7 @@ module fp_multiplier(in_A,in_B,strb_A,strb_B,out_prod_ack,clk,reset_n,output_pro
 
     endcase
 
-    if (!reset_n) begin
+    if (~reset_n) begin
       state <= get_A;
       s_in_a_ack <= 0;
       s_in_b_ack <= 0;
