@@ -18,3 +18,13 @@ auto.ece.pdx.edu server and run through the terminal.
 
 1. Enter the /src/ folder. `cd src`
 2. Build with the appropriate testing parameters.
+    * `make all`: Simulation will run both corner cases and generalized random cases.
+    * `make cornercases`: Simulation will run only corner case testing
+    * `make randcases`: Simulation will run only random testing
+    * `make debug`: Simulation will run both testing cases, and produce output on all test cases.
+3. Start simulation with appropriate simulation parameters.
+    * `make sim_add`: Run simulation only with addition operations.
+    * `make sim_sub`: Run simulation only with subtraction operations.
+    * `make sim_mul`: Run simulation only with multiplication operations.
+    * `make sim_div`: Run simulation only with division operations.
+    * `make sim_all`: Run simulation test cases with ALL operations.
