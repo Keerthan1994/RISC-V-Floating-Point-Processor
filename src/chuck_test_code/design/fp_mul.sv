@@ -1,33 +1,20 @@
-module fp_multiplier(
-  in_A,
-  in_B,
-  strb_A,
-  strb_B,
-  out_prod_ack,
-  clk,
-  reset_n,
-  output_prod,
-  output_prod_stb,
-  in_A_ack,
-  in_B_ack
-);
+// Floating point multiplier
+// 
+
+module fp_multiplier(in_A,in_B,strb_A,strb_B,out_prod_ack,clk,reset_n,output_prod,output_prod_stb,in_A_ack,in_B_ack);
   
   input clk;
-  input reset_n;
-  
+  input reset_n; 
   input [31:0] in_A ;
   input strb_A;
-  output in_A_ack;
-  
+  output in_A_ack;  
   input [31:0] in_B ;
   input strb_B;
   output in_B_ack;
-  
-  output output_prod;
+  output [31:0] output_prod;
   output output_prod_stb;
   input out_prod_ack;
-  
-  
+    
   reg s_outprod_stb;
   reg [31:0] s_out_prod;
   reg s_in_a_ack;
@@ -185,7 +172,6 @@ module fp_multiplier(
       end
   
     
-  //___________________________________________  
     multiply_0:
       begin
         z_s <= x_s ^ y_s;
@@ -277,9 +263,12 @@ module fp_multiplier(
     end
 
   end
+
+// code fixed  
   assign in_A_ack = s_in_a_ack;
   assign in_B_ack = s_in_b_ack;
   assign output_prod_stb = s_outprod_stb;
-  assign out_prod_ack = s_out_prod;
+  assign output_prod = s_out_prod;
+  
 
 endmodule
