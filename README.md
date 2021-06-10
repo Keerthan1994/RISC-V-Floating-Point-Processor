@@ -1,9 +1,10 @@
 # Floating-Point-Co-Processor
-## Chuck Faber, Bhargavi Chunchu, Ramprakash Baskar, Keerthan Nayak
+## ECE 571 Final Project Spring 2021
+### Chuck Faber, Bhargavi Chunchu, Ramprakash Baskar, Keerthan Nayak
 
 For this project, we attempted to implmement a IEEE 754 single precision floating point processor in SystemVerilog.
 
-### Contents
+#### Contents
  - /docs/: Includes the final presentation report
  - /src/: Includes all source files
     - /design/: Includes the module design files.
@@ -12,7 +13,7 @@ For this project, we attempted to implmement a IEEE 754 single precision floatin
     - /dev/: This folder includes test code and other code snippets
     - makefile: This makefile includes compilation and simulation targets.
 
-### Building and Simulating
+#### Building and Simulating
 This design has been built and tested on QuestaSim installed on the 
 auto.ece.pdx.edu server and run through the terminal.
 
@@ -28,3 +29,4 @@ auto.ece.pdx.edu server and run through the terminal.
     * `make sim_mul`: Run simulation only with multiplication operations.
     * `make sim_div`: Run simulation only with division operations.
     * `make sim_all`: Run simulation test cases with ALL operations.
+4. Type `run -all` to run simulation.
