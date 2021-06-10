@@ -248,7 +248,7 @@ end
 `ifdef RANDCASES
     testRandCases();
 `endif
-
+	$display("%0d Errors Out of %0d Tests.", err_count, test_count);
     $finish();
 end
 
